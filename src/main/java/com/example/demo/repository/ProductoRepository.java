@@ -19,26 +19,30 @@ public class ProductoRepository implements ProductoDao{
 	public int save(Producto producto) {
 		// TODO Auto-generated method stub
 		
-		
-		
-		return jdbc.update("");
+
+		return jdbc.update("insert into producto(titulo, descripcion,precio, descuento) values (?,?,?,?)", producto.getTitulo(), producto.getDescripcion(),
+				producto.getPrecio(), producto.getDescuento());
 	}
 
 	@Override
 	public int count() {
 		// TODO Auto-generated method stub
+		Integer cantidad = jdbc.queryForObject("select count(*) as 'cantidad' from producto", Integer.class);
 		return 0;
 	}
 
 	@Override
 	public List<Producto> findAll() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		return jdbc.query("select * from producto", (rs, rowNum) -> new Producto(rs.getLong("id"), rs.getString("titulo"), 
+				rs.getString("descripcion"), rs.getFloat("precio"), rs.getInt("descuento")));
 	}
 
 	@Override
 	public Optional<Producto> findById(long id) {
 		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
