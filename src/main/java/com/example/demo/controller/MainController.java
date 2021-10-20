@@ -21,7 +21,7 @@ public class MainController {
 	@GetMapping(value = "/formula")
 	public String guardarProd(Model modelo) {
 		
-		return "fomulario";
+		return "formulario";
 	}
 
 	
