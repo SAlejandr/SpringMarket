@@ -13,9 +13,15 @@ import com.example.demo.pojos.Producto;
 public class MainController {
 	
 	@GetMapping(value = "/indesx")
-	public String index(Model Modelo) {
+	public String index(Model modelo) {
 		
 		return "index";
+	}
+	
+	@GetMapping(value = "/formula")
+	public String guardarProd(Model modelo) {
+		
+		return "fomulario";
 	}
 
 	
