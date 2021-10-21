@@ -39,17 +39,22 @@ public class ProductoRepository implements ProductoDao{
 				rs.getString("descripcion"), rs.getFloat("precio"), rs.getInt("descuento")));
 	}
 
+
+	
+	@SuppressWarnings("deprecation")
 	@Override
 	public Optional<Producto> findById(long id) {
-		// TODO Auto-generated method stub
-		
-		return null;
+		return jdbc.queryForObject("select * from producto where id = ?", new Object[] { id }, (rs,
+				rowNum) -> Optional.of(new Producto(rs.getLong("id"), rs.getString("titulo"), 
+						rs.getString("descripcion"), rs.getFloat("precio"), rs.getInt("descuento"))));
 	}
 
 	@Override
 	public int delete(Producto producto) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		
+		return jdbc.update("delete * from producto where id = ?", producto.getId());
 	}
 	
 	
