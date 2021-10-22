@@ -50,8 +50,15 @@ public class MainController {
 		
 		Optional<Producto> optional = dao.findById(id);
 		
+		if(optional.isPresent()) {
+			modelo.addAttribute("producto", optional.get());
+			return "mostrar";
+		}else {
+			
+			return "mostrarNull";
+		}
+			
 		
-		return "mostrar";
 	}
 
 	
