@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.pojos.Producto;
 import com.example.demo.repository.ProductoDao;
@@ -22,6 +23,16 @@ public class MainController {
 	
 	@GetMapping(value = "/indesx")
 	public String index(Model modelo) {
+		
+		ArrayList<Producto> lista = (ArrayList<Producto>) dao.findAll();
+		ArrayList<Producto> productos = new ArrayList<>();
+		
+		for (int i = 0; i < lista.size() && i < 8; i++) {
+			
+			productos.add(lista.get(i));
+		}
+		
+		modelo.addAttribute("productos", productos);
 		
 		return "index";
 	}
