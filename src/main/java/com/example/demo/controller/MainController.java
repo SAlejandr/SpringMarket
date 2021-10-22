@@ -71,7 +71,7 @@ public class MainController {
 			
 		
 	}
-//iansboi 
+//iansboi  32
 	@GetMapping(value = "/producto/borrar/{id}")
 	public String borrar(@PathVariable long id) {
 		
