@@ -15,6 +15,7 @@
 		<p th:text="${producto.descripcion}"></p>
 		<p th:text="${producto.precio}"></p>
 		<p th:text="${producto.descuento}"></p>
+		<a th:href="@{/producto/borrar/{id}(id=${producto.id})}">Borrar</a>
 		</div>
 		
 	</main>

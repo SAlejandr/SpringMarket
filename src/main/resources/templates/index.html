@@ -5,12 +5,13 @@
 <title>Index</title>
 
 <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 <nav th:replace="/header :: header"></nav>
 <main class="container">
-<div th:each="producto : ${productos} ">
-  <article class="col-3">
+<div class="articulos" th:each="producto : ${productos} ">
+  <article>
   		<img alt="" src="img/1.jpg" height="300"width="300">
   		<a th:href="@{/producto/{id}(id=${producto.id})}" th:text="${producto.titulo}"></a>
   </article>

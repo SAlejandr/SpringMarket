@@ -54,7 +54,7 @@ public class ProductoRepository implements ProductoDao{
 		// TODO Auto-generated method stub
 		
 		
-		return jdbc.update("delete * from producto where id = ?", producto.getId());
+		return jdbc.update("delete from producto where id = ?", producto.getId());
 	}
 	
 	

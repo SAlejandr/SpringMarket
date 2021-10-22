@@ -52,7 +52,7 @@ public class MainController {
 		
 		dao.save(producto);
 		
-		return "redirect: formula";
+		return "redirect:/formula";
 	}
 
 	
@@ -81,10 +81,10 @@ public class MainController {
 			
 			dao.delete(optional.get());
 			
-			return "redirect: /indesx";
+			return "redirect:/indesx";
 		}else {
 			
-			return "redirect: /producto/"+id;
+			return "redirect:/producto/"+id;
 		}
 		
 		
