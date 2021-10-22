@@ -72,6 +72,23 @@ public class MainController {
 		
 	}
 
-	
+	@GetMapping(value = "/producto/borrar/{id}")
+	public String borrar(@PathVariable long id) {
+		
+		Optional<Producto> optional = dao.findById(id);
+		
+		if(optional.isPresent()) {
+			
+			dao.delete(optional.get());
+			
+			return "redirect: /indesx";
+		}else {
+			
+			return "redirect: /producto/"+id;
+		}
+		
+		
+	}
+
 
 }
