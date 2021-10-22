@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 import com.example.demo.pojos.Producto;
 import com.example.demo.repository.ProductoDao;
@@ -50,7 +51,7 @@ public class MainController {
 		Optional<Producto> optional = dao.findById(id);
 		
 		
-		return new String();
+		return "mostrar";
 	}
 
 	
