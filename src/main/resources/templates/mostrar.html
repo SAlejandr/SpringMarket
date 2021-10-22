@@ -10,7 +10,12 @@
 <body>
 	<nav th:replace="/header :: header"></nav>
 	<main class="container">
-		<div id="centrar" class="col-4"></div>
+		<div id="centrar" class="col-4">
+		<p th:text="${producto.titulo}"></p>
+		<p th:text="${producto.descripcion}"></p>
+		<p th:text="${producto.precio}"></p>
+		<p th:text="${producto.descuento}"></p>
+		</div>
 		
 	</main>
 </body>

@@ -9,41 +9,11 @@
 <body>
 <nav th:replace="/header :: header"></nav>
 <main class="container">
-	<div class="row">
-  <div class="col">
+<div th:each="producto : ${productos} ">
+  <article class="col-3">
   		<img alt="" src="img/1.jpg" height="300"width="300">
-  		<a>Nombre Producto1</a>
-  </div>
-  <div class="col">
-  <img alt="" src="img/1.jpg" height="300"width="300">
-  		<a>Nombre Producto2</a>
-  </div>
-  <div class="col">
-  <img alt="" src="img/1.jpg" height="300"width="300">
-  		<a>Nombre Producto3</a>
-  </div>
-  <div class="col">
-  <img alt="" src="img/1.jpg" height="300"width="300">
-  		<a>Nombre Producto4</a>
-  </div>
-</div>
-<div class="row">
-  <div class="col">
-  <img alt="" src="img/1.jpg" height="300"width="300">
-  		<a>Nombre Producto5</a>
-  </div>
-  <div class="col">
-  <img alt="" src="img/1.jpg" height="300"width="300">
-  		<a>Nombre Producto6</a>
-  </div>
-  <div class="col">
-  <img alt="" src="img/1.jpg" height="300"width="300">
-  		<a>Nombre Producto7</a>
-  </div>
-  <div class="col">
-  <img alt="" src="img/1.jpg" height="300"width="300">
-  		<a>Nombre Producto8</a>
-  </div>
+  		<a th:href="@{/producto/{id}(id=${producto.id})}" th:text="${producto.titulo}"></a>
+  </article>
 </div>
 </main>
 </body>
