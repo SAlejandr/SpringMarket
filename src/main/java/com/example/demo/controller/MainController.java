@@ -90,5 +90,14 @@ public class MainController {
 		
 	}
 
+	@GetMapping(value = "/producto/buscar")
+	public String buscarPorPatronDeTitulo(Model modelo,@RequestParam String patron) {
+		
+		ArrayList<Producto> productos = (ArrayList<Producto>) dao.findAllByTituloLike(patron);
+		
+		modelo.addAttribute("productos", productos);
+		
+		return "buscar";	
 
+	}
 }

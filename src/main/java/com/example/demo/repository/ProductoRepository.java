@@ -56,6 +56,16 @@ public class ProductoRepository implements ProductoDao{
 		
 		return jdbc.update("delete from producto where id = ?", producto.getId());
 	}
+
+	@Override
+	public List<Producto> findAllByTituloLike(String patronTitulo) {
+		// TODO Auto-generated method stub
+		
+		
+		return jdbc.query("select * from producto where titulo regex = ?", (rs, rowNum)-> new Producto(rs.getLong("id"), 
+				rs.getString("titulo"), rs.getString("descripcion"), rs.getFloat("precio"), rs.getInt("descuento")), 
+				"%"+patronTitulo+"%");
+	}
 	
 	
 	

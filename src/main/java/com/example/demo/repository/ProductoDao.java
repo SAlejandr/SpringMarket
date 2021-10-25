@@ -12,4 +12,5 @@ public interface ProductoDao{
 	public List<Producto> findAll();
 	public Optional<Producto> findById(long id);
 	public int delete(Producto producto);
+	public List<Producto> findAllByTituloLike(String patronTitulo);
 }
