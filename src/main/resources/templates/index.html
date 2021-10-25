@@ -12,8 +12,13 @@
 <main>
 <div class="articulos" >
   <article th:each="producto : ${productos} ">
-  	
-  		<img alt="" src="img/1.jpg" height="300"width="300">
+  	<picture th:switch="${producto.id % 4}">
+  	<img th:case="1"  th:src="@{img/peugeot.jpg}" height="300"width="300">
+  	<img th:case="2"  th:src="@{img/renault.jpg}" height="300"width="300">
+  	<img th:case="3"  th:src="@{img/seat.jpg}" height="300"width="300">
+  	<img th:case="0"  th:src="@{img/volkswagen.jpg}" height="300"width="300">
+  	</picture>
+  		
   		<a th:href="@{/producto/{id}(id=${producto.id})}" th:text="${producto.titulo}"></a>
   </article>
 </div>
