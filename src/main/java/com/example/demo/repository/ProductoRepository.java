@@ -62,7 +62,7 @@ public class ProductoRepository implements ProductoDao{
 		// TODO Auto-generated method stub
 		
 		
-		return jdbc.query("select * from producto where titulo regex = ?", (rs, rowNum)-> new Producto(rs.getLong("id"), 
+		return jdbc.query("select * from producto where titulo like ?", (rs, rowNum)-> new Producto(rs.getLong("id"), 
 				rs.getString("titulo"), rs.getString("descripcion"), rs.getFloat("precio"), rs.getInt("descuento")), 
 				"%"+patronTitulo+"%");
 	}

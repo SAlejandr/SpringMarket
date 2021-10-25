@@ -60,7 +60,6 @@ public class MainController {
 	public String buscarProductoPorId(Model modelo, @PathVariable long id) {
 		
 		Optional<Producto> optional = dao.findById(id);
-		System.err.println("//////////////////"+optional.isPresent() + "   jas");
 		if(optional.isPresent()) {
 			modelo.addAttribute("producto", optional.get());
 			return "mostrar";
@@ -94,6 +93,8 @@ public class MainController {
 	public String buscarPorPatronDeTitulo(Model modelo,@RequestParam String patron) {
 		
 		ArrayList<Producto> productos = (ArrayList<Producto>) dao.findAllByTituloLike(patron);
+		
+		System.err.println(patron);
 		
 		modelo.addAttribute("productos", productos);
 		

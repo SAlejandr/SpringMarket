@@ -9,9 +9,10 @@
 </head>
 <body>
 <nav th:replace="/header :: header"></nav>
-<main class="container">
-<div class="articulos" th:each="producto : ${productos} ">
-  <article>
+<main>
+<div class="articulos" >
+  <article th:each="producto : ${productos} ">
+  	
   		<img alt="" src="img/1.jpg" height="300"width="300">
   		<a th:href="@{/producto/{id}(id=${producto.id})}" th:text="${producto.titulo}"></a>
   </article>
