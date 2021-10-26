@@ -17,8 +17,7 @@
   	<img th:case="2"  th:src="@{img/renault.jpg}" height="300"width="300">
   	<img th:case="3"  th:src="@{img/seat.jpg}" height="300"width="300">
   	<img th:case="0"  th:src="@{img/volkswagen.jpg}" height="300"width="300">
-  	</picture>
-  		
+  	</picture><br>
   		<a th:href="@{/producto/{id}(id=${producto.id})}" th:text="${producto.titulo}"></a>
   </article>
 </div>

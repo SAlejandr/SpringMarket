@@ -94,11 +94,13 @@ public class MainController {
 		
 		ArrayList<Producto> productos = (ArrayList<Producto>) dao.findAllByTituloLike(patron);
 		
-		System.err.println(patron);
-		
+		if(productos.isEmpty()) {
+			return "buscarNull";
+		}else {
 		modelo.addAttribute("productos", productos);
 		
 		return "buscar";	
+		}
 
 	}
 }
