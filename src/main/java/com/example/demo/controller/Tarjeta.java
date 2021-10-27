@@ -9,7 +9,7 @@ public class Tarjeta {
 	private String titular;
 	private int codSeguridad;
 	private String dirFactura;
-	//constructores
+	//constructores a
 	public Tarjeta() {
 		// TODO Auto-generated constructor stub
 		this(new BigInteger("0"),"",0,"");
