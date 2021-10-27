@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+package com.example.demo.pojos;
 
 import java.math.BigInteger;
 import java.util.Objects;
