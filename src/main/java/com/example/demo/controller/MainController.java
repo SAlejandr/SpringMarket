@@ -94,7 +94,7 @@ public class MainController {
 		
 		ArrayList<Producto> productos = (ArrayList<Producto>) dao.findAllByTituloLike(patron);
 		
-		if(productos.isEmpty()) {
+		if(productos.isEmpty()||patron.equals("")) {
 			return "buscarNull";
 		}else {
 		modelo.addAttribute("productos", productos);
