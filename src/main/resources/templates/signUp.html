@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Crear Producto</title>
+<title>Sign up</title>
 <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
 <link rel="stylesheet" th:href="@{/css/style.css}" />
@@ -12,16 +12,18 @@
 	<main class="container">
 		<div id="centrar" class="col-4">
 		
-			<h2>FORMULARIO</h2>
-			<form th:action="@{/formula}" method="POST">
+			<h2>SIGN UP</h2>
+			<form th:action="@{/singup}" method="POST">
 				<label>Nombre:</label>
 				 <input type="text" name="nombre"/><br>
-				 <label>Descripcion</label>
-				<input type="text" name="descripcion" /><br>
-				 <label>precio</label>
-				  <input type="number" name="precio" min="0" /><br>
-				   <label>Descuento:</label> 
-				   <input type="number" name="descuento" min="0">%<br>
+				 <label>Apellido</label>
+				<input type="text" name="apellido" /><br>
+				 <label>Contraseña</label>
+				  <input type="password" name="contrasena"  /><br>
+				   <label>Email</label> 
+				   <input type="email" name="email" ><br>
+				   <label>Fecha nacimiento</label> 
+				   <input type="date" name="fecha" ><br>
 				    <input class="btn btn-primary" type="submit"value="Enviar">
 			</form>
 		</div>
