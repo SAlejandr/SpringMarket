@@ -28,7 +28,7 @@ public class ProductoRepository implements ProductoDao{
 	public int count() {
 		// TODO Auto-generated method stub
 		Integer cantidad = jdbc.queryForObject("select count(*) as 'cantidad' from producto", Integer.class);
-		return 0;
+		return cantidad;
 	}
 
 	@Override
