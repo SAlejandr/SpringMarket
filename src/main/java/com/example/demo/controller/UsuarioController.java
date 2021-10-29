@@ -65,18 +65,18 @@ public class UsuarioController {
 	/*AAAAAAAAAAAAAAAAAA**/
 	@PostMapping(value = "/signup")
 	public String postRegistrarse(@RequestParam String nombre,@RequestParam String apellido,@RequestParam String contrasenna, 
-			@RequestParam String email, @RequestParam Date fNacimiento) {
+			@RequestParam String email, @RequestParam LocalDate fNacimiento) {
 		//TODO: process POST request
 		Optional<Usuario> persona = dao.findByEmail(email);
 		
 		String redirectCorrecto = "redirect: /indesx", redirectIncorrecto = "redirect: /usuario/login";
-		Calendar cal = Calendar.getInstance();
+		/*Calendar cal = Calendar.getInstance();
 		cal.setTime(fNacimiento);
 		LocalDate fecha = LocalDate.of(cal.get(Calendar.YEAR),
 		        cal.get(Calendar.MONTH) + 1,
-		        cal.get(Calendar.DAY_OF_MONTH));
+		        cal.get(Calendar.DAY_OF_MONTH));*/
 		
-		Usuario usuario = persona.orElse(new Usuario(nombre, apellido, contrasenna, email, fecha));
+		Usuario usuario = persona.orElse(new Usuario(nombre, apellido, contrasenna, email, fNacimiento));
 		if (!persona.isPresent()) {
 			dao.save(usuario);
 			
