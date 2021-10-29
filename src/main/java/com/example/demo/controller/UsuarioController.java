@@ -59,6 +59,7 @@ public class UsuarioController {
 		return mav;
 	}
 
+	/*AAAAAAAAAAAAAAAAAA**/
 	@PostMapping(value = "/signup")
 	public String postRegistrarse(@ModelAttribute Usuario usuario) {
 		//TODO: process POST request
