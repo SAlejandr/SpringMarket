@@ -1,9 +1,10 @@
 package com.example.demo.pojos;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Usuario {
+public class Usuario implements Serializable{
 	//vairables
 	private long id;
 	private String nombre;
