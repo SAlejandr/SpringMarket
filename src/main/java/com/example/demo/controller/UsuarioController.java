@@ -61,19 +61,19 @@ public class UsuarioController {
 
 	/*AAAAAAAAAAAAAAAAAA**/
 	@PostMapping(value = "/signup")
-	public String postRegistrarse(@ModelAttribute Usuario usuario) {
+	public String postRegistrarse() {
 		//TODO: process POST request
-		Optional<Usuario> persona = dao.findByEmail(usuario.getEmail());
+		//Optional<Usuario> persona = dao.findByEmail(usuario.getEmail());
 		String redirectCorrecto = "redirect: /indesx", redirectIncorrecto = "redirect: /usuario/login";
 
-		if (!persona.isPresent()) {
+		/*if (!persona.isPresent()) {
 			dao.save(usuario);
 			
 			return redirectCorrecto;
 		} else {
-
+*/
 			return redirectIncorrecto;
-		}
+		/*}*/
 	}
 
 
