@@ -51,7 +51,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping(value = "/signup")
-	public ModelAndView getRegistrarse(@RequestParam String param) {
+	public ModelAndView getRegistrarse() {
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("signUp");
