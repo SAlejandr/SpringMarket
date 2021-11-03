@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,7 +45,7 @@ public class UsuarioController {
 			Usuario u = persona.get();
 
 			if (contrasenna.equals(u.getContrasenna()))
-				return redirectCorrecto;
+				return redirectCorrecto+"/"+u.getId();
 			else
 				return redirectIncorrecto;
 		} else {
@@ -68,7 +70,6 @@ public class UsuarioController {
 			@RequestParam String email, @RequestParam String fNacimiento) {
 		//TODO: process POST request
 		Optional<Usuario> persona = dao.findByEmail(email);
-		System.err.println(persona);
 		String redirectCorrecto = "redirect:/indesx", redirectIncorrecto = "redirect:/usuario/signup";
 		
 		LocalDate fecha = LocalDate.parse(fNacimiento);
@@ -83,8 +84,8 @@ public class UsuarioController {
 		}
 	}
 	
-	@GetMapping(value = "/perfil/{id}")
-	public ModelAndView getPerfil() {
+	@GetMapping(value = "/perfil" )
+	public ModelAndView getPerfil(@PathVariable long id) {
 		ModelAndView mav = new ModelAndView();
 
 		mav.setViewName("perfil");
