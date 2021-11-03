@@ -37,8 +37,7 @@ public class UsuarioController {
 	public String postLogin(@RequestParam String usuario, @RequestParam String contrasenna) {
 		// TODO: process POST request
 		Optional<Usuario> persona = dao.findByEmail(usuario);
-		String redirectCorrecto = "redirect: /indesx", redirectIncorrecto = "redirect: /usuario/login";
-
+		String redirectCorrecto = "redirect:/indesx", redirectIncorrecto = "redirect:/usuario/login";
 		if (persona.isPresent()) {
 			Usuario u = persona.get();
 
@@ -68,8 +67,8 @@ public class UsuarioController {
 			@RequestParam String email, @RequestParam String fNacimiento) {
 		//TODO: process POST request
 		Optional<Usuario> persona = dao.findByEmail(email);
-		
-		String redirectCorrecto = "redirect: /indesx", redirectIncorrecto = "redirect: /usuario/login";
+		System.err.println(persona);
+		String redirectCorrecto = "redirect:/indesx", redirectIncorrecto = "redirect:/usuario/signup";
 		
 		LocalDate fecha = LocalDate.parse(fNacimiento);
 		

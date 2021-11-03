@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -53,8 +54,13 @@ public class UsuarioRepository implements UsuarioDao{
 	@Override
 	public Optional<Usuario> findByEmail(String email) {
 		// TODO Auto-generated method stub
-		return jdbc.queryForObject("select * from usuario where email = ?", (rs, rowNum) -> Optional.of(new Usuario(rs.getLong("id"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("contrasenna"), rs.getString("email"), rs.getDate("fNacimiento").toLocalDate())),
+		try {
+	  return jdbc.queryForObject("select * from usuario where email = ?", (rs, rowNum) -> Optional.of(new Usuario(rs.getLong("id"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("contrasenna"), rs.getString("email"), rs.getDate("fNacimiento").toLocalDate())),
 				email);
+		}catch (EmptyResultDataAccessException e) {
+			return Optional.empty();
+		}
+		
 	}
 
 	
