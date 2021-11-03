@@ -20,8 +20,6 @@ import com.example.demo.service.IProductoService;
 public class MainController {
 
 	@Autowired
-	private ProductoDao dao;
-	@Autowired
 	private IProductoService productoService;
 
 	@GetMapping(value = "/indesx")
