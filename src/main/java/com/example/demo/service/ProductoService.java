@@ -38,7 +38,7 @@ public class ProductoService implements IProductoService {
 	}
 
 	@Override
-	public ArrayList<Producto> buscarPorPatronDeTutulo(String patron) {
+	public ArrayList<Producto> buscarPorPatronDeTitulo(String patron) {
 		// TODO Auto-generated method stub
 		
 		return (ArrayList<Producto>) dao.findAllByTituloLike(patron);

@@ -12,7 +12,7 @@ public interface IProductoService {
 	
 	public Producto buscarPorId(long id);
 	
-	public ArrayList<Producto> buscarPorPatronDeTutulo(String patron);
+	public ArrayList<Producto> buscarPorPatronDeTitulo(String patron);
 	
 	public Producto borrarPorId(long id);
 }

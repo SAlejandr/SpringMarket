@@ -23,7 +23,7 @@ public class UsuarioService implements IUsuarioService {
 	}
 
 	@Override
-	public List<Usuario> lsitarTodos() {
+	public List<Usuario> listarTodos() {
 		// TODO Auto-generated method stub
 		return dao.findAll();
 	}
