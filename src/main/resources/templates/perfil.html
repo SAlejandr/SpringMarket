@@ -15,13 +15,13 @@
 			<body>
 				<h1>Perfil de usuario</h1>
 				<label>Nombre:</label>
-				<p th:text=""></p><br>
+				<p th:text="${usuario.nombre}"></p><br>
 				<label>Apellido:</label>
-				<p ></p><br>
+				<p th:text="${usuario.apellido}"></p><br>
 				<label>Correo:</label>
-				<p ></p><br>
+				<p th:text="${usuario.email}"></p><br>
 				<label>Fecha de nacimiento:</label>
-				<p></p>
+				<p th:text="${usuario.fNacimiento}"></p>
 			</body>
 		</div>
 		

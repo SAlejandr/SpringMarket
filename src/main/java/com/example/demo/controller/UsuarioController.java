@@ -76,10 +76,11 @@ public class UsuarioController {
 		String redirectCorrecto = "redirect:/indesx", redirectIncorrecto = "redirect:/usuario/signup";
 		
 		LocalDate fecha = LocalDate.parse(fNacimiento);
-		if (u.getId() != -1) {
+		if (u.getId() == -1) {
+			
 			Usuario usuario = new Usuario(nombre, apellido, contrasenna, email, fecha);
 		
-			dao.save(usuario);
+			usuarioService.guardar(usuario);
 			
 			return redirectCorrecto;
 		} else {
@@ -87,12 +88,11 @@ public class UsuarioController {
 		}
 	}
 	
-	@GetMapping(value = "/perfil" )
+	@GetMapping(value = "/perfil/{id}" )
 	public ModelAndView getPerfil(@PathVariable long id) {
 		ModelAndView mav = new ModelAndView();
 
 		Usuario u = usuarioService.buscarPorId(id);
-		
 		mav.addObject("usuario", u);
 		
 		mav.setViewName("perfil");
