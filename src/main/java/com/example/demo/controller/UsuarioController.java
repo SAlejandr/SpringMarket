@@ -7,6 +7,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -37,7 +38,7 @@ public class UsuarioController {
 	public String postLogin(@RequestParam String usuario, @RequestParam String contrasenna) {
 		// TODO: process POST request
 		Optional<Usuario> persona = dao.findByEmail(usuario);
-		String redirectCorrecto = "redirect:/indesx", redirectIncorrecto = "redirect:/usuario/login";
+		String redirectCorrecto = "redirect:/usuario/perfil", redirectIncorrecto = "redirect:/usuario/login";
 		if (persona.isPresent()) {
 			Usuario u = persona.get();
 
@@ -81,6 +82,13 @@ public class UsuarioController {
 			return redirectIncorrecto;
 		}
 	}
+	
+	@GetMapping(value = "/perfil/{id}")
+	public ModelAndView getPerfil() {
+		ModelAndView mav = new ModelAndView();
 
+		mav.setViewName("perfil");
+		return mav;
+	}
 
 }
