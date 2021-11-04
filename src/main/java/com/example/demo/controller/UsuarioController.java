@@ -46,7 +46,7 @@ public class UsuarioController {
 	public String postLogin(HttpSession session,@RequestParam String usuario, @RequestParam String contrasenna) {
 		// TODO: process POST request
 		Boolean logueado = (Boolean) session.getAttribute("logueado");
-		if(logueado = null) {
+		if(logueado == null) {
 			logueado = false;
 		}
 		

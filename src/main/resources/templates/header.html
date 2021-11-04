@@ -31,6 +31,7 @@
 						placeholder="Search" name="patron">
 					<button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
 				</form>
+				<div th:if="${logueado==false}">
 				<ul class="navbar-nav me-d">
 				<li class="nav-item"><a class="btn btn-outline-success" th:href="@{/usuario/signup}">Registrarse
 							<span class="visually-hidden">(current)</span></a>
@@ -39,6 +40,14 @@
 							<span class="visually-hidden">(current)</span></a>
 					</li>
 				</ul>
+				</div>
+				<div th:if="${logueado==true}">
+				<ul class="navbar-nav me-d">
+					<li class="nav-item"><a class="btn btn-outline-danger"  th:href="@{/usuario/login}">Log out
+							<span class="visually-hidden">(current)</span></a>
+					</li>
+				</ul>
+				</div>
 				
 			</div>
 		</div>
