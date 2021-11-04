@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,8 +25,15 @@ public class MainController {
 	private IProductoService productoService;
 
 	@GetMapping(value = "/indesx")
-	public String index(Model modelo) {
+	public String index(Model modelo, HttpSession session) {
 
+		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		if(logueado == null) {
+			
+			logueado = false;
+		}
+		
+		
 		ArrayList<Producto> lista = productoService.listarTodas();
 		ArrayList<Producto> productos = new ArrayList<>();
 
@@ -34,7 +43,8 @@ public class MainController {
 		}
 
 		modelo.addAttribute("productos", productos);
-
+		modelo.addAttribute("logueado", logueado);
+		
 		return "index";
 	}
 

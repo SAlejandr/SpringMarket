@@ -5,6 +5,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,18 +43,29 @@ public class UsuarioController {
 	}
 
 	@PostMapping(value = "/login")
-	public String postLogin(@RequestParam String usuario, @RequestParam String contrasenna) {
+	public String postLogin(HttpSession session,@RequestParam String usuario, @RequestParam String contrasenna) {
 		// TODO: process POST request
+		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		if(logueado = null) {
+			logueado = false;
+		}
+		
+		
 		Usuario u = usuarioService.buscarPorEmail(usuario);
 		String redirectCorrecto = "redirect:/usuario/perfil", redirectIncorrecto = "redirect:/usuario/login";
 		if (u.getId() != -1) {
 
-			if (contrasenna.equals(u.getContrasenna()))
+			if (contrasenna.equals(u.getContrasenna())) {
+				logueado = true;
+				
+				session.setAttribute("logueado", logueado);
 				return redirectCorrecto+"/"+u.getId();
-			else
+			
+			}else
+				session.setAttribute("logueado", logueado);
 				return redirectIncorrecto;
 		} else {
-
+			session.setAttribute("logueado", logueado);
 			return redirectIncorrecto;
 		}
 
