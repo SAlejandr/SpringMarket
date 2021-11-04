@@ -112,5 +112,13 @@ public class UsuarioController {
 		mav.setViewName("perfil");
 		return mav;
 	}
+	
+	@GetMapping(value = "/logout")
+	public String desloguear(HttpSession session) {
+		
+		session.invalidate();
+		return "redirect:/indesx";
+	}
+
 
 }
