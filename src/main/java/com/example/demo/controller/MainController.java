@@ -49,27 +49,45 @@ public class MainController {
 	}
 
 	@GetMapping(value = "/formula")
-	public String guardarProd(Model modelo) {
+	public String guardarProd(Model modelo, HttpSession session) {
 
+		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		if(logueado == null) {
+			
+			logueado = false;
+		}
+		modelo.addAttribute("logueado", logueado);
 		return "formulario";
 	}
 
 	@PostMapping(value = "/formula")
 	public String guardarProducto(Model modelo, @RequestParam String nombre, @RequestParam String descripcion,
-			@RequestParam float precio, @RequestParam int descuento) {
+			@RequestParam float precio, @RequestParam int descuento, HttpSession session) {
+
+		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		if(logueado == null) {
+			
+			logueado = false;
+		}
 
 		Producto producto = new Producto(nombre, descripcion, precio, descuento);
 
 		productoService.guardar(producto);
-
+		modelo.addAttribute("logueado", logueado);
 		return "redirect:/formula";
 	}
 
 	@GetMapping(value = "/producto/{id}")
-	public String buscarProductoPorId(Model modelo, @PathVariable long id) {
+	public String buscarProductoPorId(Model modelo, @PathVariable long id, HttpSession session) {
+
+		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		if(logueado == null) {
+			
+			logueado = false;
+		}
 
 		Producto p = productoService.buscarPorId(id);
-
+		modelo.addAttribute("logueado", logueado);
 		if (p.getId() != -1) {
 			modelo.addAttribute("producto", p);
 			return "mostrar";
@@ -82,10 +100,16 @@ public class MainController {
 
 //iansboi  32
 	@GetMapping(value = "/producto/borrar/{id}")
-	public String borrar(@PathVariable long id) {
+	public String borrar(Model modelo,@PathVariable long id, HttpSession session) {
+
+		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		if(logueado == null) {
+			
+			logueado = false;
+		}
 
 		Producto p = productoService.borrarPorId(id);
-
+		modelo.addAttribute("logueado", logueado);
 		if (p.getId() != -1) {
 
 			return "redirect:/indesx";
@@ -97,10 +121,16 @@ public class MainController {
 	}
 
 	@GetMapping(value = "/producto/buscar")
-	public String buscarPorPatronDeTitulo(Model modelo, @RequestParam String patron) {
+	public String buscarPorPatronDeTitulo(Model modelo, @RequestParam String patron, HttpSession session) {
+
+		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		if(logueado == null) {
+			
+			logueado = false;
+		}
 
 		ArrayList<Producto> productos = productoService.buscarPorPatronDeTitulo(patron);
-
+		modelo.addAttribute("logueado", logueado);
 		if (productos.isEmpty() || patron.equals("")) {
 			return "buscarNull";
 		} else {
