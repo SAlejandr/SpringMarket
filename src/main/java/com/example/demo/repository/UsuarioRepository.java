@@ -67,7 +67,7 @@ public class UsuarioRepository implements UsuarioDao{
 	@Override
 	public int updateTarjeta(long id, BigInteger numero) {
 		// TODO Auto-generated method stub
-		//a
+		//aaaaaaaaaaaaaaaaaa
 		return jdbc.update("UPDATE usuario SET numeroTarjeta = ? WHERE id = ?", numero, id);
 	}
 
