@@ -1,6 +1,7 @@
 package com.example.demo.pojos;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -12,6 +13,7 @@ public class Usuario implements Serializable{
 	private String contrasenna;
 	private String email;
 	private LocalDate fNacimiento;
+	private BigInteger numeroTarjeta;
 	//contuctores
 	public Usuario() {
 		// TODO Auto-generated constructor stub
@@ -84,8 +86,15 @@ public class Usuario implements Serializable{
 	public void setfNacimiento(LocalDate fNacimiento) {
 		this.fNacimiento = fNacimiento;
 	}
-	//equals y hascode
+	
+	public BigInteger getNumeroTarjeta() {
+		return numeroTarjeta;
+	}
 
+	public void setNumeroTarjeta(BigInteger numeroTarjeta) {
+		this.numeroTarjeta = numeroTarjeta;
+	}
+//equals y hascode
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

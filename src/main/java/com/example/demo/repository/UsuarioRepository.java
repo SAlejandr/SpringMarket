@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.math.BigInteger;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
@@ -61,6 +62,12 @@ public class UsuarioRepository implements UsuarioDao{
 			return Optional.empty();
 		}
 		
+	}
+
+	@Override
+	public int updateTarjeta(long id, BigInteger numero) {
+		// TODO Auto-generated method stub
+		return jdbc.update("UPDATE usuario SET numeroTarjeta = ? WHERE id = ?", numero, id);
 	}
 
 	

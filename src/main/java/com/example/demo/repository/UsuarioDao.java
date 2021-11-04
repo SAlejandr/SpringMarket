@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,4 +14,5 @@ public interface UsuarioDao {
 	public Optional<Usuario> findById(long id);
 	public int delete(Usuario usuario);
 	public Optional<Usuario> findByEmail(String email);
+	public int updateTarjeta(long id, BigInteger numero);
 }
