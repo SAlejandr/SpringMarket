@@ -35,9 +35,15 @@ public class UsuarioController {
 	private IUsuarioService usuarioService;
 
 	@GetMapping(value = "/login")
-	public ModelAndView getLogin() {
-		ModelAndView mav = new ModelAndView();
+	public ModelAndView getLogin(HttpSession session) {
 
+		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		if(logueado == null) {
+			
+			logueado = false;
+		}
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("logueado",logueado);
 		mav.setViewName("logIn");
 		return mav;
 	}
@@ -53,6 +59,7 @@ public class UsuarioController {
 		
 		Usuario u = usuarioService.buscarPorEmail(usuario);
 		String redirectCorrecto = "redirect:/usuario/perfil", redirectIncorrecto = "redirect:/usuario/login";
+		
 		if (u.getId() != -1) {
 
 			if (contrasenna.equals(u.getContrasenna())) {
@@ -72,9 +79,15 @@ public class UsuarioController {
 	}
 	
 	@GetMapping(value = "/signup")
-	public ModelAndView getRegistrarse() {
+	public ModelAndView getRegistrarse(HttpSession session) {
+
+		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		if(logueado == null) {
+			
+			logueado = false;
+		}
 		ModelAndView mav = new ModelAndView();
-		
+		mav.addObject("logueado", logueado);
 		mav.setViewName("signUp");
 		
 		return mav;
@@ -103,12 +116,18 @@ public class UsuarioController {
 	}
 	
 	@GetMapping(value = "/perfil/{id}" )
-	public ModelAndView getPerfil(@PathVariable long id) {
+	public ModelAndView getPerfil(@PathVariable long id,HttpSession session) {
+
+		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		if(logueado == null) {
+			
+			logueado = false;
+		}
 		ModelAndView mav = new ModelAndView();
 
 		Usuario u = usuarioService.buscarPorId(id);
 		mav.addObject("usuario", u);
-		
+		mav.addObject("logueado", logueado);
 		mav.setViewName("perfil");
 		return mav;
 	}
