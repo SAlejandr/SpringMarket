@@ -25,7 +25,7 @@
 					</li>
 					
 				</ul>
-				<a class="btn btn-outline-light"><i class="bi bi-cart"></i></a>
+				<a class="btn btn-outline-light" th:href="@{/producto/carrito}"><i class="bi bi-cart"></i></a>
 				<form class="d-flex" th:action="@{/producto/buscar}" method="get">
 					<input class="form-control me-sm-2" type="text"
 						placeholder="Search" name="patron">
