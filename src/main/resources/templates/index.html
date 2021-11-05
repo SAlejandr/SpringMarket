@@ -12,14 +12,15 @@
 <nav th:replace="/header :: header"></nav>
 <main>
 <div class="articulos" >
-  <article th:each="producto : ${productos} ">
-  	<picture th:switch="${producto.id % 4}">
+  <article class="card" th:each="producto : ${productos} ">
+  	<picture class="card-img-top" th:switch="${producto.id % 4}">
   	<img th:case="1"  th:src="@{img/peugeot.jpg}" height="300"width="300">
   	<img th:case="2"  th:src="@{img/renault.jpg}" height="300"width="300">
   	<img th:case="3"  th:src="@{img/seat.jpg}" height="300"width="300">
   	<img th:case="0"  th:src="@{img/volkswagen.jpg}" height="300"width="300">
   	</picture><br>
-  		<a th:href="@{/producto/{id}(id=${producto.id})}" th:text="${producto.titulo}"></a>
+  			<h5 class="card-title" th:text="${producto.titulo}"></h5>
+  		<a class="btn btn-primary" th:href="@{/producto/{id}(id=${producto.id})}">Ver caracteristicas</a>
   </article>
 </div>
 </main>

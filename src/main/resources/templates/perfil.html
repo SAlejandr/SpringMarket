@@ -22,6 +22,9 @@
 				<p th:text="${usuario.email}"></p><br>
 				<label>Fecha de nacimiento:</label>
 				<p th:text="${usuario.fNacimiento}"></p>
+				<a type="button" class="btn btn-success" th:href="@{/usuario/perfil/{id}/tarjeta (id=${usuario.id})}">
+                <i class="bi bi-credit-card"></i> Tarjeta
+                </a>
 			</body>
 		</div>
 		

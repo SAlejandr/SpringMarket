@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
+<meta charset="utf-8">
 <title>Mostrar producto</title>
 <link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
 <link rel="stylesheet" th:href="@{/css/style.css}" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
 </head>
 <body>
 <body>
 	<nav th:replace="/header :: header"></nav>
 	<main class="container">
-		<div id="centrar" class="col-4">
-		<p th:text="${producto.titulo}"></p>
-		<p th:text="${producto.descripcion}"></p>
-		<p th:text="${producto.precio}"></p>
-		<p th:text="${producto.descuento}"></p>
-		<a th:href="@{/producto/borrar/{id}(id=${producto.id})}"> <i class="bi bi-trash"></i></a>
+		<div id="centrar" class="col-4 card">
+			<div class="card" style="width: 18rem;">
+				<div class="card-body">
+					<h5 class="card-title" th:text="${producto.titulo}"></h5>
+					<h6 class="card-subtitle mb-2 text-muted"
+						th:text="${producto.descripcion}"></h6>
+					<p class="card-text" th:text="${producto.precio}">&#8364;</p>
+					<p class="card-text" th:text="${producto.descuento}">%</p>
+					<a type="button" class="btn btn-outline-danger"
+						th:href="@{/producto/borrar/{id}(id=${producto.id})}"> <i
+						class="bi bi-trash">Eliminar</i></a> <a href="#" class="card-link">Another
+						link</a>
+				</div>
+			</div>
 		</div>
-		
+
+
 	</main>
 </body>
 </html>
