@@ -55,6 +55,10 @@ public class UsuarioController {
 		if(logueado == null) {
 			logueado = false;
 		}
+		Long user = (Long )session.getAttribute("user");
+		if(user == null) {
+			user = (long) -1;
+		}
 		
 		
 		Usuario u = usuarioService.buscarPorEmail(usuario);
@@ -64,15 +68,18 @@ public class UsuarioController {
 
 			if (contrasenna.equals(u.getContrasenna())) {
 				logueado = true;
-				
+				user=u.getId();
 				session.setAttribute("logueado", logueado);
+				session.setAttribute("user",user);
 				return redirectCorrecto+"/"+u.getId();
 			
 			}else
 				session.setAttribute("logueado", logueado);
+				session.setAttribute("user",user);
 				return redirectIncorrecto;
 		} else {
 			session.setAttribute("logueado", logueado);
+			session.setAttribute("user",user);
 			return redirectIncorrecto;
 		}
 
@@ -116,7 +123,7 @@ public class UsuarioController {
 	}
 	
 	@GetMapping(value = "/perfil/{id}" )
-	public ModelAndView getPerfil(@PathVariable long id,HttpSession session) {
+	public ModelAndView getPerfil(@PathVariable Long id,HttpSession session) {
 
 		Boolean logueado = (Boolean) session.getAttribute("logueado");
 		if(logueado == null) {
