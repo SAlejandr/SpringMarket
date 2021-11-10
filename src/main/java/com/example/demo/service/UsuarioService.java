@@ -7,7 +7,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.pojos.Tarjeta;
 import com.example.demo.pojos.Usuario;
+import com.example.demo.repository.TarjetaDao;
 import com.example.demo.repository.UsuarioDao;
 
 @Service
@@ -15,6 +17,8 @@ public class UsuarioService implements IUsuarioService {
 
 	@Autowired
 	private UsuarioDao dao;
+	@Autowired
+	private TarjetaDao tarjetaDao;
 
 	@Override
 	public int guardar(Usuario usuario) {
@@ -58,6 +62,29 @@ public class UsuarioService implements IUsuarioService {
 		}
 
 		return optional.orElse(new Usuario(-1, "", "", "", "", LocalDate.now()));
+	}
+
+	@Override
+	public int cambiarTarjeta(long id, Tarjeta tarjeta) {
+		// TODO Auto-generated method stub
+		
+		Optional<Usuario> persona = dao.findById(id);
+		
+		if(persona.isPresent()) {
+			Optional<Tarjeta> tarjetica = tarjetaDao.findById(tarjeta.getNumero());
+			if(tarjetica.isPresent() && persona.get().getNumeroTarjeta().equals(tarjeta.getNumero())) {
+				
+				tarjetaDao.update(tarjeta);
+			}else if (tarjetica.isPresent() && !persona.get().getNumeroTarjeta().equals(tarjeta.getNumero())) {
+				dao.updateTarjeta(id, tarjeta.getNumero());
+			}else {
+				
+				tarjetaDao.save(tarjeta);
+				dao.updateTarjeta(id, tarjeta.getNumero());
+			}
+		}
+		
+		return 0;
 	}
 
 }

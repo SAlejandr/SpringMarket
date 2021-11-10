@@ -52,9 +52,20 @@ public class TarjetaService implements ITarjetaService {
 	@Override
 	public int actualizarTarjeta(Tarjeta tarjeta) {
 		// TODO Auto-generated method stub
+		Optional<Tarjeta> laTarjeta = dao.findById(tarjeta.getNumero());
 		
+		if(existeTarjeta(tarjeta.getNumero()))
+			return dao.update(tarjeta);
+		else
+			return dao.save(tarjeta);		
+	}
+
+	@Override
+	public boolean existeTarjeta(BigInteger tarjeta) {
+		// TODO Auto-generated method stub
+		Optional<Tarjeta> optional = dao.findById(tarjeta);
 		
-		return 0;
+		return optional.isPresent();
 	}
 
 

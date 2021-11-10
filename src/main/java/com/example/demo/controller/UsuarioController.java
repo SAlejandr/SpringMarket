@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.pojos.Tarjeta;
 import com.example.demo.pojos.Usuario;
 import com.example.demo.repository.UsuarioDao;
 import com.example.demo.service.IUsuarioService;
@@ -29,8 +31,6 @@ import com.example.demo.service.IUsuarioService;
 @RequestMapping(value = "/usuario")
 public class UsuarioController {
 
-	@Autowired
-	private UsuarioDao dao;
 	@Autowired
 	private IUsuarioService usuarioService;
 
@@ -169,6 +169,14 @@ public class UsuarioController {
 
 		String redirect = "redirect:/perfil/" + id + "/tarjeta";
 		
+		Tarjeta laTarjeta = new Tarjeta(new BigInteger(tarjeta), titular, cod, direccion);
+		
+		
+		Usuario usuario = usuarioService.buscarPorId(id);
+		
+		if(usuario.getId() != -1) {
+			usuarioService.cambiarTarjeta(id, laTarjeta);
+		}
 
 		return redirect;
 

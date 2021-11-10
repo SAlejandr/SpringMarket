@@ -12,5 +12,5 @@ public interface ITarjetaService {
 	public Tarjeta buscarPorId(Tarjeta tarjeta);
 	public Tarjeta borrarPorId(BigInteger tarjeta);
 	public int actualizarTarjeta(Tarjeta tarjeta);
-
+	public boolean existeTarjeta(BigInteger tarjeta);
 }
