@@ -11,5 +11,6 @@ public interface ITarjetaService {
 	public List<Tarjeta> listarTodo();
 	public Tarjeta buscarPorId(Tarjeta tarjeta);
 	public Tarjeta borrarPorId(BigInteger tarjeta);
-	
+	public int actualizarTarjeta(Tarjeta tarjeta);
+
 }

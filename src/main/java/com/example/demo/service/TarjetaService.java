@@ -48,5 +48,14 @@ public class TarjetaService implements ITarjetaService {
 		
 		return optional.orElse(new Tarjeta(BigInteger.ZERO,"",0,""));
 	}
+	
+	@Override
+	public int actualizarTarjeta(Tarjeta tarjeta) {
+		// TODO Auto-generated method stub
+		
+		
+		return 0;
+	}
+
 
 }

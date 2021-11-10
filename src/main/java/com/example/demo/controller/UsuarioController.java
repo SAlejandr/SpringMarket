@@ -162,5 +162,17 @@ public class UsuarioController {
 		mav.setViewName("tarjetaForm");
 		return mav;
 	}
+	
+	@PostMapping(value = "/perfil/{id}/tarjeta")
+	public String postTarjeta(@PathVariable long id, @RequestParam String tarjeta, @RequestParam String titular,
+			@RequestParam int cod, @RequestParam String direccion) {
+
+		String redirect = "redirect:/perfil/" + id + "/tarjeta";
+		
+
+		return redirect;
+
+	}
+
 
 }

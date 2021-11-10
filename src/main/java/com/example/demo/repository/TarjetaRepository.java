@@ -22,6 +22,12 @@ public class TarjetaRepository implements TarjetaDao {
 		return jdbc.update("insert into tarjeta(numero, titular, codSecure, dirFactura) value (?,?,?,?)",
 				tarjeta.getNumero(), tarjeta.getTitular(), tarjeta.getCodSeguridad(), tarjeta.getDirFactura());
 	}
+	@Override
+	public int update(Tarjeta tarjeta) {
+		// TODO Auto-generated method stub
+		return jdbc.update("update tarjeta set titular = ?, codSecure = ?, dirFactura =? where numeroTarjeta=?",
+				tarjeta.getTitular(),  tarjeta.getCodSeguridad(), tarjeta.getDirFactura(),tarjeta.getNumero());
+	}
 
 	@Override
 	public int count() {
