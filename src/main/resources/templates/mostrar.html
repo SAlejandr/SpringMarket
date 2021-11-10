@@ -20,7 +20,10 @@
 						th:text="${producto.descripcion}"></h6>
 					<p class="card-text" th:text="${producto.precio}+ ' &euro;'"></p>
 					<p class="card-text" th:text="${producto.descuento}+' %'"></p>
-					<a type="button" class="btn btn-outline-success" href="#"><i class="bi bi-cart-check">Añadir al carrito</i></a>				
+					<form th:action="@{/producto/anadir}" method="POST">
+					<input type="number" name="nProducto" min="1" value="1">
+					<input type="submit" class="btn btn-outline-success"value="Añadir al carrito">	
+					</form>
 					<a type="button" class="btn btn-outline-danger"th:href="@{/producto/borrar/{id}(id=${producto.id})}"> <i class="bi bi-trash">Eliminar producto</i></a>
 				</div>
 			</div>

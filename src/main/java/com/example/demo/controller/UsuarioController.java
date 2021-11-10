@@ -181,6 +181,22 @@ public class UsuarioController {
 		return redirect;
 
 	}
+	@GetMapping(value = "/perfil/{id}/compras" )
+	public ModelAndView getcompra(@PathVariable long id,HttpSession session) {
+
+		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		if(logueado == null) {
+			
+			logueado = false;
+		}
+		ModelAndView mav = new ModelAndView();
+
+		Usuario u = usuarioService.buscarPorId(id);
+		mav.addObject("usuario", u);
+		mav.addObject("logueado", logueado);
+		mav.setViewName("listaCompras");
+		return mav;
+	}
 
 
 }
