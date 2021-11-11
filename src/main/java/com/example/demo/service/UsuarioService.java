@@ -72,7 +72,10 @@ public class UsuarioService implements IUsuarioService {
 		
 		if(persona.isPresent()) {
 			Optional<Tarjeta> tarjetica = tarjetaDao.findById(tarjeta.getNumero());
-			if(tarjetica.isPresent() && persona.get().getNumeroTarjeta().equals(tarjeta.getNumero())) {
+			if(tarjetica.isPresent() && persona.get().getNumeroTarjeta() == null) {
+			
+				dao.updateTarjeta(id, tarjeta.getNumero());
+			}else if(tarjetica.isPresent() && persona.get().getNumeroTarjeta().equals(tarjeta.getNumero())) {
 				
 				tarjetaDao.update(tarjeta);
 			}else if (tarjetica.isPresent() && !persona.get().getNumeroTarjeta().equals(tarjeta.getNumero())) {
