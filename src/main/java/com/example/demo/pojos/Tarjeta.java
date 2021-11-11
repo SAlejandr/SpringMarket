@@ -1,9 +1,10 @@
 package com.example.demo.pojos;
 
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Objects;
 
-public class Tarjeta {
+public class Tarjeta implements Serializable{
 	//variables
 	private BigInteger numero;
 	private String titular;

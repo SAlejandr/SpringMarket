@@ -1,8 +1,9 @@
 package com.example.demo.pojos;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Producto {
+public class Producto implements Serializable{
 
 	//Variables
 	private long id;
