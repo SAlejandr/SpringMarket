@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -43,7 +44,7 @@ public class TarjetaRepository implements TarjetaDao {
 	}
 
 	@Override
-	public Optional<Tarjeta> findById(BigInteger numeroTarjeta) {
+	public Optional<Tarjeta> findById(BigInteger numeroTarjeta)  throws EmptyResultDataAccessException{
 		// TODO Auto-generated method stub
 		return jdbc.queryForObject("select * from tarjeta where numero = ?",(rs, rowNum) -> Optional.of( new Tarjeta(new BigInteger(rs.getString("numero")), rs.getString("titular"), rs.getInt("codSecure"), rs.getString("dirFactura"))) , numeroTarjeta);
 	}

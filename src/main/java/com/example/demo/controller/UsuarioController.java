@@ -167,7 +167,7 @@ public class UsuarioController {
 	public String postTarjeta(@PathVariable long id, @RequestParam String tarjeta, @RequestParam String titular,
 			@RequestParam int cod, @RequestParam String direccion) {
 
-		String redirect = "redirect:/perfil/" + id + "/tarjeta";
+		String redirect = "redirect:/usuario/perfil/" + id + "/tarjeta";
 		
 		Tarjeta laTarjeta = new Tarjeta(new BigInteger(tarjeta), titular, cod, direccion);
 		

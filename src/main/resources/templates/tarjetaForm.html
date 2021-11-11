@@ -13,7 +13,7 @@
 		<div id="centrar" class="col-4">
 		
 			<h2>TARJETA</h2>
-			<form th:action="@{/}" method="POST">
+			<form th:action="@{/usuario/perfil/{id}/tarjeta (id=${usuario.id})} " method="POST">
 				<label>Numero tarjeta</label>
 				 <input type="text" name="tarjeta"/><br>
 				 <label>Titular</label>

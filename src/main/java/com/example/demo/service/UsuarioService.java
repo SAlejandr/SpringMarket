@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.pojos.Tarjeta;
@@ -67,26 +68,34 @@ public class UsuarioService implements IUsuarioService {
 	@Override
 	public int cambiarTarjeta(long id, Tarjeta tarjeta) {
 		// TODO Auto-generated method stub
-		
+
 		Optional<Usuario> persona = dao.findById(id);
 		
-		if(persona.isPresent()) {
-			Optional<Tarjeta> tarjetica = tarjetaDao.findById(tarjeta.getNumero());
-			if(tarjetica.isPresent() && persona.get().getNumeroTarjeta() == null) {
-			
-				dao.updateTarjeta(id, tarjeta.getNumero());
-			}else if(tarjetica.isPresent() && persona.get().getNumeroTarjeta().equals(tarjeta.getNumero())) {
+		if (persona.isPresent()) {
+			Optional<Tarjeta> tarjetica;
+			try {
+				 tarjetica = tarjetaDao.findById(tarjeta.getNumero());
+
 				
-				tarjetaDao.update(tarjeta);
-			}else if (tarjetica.isPresent() && !persona.get().getNumeroTarjeta().equals(tarjeta.getNumero())) {
-				dao.updateTarjeta(id, tarjeta.getNumero());
-			}else {
-				
-				tarjetaDao.save(tarjeta);
-				dao.updateTarjeta(id, tarjeta.getNumero());
+			} catch (EmptyResultDataAccessException e) {
+				// TODO: handle exception
+				tarjetica = Optional.empty();
 			}
+				if (tarjetica.isPresent() && persona.get().getNumeroTarjeta() == null) {
+
+					dao.updateTarjeta(id, tarjeta.getNumero());
+				} else if (tarjetica.isPresent() && persona.get().getNumeroTarjeta().equals(tarjeta.getNumero())) {
+
+					tarjetaDao.update(tarjeta);
+				} else if (tarjetica.isPresent() && !persona.get().getNumeroTarjeta().equals(tarjeta.getNumero())) {
+					dao.updateTarjeta(id, tarjeta.getNumero());
+				} else {
+
+					tarjetaDao.save(tarjeta);
+					dao.updateTarjeta(id, tarjeta.getNumero());
+				}
 		}
-		
+
 		return 0;
 	}
 
