@@ -23,6 +23,7 @@
 					<form th:action="@{/producto/carrito/add}" method="POST">
 						<input th:value="${producto.id}" name="id" type="hidden">
 						<input th:value="${producto.titulo}" name="nombre" type="hidden">
+						<input th:value="${producto.precio}" name="precio" type="hidden">
 						<input type="number" name="nProducto" min="1" value="1"> <input
 							type="submit" class="btn btn-outline-success"
 							value="Añadir al carrito">

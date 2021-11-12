@@ -19,7 +19,6 @@
 					<th>Nombre articulo</th>
 					<th>Cantidad</th>
 					<th>precio</th>
-					<th>Comprar</th>
 					<th>Eliminar</th>
 				</tr>
 			</thead>
@@ -27,9 +26,8 @@
 				<tr class="table-light" th:each="producto :${session.carrito}">
 					<td th:text="${producto.nombre}"></td>
 					<td th:text="${producto.cantidad}"></td>
-					<td>22222</td>
-					<td><i class="bi bi-bag-plus"></i></i></td>
-					<td><i class="bi bi-bag-plus"></i></i></td>
+					<td th:with="result=${producto.precio *producto.cantidad}" th:text="${result}+ ' &euro;'"></td>
+					<td><i class="bi bi-bag-dash"></i></i></td>
 				</tr>
 			</tbody>
 		</table>

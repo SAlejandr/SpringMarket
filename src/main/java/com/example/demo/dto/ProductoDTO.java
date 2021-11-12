@@ -21,7 +21,7 @@ public class ProductoDTO implements Serializable {
 		this.id = id;
 		this.nombre = nombre;
 		this.cantidad = cantidad;
-		this.setPrecio(precio);
+		this.precio=precio;
 	}
 
 	//sets y gets
