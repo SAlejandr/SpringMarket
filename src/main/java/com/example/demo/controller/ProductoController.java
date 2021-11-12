@@ -63,7 +63,7 @@ public class ProductoController {
 		
 		session.setAttribute("carrito", carrito);
 		
-		return "a";
+		return "redirect:/producto/carrito";
 	}
 
 }
