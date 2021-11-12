@@ -8,18 +8,20 @@ public class ProductoDTO implements Serializable {
 	private long id;
 	private String nombre;
 	private int cantidad;
+	private float precio;
 	
 	//Constructor
 	public ProductoDTO() {
 		// TODO Auto-generated constructor stub
-		this(0, "", 0);
+		this(0, "", 0, 0);
 	}
 
-	public ProductoDTO(long id, String nombre, int cantidad) {
+	public ProductoDTO(long id, String nombre, int cantidad, float precio) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 		this.cantidad = cantidad;
+		this.setPrecio(precio);
 	}
 
 	//sets y gets
@@ -46,6 +48,14 @@ public class ProductoDTO implements Serializable {
 	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
+	public float getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(float precio) {
+		this.precio = precio;
+	}
+
 	//equals y hashCode
 	@Override
 	public int hashCode() {

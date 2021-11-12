@@ -42,7 +42,7 @@ public class ProductoController {
 	}
 
 	@PostMapping(value = "/carrito/add")
-	public String postMethodName(@RequestParam long id, @RequestParam String nombre, @RequestParam int nProducto,
+	public String postMethodName(@RequestParam long id, @RequestParam String nombre, @RequestParam int nProducto, @RequestParam float precio,
 			HttpSession session) {
 		// TODO: process POST request
 		@SuppressWarnings("unchecked")
@@ -51,7 +51,7 @@ public class ProductoController {
 			carrito = new ArrayList<>();
 		}
 		
-		ProductoDTO dto = new ProductoDTO(id, nombre, nProducto);
+		ProductoDTO dto = new ProductoDTO(id, nombre, nProducto, precio);
 		
 		if(carrito.contains(dto)) {
 			int cantidad = carrito.get(carrito.lastIndexOf(dto)).getCantidad() + dto.getCantidad();
