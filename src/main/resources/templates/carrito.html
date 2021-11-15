@@ -3,15 +3,12 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Lista compras</title>
-<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
-<link rel="stylesheet" th:href="@{/css/style.css}" />
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+
 </head>
 <body>
 <body>
 	<!-- AAAAAAAAAAAAAAAAAAA -->
-	<nav th:replace="/header :: header"></nav>
+	<nav th:replace="/header"></nav>
 	<main>
 		<table class="table table-hover">
 			<thead>
@@ -31,8 +28,8 @@
 				</tr>
 			</tbody>
 		</table>
-		<form  method="POST">
-		<input type="button" value="comprar">
+	  <form th:action="@{/}" method="POST"> 
+		<input type="button" class="btn btn-success" value="comprar">
 		</form>
 	</main>
 </body>

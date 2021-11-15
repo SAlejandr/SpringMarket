@@ -57,7 +57,7 @@ public class UsuarioController {
 		}
 		Long user = (Long )session.getAttribute("user");
 		if(user == null) {
-			user = (long) -1;
+			user = -1L;
 		}
 		
 		
@@ -131,7 +131,7 @@ public class UsuarioController {
 			logueado = false;
 		}
 		ModelAndView mav = new ModelAndView();
-
+		
 		Usuario u = usuarioService.buscarPorId(id);
 		mav.addObject("usuario", u);
 		mav.addObject("logueado", logueado);

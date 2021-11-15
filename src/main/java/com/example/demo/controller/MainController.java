@@ -24,7 +24,7 @@ public class MainController {
 	@Autowired
 	private IProductoService productoService;
 
-	@GetMapping(value = "/indesx")
+	@GetMapping(value = {"/indesx", "/","/index"})
 	public String index(Model modelo, HttpSession session) {
 
 		Boolean logueado = (Boolean) session.getAttribute("logueado");
