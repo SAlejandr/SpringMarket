@@ -44,7 +44,7 @@ public class ProductoController {
 	@PostMapping(value = "/carrito/add")
 	public String postMethodName(@RequestParam long id, @RequestParam String nombre, @RequestParam int nProducto, @RequestParam float precio,
 			HttpSession session) {
-		// TODO: process POST request
+		
 		@SuppressWarnings("unchecked")
 		ArrayList<ProductoDTO> carrito = (ArrayList<ProductoDTO>) session.getAttribute("carrito");
 		if (carrito == null) {

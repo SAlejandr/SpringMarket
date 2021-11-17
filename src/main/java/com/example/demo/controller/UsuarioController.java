@@ -50,7 +50,7 @@ public class UsuarioController {
 
 	@PostMapping(value = "/login")
 	public String postLogin(HttpSession session,@RequestParam String usuario, @RequestParam String contrasenna) {
-		// TODO: process POST request
+		
 		Boolean logueado = (Boolean) session.getAttribute("logueado");
 		if(logueado == null) {
 			logueado = false;
@@ -104,7 +104,7 @@ public class UsuarioController {
 	@PostMapping(value = "/signup")
 	public String postRegistrarse(@RequestParam String nombre,@RequestParam String apellido,@RequestParam String contrasenna, 
 			@RequestParam String email, @RequestParam String fNacimiento) {
-		//TODO: process POST request
+		
 		
 		Usuario u  = usuarioService.buscarPorEmail(email);
 		String redirectCorrecto = "redirect:/indesx", redirectIncorrecto = "redirect:/usuario/signup";
@@ -198,5 +198,20 @@ public class UsuarioController {
 		return mav;
 	}
 
+	@PostMapping(value="/perfil/compras")
+	public String postcompra(HttpSession session) {
+		Long id =(Long) session.getAttribute("user");
+		
+		if(id == null) {
+			id = -1L;
+		}
+		
+		if(id==-1) {
+			return "redirect:/usuario/login";
+		}
+		session.setAttribute("carrito", null);
+		return "redirect:/usuario/perfil/"+id+"/compras";
+		
+	}
 
 }
