@@ -2,6 +2,7 @@ package com.example.demo.pojos;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 
@@ -14,19 +15,26 @@ public class Compra implements Serializable {
 	private Usuario usuario;
 	private long id;
 	private HashSet<ProductoDTO> productos;
-	private LocalDate fecha;
+	private LocalDateTime fecha;
 	//constructor
 	
 	public Compra() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Compra(Usuario usuario, long id, HashSet<ProductoDTO> productos, LocalDate fecha) {
+	public Compra(Usuario usuario, long id, HashSet<ProductoDTO> productos, LocalDateTime fecha) {
 		super();
 		this.usuario = usuario;
 		this.id = id;
 		this.productos = productos;
 		this.fecha = fecha;
+	}
+	
+	public Compra(long id, Usuario u) {
+		
+		this(u, id, new HashSet<>(), LocalDateTime.now());
+
+		
 	}
 	//setter y getter
 
@@ -54,11 +62,11 @@ public class Compra implements Serializable {
 		this.productos = productos;
 	}
 
-	public LocalDate getFecha() {
+	public LocalDateTime getFecha() {
 		return fecha;
 	}
 
-	public void setFecha(LocalDate fecha) {
+	public void setFecha(LocalDateTime fecha) {
 		this.fecha = fecha;
 	}
 
