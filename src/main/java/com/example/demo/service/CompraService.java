@@ -39,6 +39,8 @@ public class CompraService implements ICompraService {
 	@Override
 	public void borrarUnArticulo(long idCompra, long articulo) {
 
+		dao.deleteByProducto(idCompra, articulo);
+		
 	}
 
 }
