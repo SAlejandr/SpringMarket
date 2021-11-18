@@ -12,7 +12,8 @@ public interface CompraDao {
 	public int save(long id, long user, ProductoDTO dto, LocalDateTime fecha);
 	public int count();
 	public Optional<Compra> findById(long id);
+	public Set<ProductoDTO> findListaById(long id);
 	public List<Compra> findAllByUsuario(long user);
-	public int deleteById(long id, long user, HashSet<ProductoDTO> productos );
+	public int deleteByProducto(long id, long articulo );
 	
 }

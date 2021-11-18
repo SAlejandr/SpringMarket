@@ -1,10 +1,7 @@
 package com.example.demo.repository;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
+import java.time.*;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import com.example.demo.dto.ProductoDTO;
 import com.example.demo.pojos.Compra;
 import com.example.demo.pojos.Usuario;
-
 @Repository
 public class CompraRepository implements CompraDao {
 
@@ -46,17 +42,31 @@ public class CompraRepository implements CompraDao {
 		
 		
 		
-		return null;
+		return Optional.of(c);
+	}
+	
+	public Set<ProductoDTO> findListaById(long id){
+		
+		List<ProductoDTO> lista = jdbc.query("select articulo, cantidad from listaCompra where id = ?" , (rs, rowNum) -> new ProductoDTO(rs.getLong("articulo"), "", rs.getInt("cantidad"), 0));
+		
+		HashSet<ProductoDTO> set = new HashSet<>();
+		
+		lista.stream().forEach(set::add);
+		
+		return set;
 	}
 
 	@Override
 	public List<Compra> findAllByUsuario(long user) {
-		return null;
+		Usuario u = new Usuario();
+		u.setId(user);
+		return jdbc.query("select * from compra where usuario = ?",(rs, rowNum) -> new Compra(rs.getLong("id"),u), user);
+		
 	}
 
 	@Override
-	public int deleteById(long id, long user, HashSet<ProductoDTO> productos) {
-		return 0;
+	public int deleteByProducto(long id,long articulo) {
+		return jdbc.update("delete from listaCompra where id =? and articulo =?", id, articulo );
 	}
 
 }
