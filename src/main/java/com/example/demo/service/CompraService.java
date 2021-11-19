@@ -7,13 +7,17 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.dto.ProductoDTO;
 import com.example.demo.pojos.Compra;
+import com.example.demo.pojos.Producto;
 import com.example.demo.repository.CompraDao;
+import com.example.demo.repository.ProductoDao;
 
 @Service
 public class CompraService implements ICompraService {
 
 	@Autowired
 	private CompraDao dao;
+	@Autowired
+	private ProductoDao daoProducto;
 	
 	@Override
 	public void guardarCompra(Compra c) {
@@ -36,6 +40,17 @@ public class CompraService implements ICompraService {
 			
 			c.setProductos((HashSet<ProductoDTO>) set);
 		});
+		
+		
+		lista.stream().forEach(c -> {
+			c.getProductos().stream().forEach(p ->{
+				
+				Producto pro = daoProducto.findById(p.getId()).get();
+				
+				p.setNombre(pro.getTitulo());
+			});
+		});
+		
 		
 		return lista;
 	}
