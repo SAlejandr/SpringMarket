@@ -9,7 +9,8 @@ import com.example.demo.pojos.Compra;
 
 public interface CompraDao {
 	
-	public int save(long id, long user, ProductoDTO dto, LocalDateTime fecha);
+	public int save(long user, LocalDateTime fecha);
+	public int saveArticle(long id, ProductoDTO dto);
 	public int count();
 	public Optional<Compra> findById(long id);
 	public Set<ProductoDTO> findListaById(long id);

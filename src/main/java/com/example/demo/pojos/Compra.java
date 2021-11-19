@@ -36,8 +36,15 @@ public class Compra implements Serializable {
 
 		
 	}
+	public Compra(Usuario usuario, HashSet<ProductoDTO> productos, LocalDateTime fecha) {
+		this.usuario = usuario;
+		this.productos = productos;
+		this.fecha = fecha;
+	}
+
 	//setter y getter
 
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}

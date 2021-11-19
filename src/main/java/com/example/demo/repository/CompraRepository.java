@@ -16,12 +16,17 @@ public class CompraRepository implements CompraDao {
 	@Autowired
 	private JdbcTemplate jdbc;
 	@Override
-	public int save(long id, long user, ProductoDTO dto, LocalDateTime fecha) {
+	public int save( long user, LocalDateTime fecha) {
 	
-		return jdbc.update("insert into compre(id, usuario, articulo, cantidad, fecha)"
-				, id, user, dto.getId(), dto.getCantidad(), fecha);
+		return jdbc.update("insert into compra(usuario, fecha) value (?,?)"
+				,  user, fecha);
 	}
-
+	@Override
+	public int saveArticle(long id, ProductoDTO dto) {
+		// TODO Auto-generated method stub
+		return jdbc.update("insert into listaCompra(id, articulo, cantidad) value (?,?,?)"
+				,  id, dto.getId(), dto.getCantidad());
+	}
 	@Override
 	public int count() {
 		
@@ -68,5 +73,4 @@ public class CompraRepository implements CompraDao {
 	public int deleteByProducto(long id,long articulo) {
 		return jdbc.update("delete from listaCompra where id =? and articulo =?", id, articulo );
 	}
-
 }

@@ -2,8 +2,11 @@ package com.example.demo.controller;
 
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,9 +25,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.dto.ProductoDTO;
+import com.example.demo.pojos.Compra;
 import com.example.demo.pojos.Tarjeta;
 import com.example.demo.pojos.Usuario;
 import com.example.demo.repository.UsuarioDao;
+import com.example.demo.service.ICompraService;
 import com.example.demo.service.IUsuarioService;
 
 @Controller
@@ -33,6 +39,9 @@ public class UsuarioController {
 
 	@Autowired
 	private IUsuarioService usuarioService;
+	
+	@Autowired
+	private ICompraService compraService;
 
 	@GetMapping(value = "/login")
 	public ModelAndView getLogin(HttpSession session) {
@@ -208,7 +217,14 @@ public class UsuarioController {
 		
 		if(id==-1) {
 			return "redirect:/usuario/login";
-		}
+		} 
+		ArrayList<ProductoDTO> l = (ArrayList<ProductoDTO>) session.getAttribute("carrito");
+		HashSet<ProductoDTO> p = new HashSet<>();
+		l.stream().forEach(p::add);
+		Usuario u = new Usuario();
+		u.setId(id);
+		Compra c = new Compra(u, p, LocalDateTime.now());
+		compraService.guardarCompra(c);
 		session.setAttribute("carrito", null);
 		return "redirect:/usuario/perfil/"+id+"/compras";
 		

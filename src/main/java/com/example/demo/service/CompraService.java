@@ -18,7 +18,11 @@ public class CompraService implements ICompraService {
 	@Override
 	public void guardarCompra(Compra c) {
 		
-		c.getProductos().stream().forEach(p -> dao.save(c.getId(), c.getUsuario().getId(), p, c.getFecha()));
+		int idP = dao.count() + 1;
+		dao.save(c.getUsuario().getId(), c.getFecha());
+		
+		
+		c.getProductos().stream().forEach(p -> dao.saveArticle(idP, p));
 		
 	}
 
