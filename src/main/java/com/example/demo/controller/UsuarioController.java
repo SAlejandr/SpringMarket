@@ -234,5 +234,13 @@ public class UsuarioController {
 		return "redirect:/usuario/perfil/"+id+"/compras";
 		
 	}
-
+	
+	@GetMapping(value = "/perfil/{id}/compras/{compra}/{pro}")
+	public String delete(@PathVariable long id, @PathVariable long compra, @PathVariable long pro) {
+		
+		compraService.borrarUnArticulo(compra, pro);
+		
+		return "redirect:/usuario/perfil/"+id+"/compras";	
+		
+	}
 }

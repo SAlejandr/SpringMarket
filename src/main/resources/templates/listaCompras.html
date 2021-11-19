@@ -26,7 +26,7 @@
 					<td th:text="${producto.id}"></td>
 					<td th:text="${producto.nombre}"></td>
 					<td th:text="${producto.cantidad}"></td>
-					<td><a class="bi bi-bag-x"></a></td>
+					<td><a class="bi bi-bag-x" th:href="@{/usuario/perfil/{id}/compras/{compra}/{pro} (id=${usuario.id}, compra=${recibo.id}, pro=${producto.id})}"></a></td>
 				</tr>
 			</tbody>
 			</div>
