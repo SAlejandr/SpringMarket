@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.HttpServletRequest;
@@ -200,8 +201,12 @@ public class UsuarioController {
 		}
 		ModelAndView mav = new ModelAndView();
 
+		
 		Usuario u = usuarioService.buscarPorId(id);
+		List<Compra> c=  compraService.listarComprasPorUsuario(id);
+		
 		mav.addObject("usuario", u);
+		mav.addObject("compra", c);
 		mav.addObject("logueado", logueado);
 		mav.setViewName("listaCompras");
 		return mav;

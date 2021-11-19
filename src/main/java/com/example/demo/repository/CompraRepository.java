@@ -52,7 +52,7 @@ public class CompraRepository implements CompraDao {
 	
 	public Set<ProductoDTO> findListaById(long id){
 		
-		List<ProductoDTO> lista = jdbc.query("select articulo, cantidad from listaCompra where id = ?" , (rs, rowNum) -> new ProductoDTO(rs.getLong("articulo"), "", rs.getInt("cantidad"), 0));
+		List<ProductoDTO> lista = jdbc.query("select articulo, cantidad from listaCompra where id = ?" , (rs, rowNum) -> new ProductoDTO(rs.getLong("articulo"), "", rs.getInt("cantidad"), 0), id);
 		
 		HashSet<ProductoDTO> set = new HashSet<>();
 		

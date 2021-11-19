@@ -18,14 +18,18 @@
 					<th>Devolucion</th>
 				</tr>
 			</thead>
-			<tbody>
-				<tr class="table-light">
-					<th>1</th>
-					<td></td>
-					<td></td>
+			<div th:each="recibo :${compra}">
+			<strong th:text="${recibo.id}"></strong>
+			<span th:text="${recibo.fecha}"></span>
+			<tbody th:each="producto :${recibo.productos}">
+				<tr class="table-light" >
+					<td th:text="${producto.id}"></td>
+					<td th:text="${producto.nombre}"></td>
+					<td th:text="${producto.cantidad}"></td>
 					<td><a class="bi bi-bag-x"></a></td>
 				</tr>
 			</tbody>
+			</div>
 	</main>
 </body>
 </html>
