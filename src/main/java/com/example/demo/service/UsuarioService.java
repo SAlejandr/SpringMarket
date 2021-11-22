@@ -15,22 +15,29 @@ import com.example.demo.pojos.Usuario;
 import com.example.demo.repository.TarjetaDao;
 import com.example.demo.repository.UsuarioDao;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+
+
+
 @Transactional
 @Service
-public class UsuarioService implements IUsuarioService {
+public class UsuarioService implements IUsuarioService,UserDetailsService {
 
 	@Autowired
 	private UsuarioDao dao;
 	@Autowired
 	private TarjetaDao tarjetaDao;
-	/*@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;*/
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
 	public int guardar(Usuario usuario) {
 		// TODO Auto-generated method stub
 		
-		//usuario.setContrasenna(bCryptPasswordEncoder.encode(usuario.getContrasenna()));
+		usuario.setContrasenna(bCryptPasswordEncoder.encode(usuario.getContrasenna()));
 		
 		return dao.save(usuario);
 	}
@@ -46,7 +53,7 @@ public class UsuarioService implements IUsuarioService {
 		// TODO Auto-generated method stub
 		Optional<Usuario> optional = dao.findById(id);
 
-		return optional.orElse(new Usuario(-1, "", "", "", "", LocalDate.now()));
+		return optional.orElse(new Usuario());
 
 	}
 
@@ -56,7 +63,7 @@ public class UsuarioService implements IUsuarioService {
 
 		Optional<Usuario> optional = dao.findByEmail(email);
 
-		return optional.orElse(new Usuario(-1, "", "", "", "", LocalDate.now()));
+		return optional.orElse(new Usuario());
 	}
 
 	@Override
@@ -70,7 +77,7 @@ public class UsuarioService implements IUsuarioService {
 			dao.delete(optional.get());
 		}
 
-		return optional.orElse(new Usuario(-1, "", "", "", "", LocalDate.now()));
+		return optional.orElse(new Usuario());
 	}
 
 	@Override
@@ -105,6 +112,12 @@ public class UsuarioService implements IUsuarioService {
 		}
 
 		return 0;
+	}
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

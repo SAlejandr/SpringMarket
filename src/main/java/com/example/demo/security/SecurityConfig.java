@@ -1,13 +1,6 @@
 package com.example.demo.security;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.neo4j.Neo4jProperties.Authentication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -28,33 +21,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private UserDetailsService userDetailsService;
 	
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		return bCryptPasswordEncoder;
-	}
-	
-    @Bean
-    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
-        return new AuthenticationSuccessHandlerImp();
-    }
-	
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		// TODO Auto-generated method stub
-		super.configure(http);
-		
 		http.
-		 authorizeRequests().
-		 antMatchers("/","/indesx","/index","/js/**","/css/**","/images/**","/signup","/createUser","/webjars/**").permitAll().
+		 authorizeRequests().antMatchers("/","/indesx","/index","/js/**","/css/**","/images/**","/signup","/createUser","/webjars/**").permitAll().
 		 antMatchers("/admin/**").hasAuthority("admin").
-		 anyRequest().authenticated().
 		 and().
 		 formLogin().
 		 loginPage("/usuario/login").
 		 loginProcessingUrl("/usuario/login").
-		 usernameParameter("email").
+		 usernameParameter("usuario").
+		 passwordParameter("contrasenna").
 		 successHandler(myAuthenticationSuccessHandler()).
 		 permitAll().
 		 and().
@@ -70,10 +48,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 	
 	
-	 @Autowired
-	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception { 
-	 
-	        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());     
-	    }
+	@Autowired
+	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+	}
+
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		return bCryptPasswordEncoder;
+	}
+
+	@Bean
+	public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
+		return new AuthenticationSuccessHandlerImp();
+	}
 	 
 }
