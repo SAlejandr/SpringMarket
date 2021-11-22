@@ -21,6 +21,14 @@ public class Usuario implements Serializable{
 		
 		this(-1L ,"", "", "", "", LocalDate.now(), new HashSet<>());
 	}
+	public Usuario(long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento) {
+		this.id = id;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.contrasenna = contrasenna;
+		this.email = email;
+		this.fNacimiento = fNacimiento;
+	}
 
 	public Usuario(String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento) {
 		super();
