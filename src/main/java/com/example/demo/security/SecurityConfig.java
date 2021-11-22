@@ -30,15 +30,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-		
-		return new BCryptPasswordEncoder();
+		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+		return bCryptPasswordEncoder;
 	}
 	
-	@Bean
-	public AuthenticationSuccessHandler myAuthenticationSuccessHandler() {
-		
-		return new AuthenticationSuccessHandlerImp();
-	}
+    @Bean
+    public AuthenticationSuccessHandler myAuthenticationSuccessHandler(){
+        return new AuthenticationSuccessHandlerImp();
+    }
 	
 	
 	@Override
