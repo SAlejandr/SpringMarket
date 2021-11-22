@@ -6,13 +6,16 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.pojos.Tarjeta;
 import com.example.demo.pojos.Usuario;
 import com.example.demo.repository.TarjetaDao;
 import com.example.demo.repository.UsuarioDao;
 
+@Transactional
 @Service
 public class UsuarioService implements IUsuarioService {
 
@@ -20,10 +23,15 @@ public class UsuarioService implements IUsuarioService {
 	private UsuarioDao dao;
 	@Autowired
 	private TarjetaDao tarjetaDao;
-
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	
 	@Override
 	public int guardar(Usuario usuario) {
 		// TODO Auto-generated method stub
+		
+		usuario.setContrasenna(bCryptPasswordEncoder.encode(usuario.getContrasenna()));
+		
 		return dao.save(usuario);
 	}
 
