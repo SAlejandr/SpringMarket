@@ -23,14 +23,14 @@ public class UsuarioService implements IUsuarioService {
 	private UsuarioDao dao;
 	@Autowired
 	private TarjetaDao tarjetaDao;
-	@Autowired
-	private BCryptPasswordEncoder bCryptPasswordEncoder;
+	/*@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;*/
 	
 	@Override
 	public int guardar(Usuario usuario) {
 		// TODO Auto-generated method stub
 		
-		usuario.setContrasenna(bCryptPasswordEncoder.encode(usuario.getContrasenna()));
+		//usuario.setContrasenna(bCryptPasswordEncoder.encode(usuario.getContrasenna()));
 		
 		return dao.save(usuario);
 	}
