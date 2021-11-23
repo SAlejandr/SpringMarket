@@ -75,7 +75,7 @@ public class UsuarioRepository implements UsuarioDao{
 	@Override
 	public List<Rol> findAllRolByUser(long id) {
 		// TODO Auto-generated method stub
-		return jdbc.query("select * from usuario_rol where usuario = ?", (rs, rowNum) -> new Rol(rs.getByte("id"), rs.getString("nombre")), id);
+		return jdbc.query("select r.id as 'id', r.nombre as 'nombre' from usuario_rol ur inner join rol r on r.id = ur.rol where ur.usuario = ?", (rs, rowNum) -> new Rol(rs.getByte("id"), rs.getString("nombre")), id);
 	}
 
 	
