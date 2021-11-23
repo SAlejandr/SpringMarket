@@ -120,7 +120,13 @@ public class Usuario implements Serializable{
 	public void setNumeroTarjeta(BigInteger numeroTarjeta) {
 		this.numeroTarjeta = numeroTarjeta;
 	}
-//equals y hascode
+	public HashSet<Rol> getRoles() {
+		return roles;
+	}
+	public void setRoles(HashSet<Rol> roles) {
+		this.roles = roles;
+	}
+	//equals y hascode
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);

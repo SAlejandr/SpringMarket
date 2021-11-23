@@ -11,6 +11,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.pojos.Rol;
 import com.example.demo.pojos.Usuario;
 
 @Repository
@@ -69,6 +70,12 @@ public class UsuarioRepository implements UsuarioDao{
 		// TODO Auto-generated method stub
 		//aaaaaaaaaaaaaaaaaa
 		return jdbc.update("UPDATE usuario SET numeroTarjeta = ? WHERE id = ?", numero, id);
+	}
+
+	@Override
+	public List<Rol> findAllRolByUser(long id) {
+		// TODO Auto-generated method stub
+		return jdbc.query("select * from usuario_rol where usuario = ?", (rs, rowNum) -> new Rol(rs.getByte("id"), rs.getString("nombre")), id);
 	}
 
 	

@@ -1,8 +1,10 @@
 package com.example.demo.service;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -10,11 +12,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.pojos.Rol;
 import com.example.demo.pojos.Tarjeta;
 import com.example.demo.pojos.Usuario;
 import com.example.demo.repository.TarjetaDao;
 import com.example.demo.repository.UsuarioDao;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -116,8 +121,25 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		// TODO Auto-generated method stub
-		return null;
+		
+		
+		Usuario u = dao.findByEmail(username).get();
+		List<Rol> l = dao.findAllRolByUser(u.getId());
+		HashSet<Rol> roles = new HashSet<>();
+		
+		l.stream().forEach(roles::add);
+		
+		u.setRoles(roles);
+		
+		Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+
+		for (Rol rol : u.getRoles()) {
+			grantedAuthorities.add(new SimpleGrantedAuthority(rol.getNombre()));
+		}
+		
+		
+		return new org.springframework.security.core.userdetails.User(u.getEmail(), u.getContrasenna(),
+				grantedAuthorities);
 	}
 
 }
