@@ -47,10 +47,10 @@ public class AuthenticationSuccessHandlerImp implements AuthenticationSuccessHan
 		boolean isAdmin = false;
 		final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		for (final GrantedAuthority grantedAuthority : authorities) {
-			if (grantedAuthority.getAuthority().equals("ROL_CLIENTE")) {
+			if (grantedAuthority.getAuthority().equals("Cliente")) {
 				isCliente = true;
 				break;
-			} else if (grantedAuthority.getAuthority().equals("ROL_ADMIN")) {
+			} else if (grantedAuthority.getAuthority().equals("Admin")) {
 				isAdmin = true;
 				break;
 			}
