@@ -18,5 +18,7 @@ public interface IUsuarioService {
 	public Usuario borrarPorId(long id);
 	
 	public int cambiarTarjeta(long id, Tarjeta tarjeta);
+	
+	public void asignarRolCliente(String usuario, byte rol);
 }
 

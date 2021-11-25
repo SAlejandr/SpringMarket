@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.pojos.Rol;
 import com.example.demo.pojos.Tarjeta;
 import com.example.demo.pojos.Usuario;
+import com.example.demo.repository.RolDao;
 import com.example.demo.repository.TarjetaDao;
 import com.example.demo.repository.UsuarioDao;
 
@@ -35,6 +36,8 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 	private UsuarioDao dao;
 	@Autowired
 	private TarjetaDao tarjetaDao;
+	@Autowired
+	private RolDao rolDao;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
@@ -140,6 +143,15 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 		
 		return new org.springframework.security.core.userdetails.User(u.getEmail(), u.getContrasenna(),
 				grantedAuthorities);
+	}
+
+	@Override
+	public void asignarRolCliente(String usuario, byte rol) {
+		
+		Usuario completa = dao.findByEmail(usuario).get();
+		
+		rolDao.saveAsignacion(rol, completa.getId());
+		
 	}
 
 }

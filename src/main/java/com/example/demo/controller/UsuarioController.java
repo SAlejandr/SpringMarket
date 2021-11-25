@@ -126,6 +126,8 @@ public class UsuarioController {
 		
 			usuarioService.guardar(usuario);
 			
+			usuarioService.asignarRolCliente(email, Byte.parseByte("2"));
+			
 			return redirectCorrecto;
 		} else {
 			return redirectIncorrecto;
