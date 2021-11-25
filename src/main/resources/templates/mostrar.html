@@ -25,7 +25,7 @@
 							type="submit" class="btn btn-outline-success"
 							value="Añadir al carrito">
 					</form>
-					<a type="button" class="btn btn-outline-danger"
+					<a sec:authorize="hasAuthority('Admin')" type="button" class="btn btn-outline-danger"
 						th:href="@{/producto/borrar/{id}(id=${producto.id})}"> <i
 						class="bi bi-trash">Eliminar producto</i></a>
 				</div>
