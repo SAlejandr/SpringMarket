@@ -216,7 +216,7 @@ public class UsuarioController {
 
 	@PostMapping(value="/perfil/compras")
 	public String postcompra(HttpSession session) {
-		Long id =(Long) session.getAttribute("user");
+		Long id =(Long) session.getAttribute("idUsuario");
 		
 		if(id == null) {
 			id = -1L;

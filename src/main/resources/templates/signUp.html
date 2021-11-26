@@ -11,16 +11,16 @@
 		
 			<h2>SIGN UP</h2>
 			<form th:action="@{/usuario/signup}" method="POST">
-				<label>Nombre:</label>
-				 <input type="text" name="nombre" required /><br>
-				 <label>Apellido</label>
-				<input type="text" name="apellido" required /><br>
-				 <label>Password </label>
-				  <input type="password" name="contrasenna" required /><br>
-				   <label>Email</label> 
-				   <input type="email" name="email" required= ><br>
-				   <label>Fecha nacimiento</label> 
-				   <input type="date" name="fNacimiento" required ><br>
+				<label class="col-4">Nombre:</label>
+				 <input class="col-8" type="text" name="nombre" required /><br>
+				 <label class="col-4">Apellido</label>
+				<input class="col-8" type="text" name="apellido" required /><br>
+				 <label class="col-4">Password </label>
+				  <input class="col-8" type="password" name="contrasenna" required /><br>
+				   <label class="col-4">Email</label> 
+				   <input class="col-8" type="email" name="email" required= ><br>
+				   <label class="col-4">Fecha nacimiento</label> 
+				   <input class="col-8" type="date" name="fNacimiento" required ><br>
 				    <input class="btn btn-primary" type="submit"value="Enviar">
 			</form>
 		</div>

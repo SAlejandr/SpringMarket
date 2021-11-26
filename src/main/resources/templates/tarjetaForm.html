@@ -12,14 +12,14 @@
 		
 			<h2>TARJETA</h2>
 			<form th:action="@{/usuario/perfil/{id}/tarjeta (id=${usuario.id})} " method="POST">
-				<label>Numero tarjeta</label>
-				 <input type="text" name="tarjeta"/><br>
-				 <label>Titular</label>
-				<input type="text" name="titular" /><br>
-				 <label>COD seguridad</label>
-				  <input type="number" name="cod"  /><br>
-				   <label>Direccion factura</label> 
-				   <input type="text" name="direccion" ><br>
+				<label class="col-4">Numero tarjeta</label>
+				 <input class="col-8" type="text" name="tarjeta"/><br>
+				 <label class="col-4">Titular</label>
+				<input class="col-8" type="text" name="titular" /><br>
+				 <label class="col-4">COD seguridad</label>
+				  <input class="col-8" type="number" name="cod"  /><br>
+				   <label class="col-4">Direccion factura</label> 
+				   <input class="col-8" type="text" name="direccion" ><br>
 				    <input class="btn btn-primary" type="submit"value="Enviar">
 			</form>
 		</div>
