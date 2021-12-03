@@ -225,6 +225,7 @@ public class UsuarioController {
 		if(id==-1) {
 			return "redirect:/usuario/login";
 		} 
+		@SuppressWarnings("unchecked")
 		ArrayList<ProductoDTO> l = (ArrayList<ProductoDTO>) session.getAttribute("carrito");
 		HashSet<ProductoDTO> p = new HashSet<>();
 		l.stream().forEach(p::add);

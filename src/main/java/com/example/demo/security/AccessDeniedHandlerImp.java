@@ -31,7 +31,7 @@ public class AccessDeniedHandlerImp implements AccessDeniedHandler {
 		
 		if (auth != null) {
 			
-			log.info(auth.getName()+"Otra vez, Maelo Ruiz"+ request.getRequestURI());
+			log.info(auth.getName()+"Otra vez,"+ request.getRequestURI());
 		}
 		response.sendRedirect(request.getContextPath()+"/acceso-prohibido");
 		

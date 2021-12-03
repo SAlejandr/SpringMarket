@@ -33,7 +33,6 @@ public class MainController {
 			logueado = false;
 		}
 		
-		
 		ArrayList<Producto> lista = productoService.listarTodas();
 		ArrayList<Producto> productos = new ArrayList<>();
 
@@ -98,7 +97,6 @@ public class MainController {
 
 	}
 
-//iansboi  32
 	@GetMapping(value = "/producto/borrar/{id}")
 	public String borrar(Model modelo,@PathVariable long id, HttpSession session) {
 
