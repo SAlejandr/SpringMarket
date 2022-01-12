@@ -6,15 +6,27 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 
-import com.example.demo.dto.ProductoDTO;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+import com.example.demo.dto.ProductoDTO;
+@Entity
+@Table
 public class Compra implements Serializable {
 
 	//variables
 	
 	private Usuario usuario;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
 	private long id;
 	private HashSet<ProductoDTO> productos;
+	@Column
 	private LocalDateTime fecha;
 	//constructor
 	

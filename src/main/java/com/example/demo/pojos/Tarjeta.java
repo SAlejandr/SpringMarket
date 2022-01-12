@@ -4,11 +4,26 @@ import java.io.Serializable;
 import java.math.BigInteger;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Tarjeta implements Serializable{
 	//variables
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
 	private BigInteger numero;
+	@Column
 	private String titular;
+	@Column
 	private int codSeguridad;
+	@Column
 	private String dirFactura;
 	//constructores a
 	public Tarjeta() {

@@ -3,10 +3,22 @@ package com.example.demo.pojos;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table
 public class Rol implements Serializable{
 	
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column
 	private byte id;
+	
+	@Column
 	private String nombre;
 	
 	public Rol() {
