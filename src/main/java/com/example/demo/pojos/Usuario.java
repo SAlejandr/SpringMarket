@@ -6,11 +6,17 @@ import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -34,6 +40,11 @@ public class Usuario implements Serializable{
 	private LocalDate fNacimiento;
 	
 	private BigInteger numeroTarjeta;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name="usuario_rol",
+			joinColumns =	@JoinColumn(name = "usuario", nullable = false),
+			inverseJoinColumns = @JoinColumn(name = "rol", nullable= false))
 	private HashSet<Rol> roles;
 	//contuctores
 	public Usuario() {

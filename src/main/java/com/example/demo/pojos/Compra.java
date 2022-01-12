@@ -6,11 +6,14 @@ import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.example.demo.dto.ProductoDTO;
@@ -20,6 +23,8 @@ public class Compra implements Serializable {
 
 	//variables
 	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name= "usuario")
 	private Usuario usuario;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
