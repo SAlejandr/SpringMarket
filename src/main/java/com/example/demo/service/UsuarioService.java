@@ -104,13 +104,13 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 				// TODO: handle exception
 				tarjetica = Optional.empty();
 			}
-				if (tarjetica.isPresent() && persona.get().getNumeroTarjeta() == null) {
+				if (tarjetica.isPresent() && persona.get().getTarjeta() == null){
 
 					dao.updateTarjeta(id, tarjeta.getNumero());
-				} else if (tarjetica.isPresent() && persona.get().getNumeroTarjeta().equals(tarjeta.getNumero())) {
+				} else if (tarjetica.isPresent() && persona.get().getTarjeta().equals(tarjeta)) {
 
 					tarjetaDao.update(tarjeta);
-				} else if (tarjetica.isPresent() && !persona.get().getNumeroTarjeta().equals(tarjeta.getNumero())) {
+				} else if (tarjetica.isPresent() && !persona.get().getTarjeta().equals(tarjeta)) {
 					dao.updateTarjeta(id, tarjeta.getNumero());
 				} else {
 

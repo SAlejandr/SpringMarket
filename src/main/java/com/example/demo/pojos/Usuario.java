@@ -17,6 +17,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -39,7 +40,9 @@ public class Usuario implements Serializable{
 	@Column
 	private LocalDate fNacimiento;
 	
-	private BigInteger numeroTarjeta;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "numeroTarjeta")
+	private Tarjeta tarjeta;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="usuario_rol",
@@ -82,7 +85,7 @@ public class Usuario implements Serializable{
 	}
 
 	public Usuario(long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento,
-			BigInteger numeroTarjeta, HashSet<Rol> roles) {
+			Tarjeta tarjeta, HashSet<Rol> roles) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -90,7 +93,7 @@ public class Usuario implements Serializable{
 		this.contrasenna = contrasenna;
 		this.email = email;
 		this.fNacimiento = fNacimiento;
-		this.numeroTarjeta = numeroTarjeta;
+		this.tarjeta = tarjeta;
 		this.roles = roles;
 	}
 
@@ -142,13 +145,11 @@ public class Usuario implements Serializable{
 	public void setfNacimiento(LocalDate fNacimiento) {
 		this.fNacimiento = fNacimiento;
 	}
-	
-	public BigInteger getNumeroTarjeta() {
-		return numeroTarjeta;
+	public Tarjeta getTarjeta() {
+		return tarjeta;
 	}
-
-	public void setNumeroTarjeta(BigInteger numeroTarjeta) {
-		this.numeroTarjeta = numeroTarjeta;
+	public void setTarjeta(Tarjeta tarjeta) {
+		this.tarjeta = tarjeta;
 	}
 	public HashSet<Rol> getRoles() {
 		return roles;
