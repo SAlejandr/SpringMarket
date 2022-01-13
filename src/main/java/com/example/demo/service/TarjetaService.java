@@ -5,10 +5,11 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.pojos.Tarjeta;
 import com.example.demo.repository.TarjetaDao;
-
+@Transactional
 @Service
 public class TarjetaService implements ITarjetaService {
 

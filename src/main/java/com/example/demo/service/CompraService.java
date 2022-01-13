@@ -4,13 +4,14 @@ import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.ProductoDTO;
 import com.example.demo.pojos.Compra;
 import com.example.demo.pojos.Producto;
 import com.example.demo.repository.CompraDao;
 import com.example.demo.repository.ProductoDao;
-
+@Transactional
 @Service
 public class CompraService implements ICompraService {
 
