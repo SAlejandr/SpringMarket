@@ -1,5 +1,6 @@
 package com.example.demo.pojos;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -9,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "listaCompra")
-public class ItemCompra {
+public class ItemCompra implements Serializable{
 	
 	@EmbeddedId
 	private IdItemCompra id;

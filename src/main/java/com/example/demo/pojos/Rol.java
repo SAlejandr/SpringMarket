@@ -1,6 +1,7 @@
 package com.example.demo.pojos;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -23,8 +24,8 @@ public class Rol implements Serializable{
 	@Column
 	private String nombre;
 	
-	@ManyToMany(mappedBy = "rol")
-	private Set<Usuario> usuarios;
+	@ManyToMany(mappedBy =  "roles")
+	private List<Usuario> usuarios;
 	
 	
 	public Rol() {
@@ -53,6 +54,14 @@ public class Rol implements Serializable{
 		this.nombre = nombre;
 	}
 
+
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
 
 	@Override
 	public int hashCode() {

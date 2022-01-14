@@ -3,7 +3,9 @@ package com.example.demo.pojos;
 import java.io.Serializable;
 import java.math.BigInteger;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -48,11 +50,11 @@ public class Usuario implements Serializable{
 	@JoinTable(name="usuario_rol",
 			joinColumns =	@JoinColumn(name = "usuario", nullable = false),
 			inverseJoinColumns = @JoinColumn(name = "rol", nullable= false))
-	private HashSet<Rol> roles;
+	private List<Rol> roles;
 	//contuctores
 	public Usuario() {
 		
-		this(-1L ,"", "", "", "", LocalDate.now(), new HashSet<>());
+		this(-1L ,"", "", "", "", LocalDate.now(), new ArrayList<>());
 	}
 	public Usuario(long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento) {
 		this.id = id;
@@ -73,7 +75,7 @@ public class Usuario implements Serializable{
 	}
 
 	public Usuario(long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento,
-			HashSet<Rol> roles) {
+			List<Rol> roles) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -85,7 +87,7 @@ public class Usuario implements Serializable{
 	}
 
 	public Usuario(long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento,
-			Tarjeta tarjeta, HashSet<Rol> roles) {
+			Tarjeta tarjeta, List<Rol> roles) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -151,10 +153,10 @@ public class Usuario implements Serializable{
 	public void setTarjeta(Tarjeta tarjeta) {
 		this.tarjeta = tarjeta;
 	}
-	public HashSet<Rol> getRoles() {
+	public List<Rol> getRoles() {
 		return roles;
 	}
-	public void setRoles(HashSet<Rol> roles) {
+	public void setRoles(List<Rol> roles) {
 		this.roles = roles;
 	}
 	//equals y hascode
