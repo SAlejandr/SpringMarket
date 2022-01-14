@@ -5,12 +5,8 @@ import java.util.Optional;
 
 import com.example.demo.pojos.Producto;
 
-public interface ProductoDao{
+public interface ProductoDao extends DaoGenerico<Producto>{
 
-	public int save(Producto producto);
-	public int count();
 	public List<Producto> findAll();
-	public Optional<Producto> findById(long id);
-	public int delete(Producto producto);
 	public List<Producto> findAllByTituloLike(String patronTitulo);
 }

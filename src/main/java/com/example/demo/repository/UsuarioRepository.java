@@ -6,76 +6,62 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.Query;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.pojos.Rol;
+import com.example.demo.pojos.Tarjeta;
 import com.example.demo.pojos.Usuario;
 
 @Repository
-public class UsuarioRepository implements UsuarioDao{
-
-	@Autowired
-	private JdbcTemplate jdbc;
-	
-	@Override
-	public int save(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return jdbc.update("insert into usuario(nombre, apellido, contrasenna, email, fNacimiento) values (?,?,?,?, ?);", 
-				usuario.getNombre(), usuario.getApellido(), usuario.getContrasenna(), usuario.getEmail(), Date.valueOf(usuario.getfNacimiento()));
-	}
-
-	@Override
-	public int count() {
-		// TODO Auto-generated method stub
-		Integer cantidad = jdbc.queryForObject("select count(*) as 'cantidad' from usuario", Integer.class);
-		return cantidad;
-	}
+public class UsuarioRepository extends DaoRepository<Usuario> implements UsuarioDao{
 
 	@Override
 	public List<Usuario> findAll() {
 		// TODO Auto-generated method stub
-		return jdbc.query("select * from usuario", (rs, rowNum) -> new Usuario(rs.getLong("id"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("contrasenna"), rs.getString("email"), rs.getDate("fNacimiento").toLocalDate()));
+				Query query = this.em.createQuery("FROM Usuario");
+				
+				return query.getResultList();
+				
 	}
 
-	@Override
-	public Optional<Usuario> findById(long id) {
-		// TODO Auto-generated method stub
-		return jdbc.queryForObject("select * from usuario where id = ?", (rs, rowNum) -> Optional.of(new Usuario(rs.getLong("id"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("contrasenna"), rs.getString("email"), rs.getDate("fNacimiento").toLocalDate())),
-				id);
-	}
 
-	@Override
-	public int delete(Usuario usuario) {
-		// TODO Auto-generated method stub
-		return jdbc.update("delete from usuario where id = ?", usuario.getId());
-	}
 
 	@Override
 	public Optional<Usuario> findByEmail(String email) {
-		// TODO Auto-generated method stub
-		try {
-	  return jdbc.queryForObject("select * from usuario where email = ?", (rs, rowNum) -> Optional.of(new Usuario(rs.getLong("id"), rs.getString("nombre"), rs.getString("apellido"), rs.getString("contrasenna"), rs.getString("email"), rs.getDate("fNacimiento").toLocalDate())),
-				email);
-		}catch (EmptyResultDataAccessException e) {
-			return Optional.empty();
-		}
+		Query query = this.em.createQuery("FROM Usuario u where u.email = :email");
+		query.setParameter("email", email);
+		
+		Optional<Usuario> optional =  Optional.of((Usuario)query.getSingleResult());
+		
+		return optional;
 		
 	}
 
 	@Override
-	public int updateTarjeta(long id, BigInteger numero) {
-		// TODO Auto-generated method stub
+	public int updateTarjeta(long id, Tarjeta tarjeta) {
 		//aaaaaaaaaaaaaaaaaa
-		return jdbc.update("UPDATE usuario SET numeroTarjeta = ? WHERE id = ?", numero, id);
+		Query query = this.em.createQuery("Update Usuario u SET u.tarjeta = :tarjeta where u.id = :id");
+		query.setParameter("id", id);
+		query.setParameter("tarjeta", tarjeta);
+		
+		
+		return query.executeUpdate();
 	}
 
 	@Override
 	public List<Rol> findAllRolByUser(long id) {
-		// TODO Auto-generated method stub
-		return jdbc.query("select r.id as 'id', r.nombre as 'nombre' from usuario_rol ur inner join rol r on r.id = ur.rol where ur.usuario = ?", (rs, rowNum) -> new Rol(rs.getByte("id"), rs.getString("nombre")), id);
+		
+		Query query = this.em.createQuery("FROM Usuario u where u.id = :id");
+		query.setParameter("id", id);
+		Usuario u = (Usuario) query.getSingleResult();
+		
+		return u.getRoles();
+		
 	}
 
 	

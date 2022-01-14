@@ -6,13 +6,8 @@ import java.util.Optional;
 
 import com.example.demo.pojos.Tarjeta;
 
-public interface TarjetaDao {
+public interface TarjetaDao extends DaoGenerico<Tarjeta> {
 
-	public int save(Tarjeta tarjeta);
-	public int update(Tarjeta tarjeta);
-	public int count();
 	public List<Tarjeta> findAll();
-	public Optional<Tarjeta> findById(BigInteger numeroTarjeta);
-	public int deleteById(Tarjeta tarjeta);
 	
 }

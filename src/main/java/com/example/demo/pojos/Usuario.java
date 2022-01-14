@@ -23,7 +23,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table
+@Table(name="usuario")
 public class Usuario implements Serializable{
 	//vairables
 	@Id
