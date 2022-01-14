@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -128,7 +129,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 		
 		Usuario u = dao.findByEmail(username).get();
 		List<Rol> l = dao.findAllRolByUser(u.getId());
-		HashSet<Rol> roles = new HashSet<>();
+		List<Rol> roles = new ArrayList<>();
 		
 		l.stream().forEach(roles::add);
 		
