@@ -30,7 +30,6 @@ public class Compra implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
 	private long id;
-	private HashSet<ProductoDTO> productos;
 	@Column
 	private LocalDateTime fecha;
 	//constructor
@@ -39,23 +38,21 @@ public class Compra implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Compra(Usuario usuario, long id, HashSet<ProductoDTO> productos, LocalDateTime fecha) {
+	public Compra(Usuario usuario, long id, LocalDateTime fecha) {
 		super();
 		this.usuario = usuario;
 		this.id = id;
-		this.productos = productos;
 		this.fecha = fecha;
 	}
 	
 	public Compra(long id, Usuario u) {
 		
-		this(u, id, new HashSet<>(), LocalDateTime.now());
+		this(u, id, LocalDateTime.now());
 
 		
 	}
-	public Compra(Usuario usuario, HashSet<ProductoDTO> productos, LocalDateTime fecha) {
+	public Compra(Usuario usuario, LocalDateTime fecha) {
 		this.usuario = usuario;
-		this.productos = productos;
 		this.fecha = fecha;
 	}
 
@@ -76,14 +73,6 @@ public class Compra implements Serializable {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public HashSet<ProductoDTO> getProductos() {
-		return productos;
-	}
-
-	public void setProductos(HashSet<ProductoDTO> productos) {
-		this.productos = productos;
 	}
 
 	public LocalDateTime getFecha() {
@@ -113,7 +102,7 @@ public class Compra implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Compra [usuario=" + usuario + ", id=" + id + ", productos=" + productos + ", fecha=" + fecha + "]";
+		return "Compra [usuario=" + usuario + ", id=" + id + ", fecha=" + fecha + "]";
 	}
 	
 }

@@ -234,7 +234,7 @@ public class UsuarioController {
 		l.stream().forEach(p::add);
 		Usuario u = new Usuario();
 		u.setId(id);
-		Compra c = new Compra(u, p, LocalDateTime.now());
+		Compra c = new Compra(u, LocalDateTime.now());
 		compraService.guardarCompra(c);
 		session.setAttribute("carrito", null);
 		return "redirect:/usuario/perfil/"+id+"/compras";

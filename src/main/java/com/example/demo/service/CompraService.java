@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.dto.ProductoDTO;
 import com.example.demo.pojos.Compra;
 import com.example.demo.pojos.IdItemCompra;
+import com.example.demo.pojos.ItemCompra;
 import com.example.demo.pojos.Producto;
 import com.example.demo.repository.CompraDao;
 import com.example.demo.repository.ItemCompraDao;
@@ -25,15 +26,17 @@ public class CompraService implements ICompraService {
 	private ItemCompraDao daoArticulo;
 	
 	@Override
-	public void guardarCompra(Compra c) {
+	public void guardarCompra(Compra c, Set<ItemCompra> articulos) {
 		
 		dao.crear(c);
 		
-		c.getProductos().stream().forEach(p -> {
+		articulos.stream().forEach(p -> {
+			p.getId().setIdCompra(c);
 			
-			
-			daoArticulo.saveArticle(c.getId(), p);
-			});
+			daoArticulo.crear(p);
+		});
+		
+		
 		
 	}
 
@@ -42,30 +45,23 @@ public class CompraService implements ICompraService {
 		
 		ArrayList<Compra> lista = (ArrayList<Compra>) dao.findAllByUsuario(usuario);
 		
-		lista.stream().forEach(c -> {
-			Set<ProductoDTO> set = dao.findListaById(c.getId());
-			
-			c.setProductos((HashSet<ProductoDTO>) set);
-		});
-		
-		
-		lista.stream().forEach(c -> {
-			c.getProductos().stream().forEach(p ->{
-				
-				Producto pro = daoProducto.buscar(p.getId()).get();
-				
-				p.setNombre(pro.getTitulo());
-			});
-		});
-		
-		
 		return lista;
 	}
 
 	@Override
 	public void borrarUnArticulo(long idCompra, long articulo) {
+		
+		Compra c = new Compra();
+		c.setId(idCompra);
+		
+		Producto p = new Producto();
+		p.setId(articulo);
+		
+		IdItemCompra id = new IdItemCompra(c, p);
+		ItemCompra i = new ItemCompra();
+		i.setId(id);
 
-		dao.deleteByProducto(idCompra, articulo);
+		daoArticulo.borrar(i);
 		
 	}
 
