@@ -14,16 +14,6 @@ import com.example.demo.pojos.Compra;
 import com.example.demo.pojos.Usuario;
 @Repository
 public class CompraRepository extends DaoRepository<Compra> implements CompraDao {
-
-	@Autowired
-	private JdbcTemplate jdbc;
-	
-	@Override
-	public int saveArticle(long id, ProductoDTO dto) {
-		// TODO Auto-generated method stub
-		return jdbc.update("insert into listaCompra(id, articulo, cantidad) value (?,?,?)"
-				,  id, dto.getId(), dto.getCantidad());
-	}
 	
 	@Override
 	public Set<ProductoDTO> findListaById(long id){
@@ -31,8 +21,7 @@ public class CompraRepository extends DaoRepository<Compra> implements CompraDao
 		Query query = this.em.createQuery("select articulo, cantidad from listaCompra where id = :id");
 		query.setParameter("id", id);
 		
-		
-		List<ProductoDTO> lista = query.getResultList();//jdbc.query("select articulo, cantidad from listaCompra where id = ?" , (rs, rowNum) -> new ProductoDTO(rs.getLong("articulo"), "", rs.getInt("cantidad"), 0), id);
+		List<ProductoDTO> lista = query.getResultList();
 		
 		HashSet<ProductoDTO> set = new HashSet<>();
 		
@@ -45,7 +34,10 @@ public class CompraRepository extends DaoRepository<Compra> implements CompraDao
 	public List<Compra> findAllByUsuario(long user) {
 		Usuario u = new Usuario();
 		u.setId(user);
-		return jdbc.query("select * from compra where usuario = ?",(rs, rowNum) -> new Compra(rs.getLong("id"),u), user);
+		Query query = this.em.createQuery("from Compra c where c.usuario = :usuario");
+		query.setParameter("usuario", u);
+		
+		return query.getResultList();
 		
 	}
 }
