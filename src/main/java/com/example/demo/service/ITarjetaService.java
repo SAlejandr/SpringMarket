@@ -7,10 +7,10 @@ import com.example.demo.pojos.Tarjeta;
 
 public interface ITarjetaService {
 
-	public int guardar(Tarjeta tarjeta);
+	public Tarjeta guardar(Tarjeta tarjeta);
 	public List<Tarjeta> listarTodo();
 	public Tarjeta buscarPorId(Tarjeta tarjeta);
 	public Tarjeta borrarPorId(BigInteger tarjeta);
-	public int actualizarTarjeta(Tarjeta tarjeta);
+	public Tarjeta actualizarTarjeta(Tarjeta tarjeta);
 	public boolean existeTarjeta(BigInteger tarjeta);
 }

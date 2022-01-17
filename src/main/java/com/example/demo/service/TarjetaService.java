@@ -17,9 +17,9 @@ public class TarjetaService implements ITarjetaService {
 	private TarjetaDao dao;
 	
 	@Override
-	public int guardar(Tarjeta tarjeta) {
+	public Tarjeta guardar(Tarjeta tarjeta) {
 		// TODO Auto-generated method stub
-		return dao.save(tarjeta);
+		return dao.crear(tarjeta);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class TarjetaService implements ITarjetaService {
 	@Override
 	public Tarjeta buscarPorId(Tarjeta tarjeta) {
 		// TODO Auto-generated method stub
-		Optional<Tarjeta> optional = dao.findById(tarjeta.getNumero());
+		Optional<Tarjeta> optional = Optional.of(dao.buscar(tarjeta.getNumero()));
 		
 		return optional.orElse(new Tarjeta(BigInteger.ZERO,"",0,""));
 	}
@@ -40,31 +40,31 @@ public class TarjetaService implements ITarjetaService {
 	public Tarjeta borrarPorId(BigInteger tarjeta) {
 		// TODO Auto-generated method stub
 		
-		Optional<Tarjeta> optional = dao.findById(tarjeta);
+		Optional<Tarjeta> optional = Optional.of(dao.buscar(tarjeta));
 		
 		if(optional.isPresent()) {
 			
-			dao.deleteById(optional.get());
+			dao.borrar(optional.get());
 		}
 		
 		return optional.orElse(new Tarjeta(BigInteger.ZERO,"",0,""));
 	}
 	
 	@Override
-	public int actualizarTarjeta(Tarjeta tarjeta) {
+	public Tarjeta actualizarTarjeta(Tarjeta tarjeta) {
 		// TODO Auto-generated method stub
-		Optional<Tarjeta> laTarjeta = dao.findById(tarjeta.getNumero());
+		Optional<Tarjeta> laTarjeta = Optional.of(dao.buscar(tarjeta.getNumero()));
 		
 		if(existeTarjeta(tarjeta.getNumero()))
-			return dao.update(tarjeta);
+			return dao.actualizar(tarjeta);
 		else
-			return dao.save(tarjeta);		
+			return dao.crear(tarjeta);		
 	}
 
 	@Override
 	public boolean existeTarjeta(BigInteger tarjeta) {
 		// TODO Auto-generated method stub
-		Optional<Tarjeta> optional = dao.findById(tarjeta);
+		Optional<Tarjeta> optional = Optional.of(dao.buscar(tarjeta));
 		
 		return optional.isPresent();
 	}

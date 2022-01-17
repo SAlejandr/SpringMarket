@@ -43,12 +43,12 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
-	public int guardar(Usuario usuario) {
+	public Usuario guardar(Usuario usuario) {
 		// TODO Auto-generated method stub
 		
 		usuario.setContrasenna(bCryptPasswordEncoder.encode(usuario.getContrasenna()));
 		
-		return dao.save(usuario);
+		return dao.crear(usuario);
 	}
 
 	@Override
@@ -60,7 +60,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 	@Override
 	public Usuario buscarPorId(long id) {
 		// TODO Auto-generated method stub
-		Optional<Usuario> optional = dao.findById(id);
+		Optional<Usuario> optional = Optional.of(dao.buscar(id));
 
 		return optional.orElse(new Usuario());
 
@@ -79,11 +79,11 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 	public Usuario borrarPorId(long id) {
 		// TODO Auto-generated method stub
 		
-		Optional<Usuario> optional = dao.findById(id);
+		Optional<Usuario> optional = Optional.of(dao.buscar(id));
 		
 		if(optional.isPresent()) {
 			
-			dao.delete(optional.get());
+			dao.borrar(optional.get());
 		}
 
 		return optional.orElse(new Usuario());
@@ -93,12 +93,12 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 	public int cambiarTarjeta(long id, Tarjeta tarjeta) {
 		// TODO Auto-generated method stub
 
-		Optional<Usuario> persona = dao.findById(id);
+		Optional<Usuario> persona = Optional.of(dao.buscar(id));
 		
 		if (persona.isPresent()) {
 			Optional<Tarjeta> tarjetica;
 			try {
-				 tarjetica = tarjetaDao.findById(tarjeta.getNumero());
+				 tarjetica =Optional.of(tarjetaDao.buscar(tarjeta.getNumero()));
 
 				
 			} catch (EmptyResultDataAccessException e) {
@@ -107,16 +107,16 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 			}
 				if (tarjetica.isPresent() && persona.get().getTarjeta() == null){
 
-					dao.updateTarjeta(id, tarjeta.getNumero());
+					dao.updateTarjeta(id, tarjeta);
 				} else if (tarjetica.isPresent() && persona.get().getTarjeta().equals(tarjeta)) {
 
-					tarjetaDao.update(tarjeta);
+					tarjetaDao.actualizar(tarjeta);
 				} else if (tarjetica.isPresent() && !persona.get().getTarjeta().equals(tarjeta)) {
-					dao.updateTarjeta(id, tarjeta.getNumero());
+					dao.updateTarjeta(id, tarjeta);
 				} else {
 
-					tarjetaDao.save(tarjeta);
-					dao.updateTarjeta(id, tarjeta.getNumero());
+					tarjetaDao.crear(tarjeta);
+					dao.updateTarjeta(id, tarjeta);
 				}
 		}
 
@@ -151,7 +151,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 		
 		Usuario completa = dao.findByEmail(usuario).get();
 		
-		rolDao.saveAsignacion(rol, completa.getId());
+		rolDao.saveAsignacion(rol, completa);
 		
 	}
 

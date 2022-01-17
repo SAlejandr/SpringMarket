@@ -7,7 +7,7 @@ import com.example.demo.pojos.Usuario;
 
 public interface IUsuarioService {
 	
-	public int guardar(Usuario usuario);
+	public Usuario guardar(Usuario usuario);
 	
 	public List<Usuario> listarTodos();
 	

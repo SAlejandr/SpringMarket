@@ -17,44 +17,39 @@ public class ProductoService implements IProductoService {
 	private ProductoDao dao;
 	
 	@Override
-	public int guardar(Producto producto) {
-		// TODO Auto-generated method stub
+	public Producto guardar(Producto producto) {
 		
-		return dao.save(producto);
+		return dao.crear(producto);
 	}
 
 	@Override
 	public ArrayList<Producto> listarTodas() {
-		// TODO Auto-generated method stub
 		return (ArrayList<Producto>) dao.findAll();
 	}
 
 	@Override
 	public Producto buscarPorId(long id) {
-		// TODO Auto-generated method stub
 	
-		Optional<Producto> optional = dao.findById(id);
+		Optional<Producto> optional = Optional.of(dao.buscar(id));
 		
 		return optional.orElse(new Producto(-1, "", "", 0, 0));
 	}
 
 	@Override
 	public ArrayList<Producto> buscarPorPatronDeTitulo(String patron) {
-		// TODO Auto-generated method stub
 		
 		return (ArrayList<Producto>) dao.findAllByTituloLike(patron);
 	}
 
 	@Override
 	public Producto borrarPorId(long id) {
-		// TODO Auto-generated method stub
 		
 		
-		Optional<Producto> optional = dao.findById(id);
+		Optional<Producto> optional = Optional.of(dao.buscar(id));
 		
 		if(optional.isPresent()) {
 			
-			dao.delete(optional.get());
+			dao.borrar(optional.get());
 			
 		}
 		

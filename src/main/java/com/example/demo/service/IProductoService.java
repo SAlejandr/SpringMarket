@@ -6,7 +6,7 @@ import com.example.demo.pojos.Producto;
 
 public interface IProductoService {
 
-	public int guardar(Producto producto);
+	public Producto guardar(Producto producto);
 	
 	public ArrayList<Producto> listarTodas();
 	

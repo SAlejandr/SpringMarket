@@ -8,8 +8,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.dto.ProductoDTO;
 import com.example.demo.pojos.Compra;
+import com.example.demo.pojos.IdItemCompra;
 import com.example.demo.pojos.Producto;
 import com.example.demo.repository.CompraDao;
+import com.example.demo.repository.ItemCompraDao;
 import com.example.demo.repository.ProductoDao;
 @Transactional
 @Service
@@ -19,15 +21,19 @@ public class CompraService implements ICompraService {
 	private CompraDao dao;
 	@Autowired
 	private ProductoDao daoProducto;
+	@Autowired
+	private ItemCompraDao daoArticulo;
 	
 	@Override
 	public void guardarCompra(Compra c) {
 		
-		int idP = dao.count() + 1;
-		dao.save(c.getUsuario().getId(), c.getFecha());
+		dao.crear(c);
 		
-		
-		c.getProductos().stream().forEach(p -> dao.saveArticle(idP, p));
+		c.getProductos().stream().forEach(p -> {
+			
+			
+			daoArticulo.saveArticle(c.getId(), p);
+			});
 		
 	}
 
@@ -46,7 +52,7 @@ public class CompraService implements ICompraService {
 		lista.stream().forEach(c -> {
 			c.getProductos().stream().forEach(p ->{
 				
-				Producto pro = daoProducto.findById(p.getId()).get();
+				Producto pro = daoProducto.buscar(p.getId()).get();
 				
 				p.setNombre(pro.getTitulo());
 			});
