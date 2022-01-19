@@ -28,10 +28,14 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.dto.ProductoDTO;
 import com.example.demo.pojos.Compra;
+import com.example.demo.pojos.IdItemCompra;
+import com.example.demo.pojos.ItemCompra;
+import com.example.demo.pojos.Producto;
 import com.example.demo.pojos.Tarjeta;
 import com.example.demo.pojos.Usuario;
 import com.example.demo.repository.UsuarioDao;
 import com.example.demo.service.ICompraService;
+import com.example.demo.service.IProductoService;
 import com.example.demo.service.IUsuarioService;
 
 @Controller
@@ -43,6 +47,10 @@ public class UsuarioController {
 	
 	@Autowired
 	private ICompraService compraService;
+	
+	@Autowired
+	private IProductoService productoService;
+	
 
 	@GetMapping(value = "/login")
 	public ModelAndView getLogin(HttpSession session) {
@@ -232,10 +240,23 @@ public class UsuarioController {
 		}
 		HashSet<ProductoDTO> p = new HashSet<>();
 		l.stream().forEach(p::add);
+		HashSet<ItemCompra> lista = new HashSet<>();
+		l.stream().forEach(it -> {
+			
+			Producto pro = productoService.buscarPorId(it.getId());
+			
+			IdItemCompra idIt = new IdItemCompra();
+			idIt.setIdProducto(pro);
+			
+			ItemCompra item = new ItemCompra(idIt, it.getCantidad());
+			
+			lista.add(item);
+			
+		});
 		Usuario u = new Usuario();
 		u.setId(id);
 		Compra c = new Compra(u, LocalDateTime.now());
-		compraService.guardarCompra(c);
+		compraService.guardarCompra(c, lista);
 		session.setAttribute("carrito", null);
 		return "redirect:/usuario/perfil/"+id+"/compras";
 		
