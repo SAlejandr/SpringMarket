@@ -11,5 +11,6 @@ public interface CompraDao extends DaoGenerico<Compra>{
 	
 	public Set<ProductoDTO> findListaById(long id);
 	public List<Compra> findAllByUsuario(long user);
+	public Compra findUlitmaByUsuario(long user);
 	
 }

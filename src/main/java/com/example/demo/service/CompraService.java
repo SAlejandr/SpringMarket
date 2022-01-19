@@ -30,8 +30,11 @@ public class CompraService implements ICompraService {
 		
 		dao.crear(c);
 		
+		Compra compra = dao.findUlitmaByUsuario(c.getUsuario().getId());
+		
+		
 		articulos.stream().forEach(p -> {
-			p.getId().setIdCompra(c);
+			p.getId().setIdCompra(compra);
 			
 			daoArticulo.crear(p);
 		});

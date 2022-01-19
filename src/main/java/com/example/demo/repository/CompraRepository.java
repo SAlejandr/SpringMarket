@@ -40,4 +40,15 @@ public class CompraRepository extends DaoRepository<Compra> implements CompraDao
 		return query.getResultList();
 		
 	}
+
+	@Override
+	public Compra findUlitmaByUsuario(long user) {
+		Usuario u = new Usuario();
+		u.setId(user);
+		Query query = this.em.createQuery("from Compra c where c.usuario = :usuario order by c.id desc");
+		query.setParameter("usuario", u);
+		
+		
+		return (Compra) query.getSingleResult();
+	}
 }
