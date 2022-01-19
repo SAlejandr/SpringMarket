@@ -36,9 +36,9 @@ public class UsuarioRepository extends DaoRepository<Usuario> implements Usuario
 		Query query = this.em.createQuery("FROM Usuario u where u.email = :email");
 		query.setParameter("email", email);
 		
-		Optional<Usuario> optional =  Optional.of((Usuario)query.getSingleResult());
+		Usuario optional =  (Usuario)query.getSingleResult();
 		
-		return optional;
+		return Optional.of(optional);
 		
 	}
 

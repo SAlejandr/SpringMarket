@@ -25,7 +25,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="usuario")
 public class Usuario implements Serializable{
-	//vairables
+	//variables
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
@@ -39,11 +39,11 @@ public class Usuario implements Serializable{
 	private String contrasenna;
 	@Column
 	private String email;
-	@Column
-	private LocalDate fNacimiento;
+	@Column(name = "nacimiento")
+	private LocalDate nacimiento;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "numeroTarjeta")
+	@JoinColumn(name = "numero_tarjeta")
 	private Tarjeta tarjeta;
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -62,7 +62,7 @@ public class Usuario implements Serializable{
 		this.apellido = apellido;
 		this.contrasenna = contrasenna;
 		this.email = email;
-		this.fNacimiento = fNacimiento;
+		this.nacimiento = fNacimiento;
 	}
 
 	public Usuario(String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento) {
@@ -71,7 +71,7 @@ public class Usuario implements Serializable{
 		this.apellido = apellido;
 		this.contrasenna = contrasenna;
 		this.email = email;
-		this.fNacimiento = fNacimiento;
+		this.nacimiento = fNacimiento;
 	}
 
 	public Usuario(long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento,
@@ -82,7 +82,7 @@ public class Usuario implements Serializable{
 		this.apellido = apellido;
 		this.contrasenna = contrasenna;
 		this.email = email;
-		this.fNacimiento = fNacimiento;
+		this.nacimiento = fNacimiento;
 		this.roles = roles;
 	}
 
@@ -94,7 +94,7 @@ public class Usuario implements Serializable{
 		this.apellido = apellido;
 		this.contrasenna = contrasenna;
 		this.email = email;
-		this.fNacimiento = fNacimiento;
+		this.nacimiento = fNacimiento;
 		this.tarjeta = tarjeta;
 		this.roles = roles;
 	}
@@ -140,12 +140,12 @@ public class Usuario implements Serializable{
 		this.email = email;
 	}
 
-	public LocalDate getfNacimiento() {
-		return fNacimiento;
+	public LocalDate getNacimiento() {
+		return nacimiento;
 	}
 
-	public void setfNacimiento(LocalDate fNacimiento) {
-		this.fNacimiento = fNacimiento;
+	public void setNacimiento(LocalDate fNacimiento) {
+		this.nacimiento = fNacimiento;
 	}
 	public Tarjeta getTarjeta() {
 		return tarjeta;
@@ -180,7 +180,7 @@ public class Usuario implements Serializable{
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", contrasenna=" + contrasenna
-				+ ", email=" + email + ", fNacimiento=" + fNacimiento + "]";
+				+ ", email=" + email + ", fNacimiento=" + nacimiento + "]";
 	}
 	
 	

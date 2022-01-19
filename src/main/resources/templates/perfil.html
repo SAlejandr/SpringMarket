@@ -16,7 +16,7 @@
 				<label>Correo:</label>
 				<p th:text="${usuario.email}"></p><br>
 				<label>Fecha de nacimiento:</label>
-				<p th:text="${usuario.fNacimiento}"></p>
+				<p th:text="${usuario.nacimiento}"></p>
 				<a type="button" class="btn btn-success" th:href="@{/usuario/perfil/{id}/tarjeta (id=${usuario.id})}">
                 <i class="bi bi-credit-card"></i> Tarjeta
                 </a>
