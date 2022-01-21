@@ -21,9 +21,9 @@ public class Tarjeta implements Serializable{
 	private BigInteger numero;
 	@Column
 	private String titular;
-	@Column
+	@Column(name = "codigo_seguridad")
 	private int codSeguridad;
-	@Column
+	@Column(name= "facturacion")
 	private String dirFactura;
 	//constructores a
 	public Tarjeta() {
