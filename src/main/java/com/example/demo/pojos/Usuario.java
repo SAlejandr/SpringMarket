@@ -37,7 +37,7 @@ public class Usuario implements Serializable{
 	private String apellido;
 	@Column
 	private String contrasenna;
-	@Column
+	@Column(unique = true)
 	private String email;
 	@Column(name = "nacimiento")
 	private LocalDate nacimiento;

@@ -1,16 +1,11 @@
 package com.example.demo.repository;
 
-import java.math.BigInteger;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.pojos.Rol;
@@ -35,10 +30,13 @@ public class UsuarioRepository extends DaoRepository<Usuario> implements Usuario
 	public Optional<Usuario> findByEmail(String email) {
 		Query query = this.em.createQuery("FROM Usuario u where u.email = :email");
 		query.setParameter("email", email);
-		
-		Usuario optional =  (Usuario)query.getSingleResult();
-		
+		try {
+		Usuario optional = (Usuario) query.getSingleResult();
 		return Optional.of(optional);
+		
+		}catch (NoResultException e) {
+		return null;	
+		}
 		
 	}
 
