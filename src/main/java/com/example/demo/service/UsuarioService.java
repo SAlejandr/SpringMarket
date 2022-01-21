@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.pojos.Rol;
 import com.example.demo.pojos.Tarjeta;
 import com.example.demo.pojos.Usuario;
+import com.example.demo.repository.ElUsuarioRepository;
 import com.example.demo.repository.RolDao;
 import com.example.demo.repository.TarjetaDao;
 import com.example.demo.repository.UsuarioDao;
@@ -34,7 +35,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public class UsuarioService implements IUsuarioService,UserDetailsService {
 
 	@Autowired
-	private UsuarioDao dao;
+	private ElUsuarioRepository dao;
+	//private UsuarioDao dao;
 	@Autowired
 	private TarjetaDao tarjetaDao;
 	@Autowired
@@ -48,7 +50,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 		
 		usuario.setContrasenna(bCryptPasswordEncoder.encode(usuario.getContrasenna()));
 		
-		return dao.crear(usuario);
+		return dao.save(usuario);
 	}
 
 	@Override
@@ -60,7 +62,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 	@Override
 	public Usuario buscarPorId(long id) {
 		// TODO Auto-generated method stub
-		Optional<Usuario> optional = Optional.of(dao.buscar(id));
+		Optional<Usuario> optional = dao.findById(id);
 
 		return optional.orElse(new Usuario());
 
@@ -79,11 +81,11 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 	public Usuario borrarPorId(long id) {
 		// TODO Auto-generated method stub
 		
-		Optional<Usuario> optional = Optional.of(dao.buscar(id));
+		Optional<Usuario> optional = dao.findById(id);
 		
 		if(optional.isPresent()) {
 			
-			dao.borrar(optional.get());
+			dao.deleteById(optional.get().getId());
 		}
 
 		return optional.orElse(new Usuario());
@@ -93,9 +95,9 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 	public int cambiarTarjeta(long id, Tarjeta tarjeta) {
 		// TODO Auto-generated method stub
 
-		Optional<Usuario> persona = Optional.of(dao.buscar(id));
+		Optional<Usuario> optional = dao.findById(id);
 		
-		if (persona.isPresent()) {
+		if (optional.isPresent()) {
 			Optional<Tarjeta> tarjetica;
 			try {
 				 tarjetica =Optional.of(tarjetaDao.buscar(tarjeta.getNumero()));
@@ -105,18 +107,26 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 				// TODO: handle exception
 				tarjetica = Optional.empty();
 			}
-				if (tarjetica.isPresent() && persona.get().getTarjeta() == null){
-
-					dao.updateTarjeta(id, tarjeta);
-				} else if (tarjetica.isPresent() && persona.get().getTarjeta().equals(tarjeta)) {
+				if (tarjetica.isPresent() && optional.get().getTarjeta() == null){
+					
+					Usuario u = optional.get();
+					u.setTarjeta(tarjeta);
+					dao.save(u);
+					//dao.updateTarjeta(id, tarjeta);
+				} else if (tarjetica.isPresent() && optional.get().getTarjeta().equals(tarjeta)) {
 
 					tarjetaDao.actualizar(tarjeta);
-				} else if (tarjetica.isPresent() && !persona.get().getTarjeta().equals(tarjeta)) {
-					dao.updateTarjeta(id, tarjeta);
+				} else if (tarjetica.isPresent() && !optional.get().getTarjeta().equals(tarjeta)) {
+					
+					Usuario u = optional.get();
+					u.setTarjeta(tarjeta);
+					dao.save(u);
 				} else {
 
 					tarjetaDao.crear(tarjeta);
-					dao.updateTarjeta(id, tarjeta);
+					Usuario u = optional.get();
+					u.setTarjeta(tarjeta);
+					dao.save(u);
 				}
 		}
 
@@ -128,7 +138,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 		
 		
 		Usuario u = dao.findByEmail(username).get();
-		List<Rol> l = dao.findAllRolByUser(u.getId());
+		List<Rol> l = u.getRoles();
 		List<Rol> roles = new ArrayList<>();
 		
 		l.stream().forEach(roles::add);

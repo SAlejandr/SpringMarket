@@ -12,7 +12,7 @@ import com.example.demo.pojos.Rol;
 import com.example.demo.pojos.Tarjeta;
 import com.example.demo.pojos.Usuario;
 
-@Repository
+//@Repository
 public class UsuarioRepository extends DaoRepository<Usuario> implements UsuarioDao{
 
 	@Override
