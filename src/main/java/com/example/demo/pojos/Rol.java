@@ -19,7 +19,7 @@ public class Rol implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private byte id;
+	private Byte id;
 	
 	@Column
 	private String nombre;
@@ -32,17 +32,17 @@ public class Rol implements Serializable{
 		this((byte) 0,"");
 	}
 
-	public Rol(byte id, String nombre) {
+	public Rol(Byte id, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
 	}
 
-	public byte getId() {
+	public Byte getId() {
 		return id;
 	}
 
-	public void setId(byte id) {
+	public void setId(Byte id) {
 		this.id = id;
 	}
 

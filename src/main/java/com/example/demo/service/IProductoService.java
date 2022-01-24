@@ -10,9 +10,9 @@ public interface IProductoService {
 	
 	public ArrayList<Producto> listarTodas();
 	
-	public Producto buscarPorId(long id);
+	public Producto buscarPorId(Long id);
 	
 	public ArrayList<Producto> buscarPorPatronDeTitulo(String patron);
 	
-	public Producto borrarPorId(long id);
+	public Producto borrarPorId(Long id);
 }

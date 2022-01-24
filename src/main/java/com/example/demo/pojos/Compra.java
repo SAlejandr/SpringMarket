@@ -29,7 +29,7 @@ public class Compra implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private long id;
+	private Long id;
 	@Column
 	private LocalDateTime fecha;
 	//constructor
@@ -38,14 +38,14 @@ public class Compra implements Serializable {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Compra(Usuario usuario, long id, LocalDateTime fecha) {
+	public Compra(Usuario usuario, Long id, LocalDateTime fecha) {
 		super();
 		this.usuario = usuario;
 		this.id = id;
 		this.fecha = fecha;
 	}
 	
-	public Compra(long id, Usuario u) {
+	public Compra(Long id, Usuario u) {
 		
 		this(u, id, LocalDateTime.now());
 
@@ -71,7 +71,7 @@ public class Compra implements Serializable {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

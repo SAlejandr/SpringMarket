@@ -17,7 +17,7 @@ public class Producto implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private long id;
+	private Long id;
 	@Column
 	private String titulo;
 	@Column
@@ -34,7 +34,7 @@ public class Producto implements Serializable{
 		
 	}
 
-	public Producto(long id, String titulo, String descripcion, float precio, int descuento) {
+	public Producto(Long id, String titulo, String descripcion, float precio, int descuento) {
 		this.id = id;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
@@ -43,6 +43,7 @@ public class Producto implements Serializable{
 	}
 	
 	public Producto(String titulo, String descripcion, float precio, int descuento) {
+		this.id = 0L;
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.precio = precio;
@@ -54,7 +55,7 @@ public class Producto implements Serializable{
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -28,11 +28,11 @@ public class ProductoService implements IProductoService {
 	}
 
 	@Override
-	public Producto buscarPorId(long id) {
+	public Producto buscarPorId(Long id) {
 	
 		Optional<Producto> optional = Optional.of(dao.buscar(id));
 		
-		return optional.orElse(new Producto(-1, "", "", 0, 0));
+		return optional.orElse(new Producto());
 	}
 
 	@Override
@@ -42,7 +42,7 @@ public class ProductoService implements IProductoService {
 	}
 
 	@Override
-	public Producto borrarPorId(long id) {
+	public Producto borrarPorId(Long id) {
 		
 		
 		Optional<Producto> optional = Optional.of(dao.buscar(id));
@@ -53,7 +53,7 @@ public class ProductoService implements IProductoService {
 			
 		}
 		
-		return optional.orElse(new Producto(-1, "", "", 0, 0));
+		return optional.orElse(new Producto());
 	}
 
 }

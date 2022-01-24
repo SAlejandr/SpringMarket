@@ -53,7 +53,7 @@ public class Usuario implements Serializable {
 		this(-1L, "", "", "", "", LocalDate.now(), new HashSet<>());
 	}
 
-	public Usuario(long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento) {
+	public Usuario(Long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento) {
 		this.id = id;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -71,7 +71,7 @@ public class Usuario implements Serializable {
 		this.nacimiento = fNacimiento;
 	}
 
-	public Usuario(long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento,
+	public Usuario(Long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento,
 			Set<Rol> roles) {
 		super();
 		this.id = id;
@@ -83,7 +83,7 @@ public class Usuario implements Serializable {
 		this.roles = roles;
 	}
 
-	public Usuario(long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento,
+	public Usuario(Long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento,
 			Tarjeta tarjeta, Set<Rol> roles) {
 		super();
 		this.id = id;
