@@ -1,12 +1,10 @@
 package com.example.demo.pojos;
 
 import java.io.Serializable;
-import java.math.BigInteger;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,21 +14,20 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="usuario")
-public class Usuario implements Serializable{
-	//variables
+@Table(name = "usuario")
+public class Usuario implements Serializable {
+	// variables
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column
-	private long id;
-	
+	private Long id;
+
 	@Column
 	private String nombre;
 	@Column
@@ -41,21 +38,21 @@ public class Usuario implements Serializable{
 	private String email;
 	@Column(name = "nacimiento")
 	private LocalDate nacimiento;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "numero_tarjeta")
 	private Tarjeta tarjeta;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name="usuario_rol",
-			joinColumns =	@JoinColumn(name = "usuario", nullable = false),
-			inverseJoinColumns = @JoinColumn(name = "rol", nullable= false))
-	private List<Rol> roles;
-	//contuctores
+	@JoinTable(name = "usuario_rol", joinColumns = @JoinColumn(name = "usuario", nullable = false), inverseJoinColumns = @JoinColumn(name = "rol", nullable = false))
+	private Set<Rol> roles=new HashSet<>();
+
+	// contuctores
 	public Usuario() {
-		
-		this(-1L ,"", "", "", "", LocalDate.now(), new ArrayList<>());
+
+		this(-1L, "", "", "", "", LocalDate.now(), new HashSet<>());
 	}
+
 	public Usuario(long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento) {
 		this.id = id;
 		this.nombre = nombre;
@@ -75,7 +72,7 @@ public class Usuario implements Serializable{
 	}
 
 	public Usuario(long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento,
-			List<Rol> roles) {
+			Set<Rol> roles) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -87,7 +84,7 @@ public class Usuario implements Serializable{
 	}
 
 	public Usuario(long id, String nombre, String apellido, String contrasenna, String email, LocalDate fNacimiento,
-			Tarjeta tarjeta, List<Rol> roles) {
+			Tarjeta tarjeta, Set<Rol> roles) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
@@ -99,12 +96,12 @@ public class Usuario implements Serializable{
 		this.roles = roles;
 	}
 
-	//sets y gets
-	public long getId() {
+	// sets y gets
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -147,19 +144,34 @@ public class Usuario implements Serializable{
 	public void setNacimiento(LocalDate fNacimiento) {
 		this.nacimiento = fNacimiento;
 	}
+
 	public Tarjeta getTarjeta() {
 		return tarjeta;
 	}
+
 	public void setTarjeta(Tarjeta tarjeta) {
 		this.tarjeta = tarjeta;
 	}
-	public List<Rol> getRoles() {
+
+	public Set<Rol> getRoles() {
 		return roles;
 	}
-	public void setRoles(List<Rol> roles) {
+
+	public void setRoles(Set<Rol> roles) {
 		this.roles = roles;
 	}
-	//equals y hascode
+
+	public boolean anadirRol(Rol rol) {
+		rol.getUsuarios().add(this);
+		return getRoles().add(rol);
+	}
+
+	public void eliminarRol(Rol rol) {
+		this.roles.remove(rol);
+		rol.getUsuarios().remove(this);
+	}
+
+	// equals y hascode
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -176,12 +188,12 @@ public class Usuario implements Serializable{
 		Usuario other = (Usuario) obj;
 		return id == other.id;
 	}
-	//To String
+
+	// To String
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", contrasenna=" + contrasenna
 				+ ", email=" + email + ", fNacimiento=" + nacimiento + "]";
 	}
-	
-	
+
 }

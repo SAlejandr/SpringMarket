@@ -47,7 +47,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 	@Override
 	public Usuario guardar(Usuario usuario) {
 		// TODO Auto-generated method stub
-		
+		usuario.anadirRol(rolDao.buscar(Byte.parseByte("2")));
 		usuario.setContrasenna(bCryptPasswordEncoder.encode(usuario.getContrasenna()));
 		
 		return dao.save(usuario);
@@ -138,8 +138,8 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 		
 		
 		Usuario u = dao.findByEmail(username).get();
-		List<Rol> l = u.getRoles();
-		List<Rol> roles = new ArrayList<>();
+		Set<Rol> l = u.getRoles();
+		Set<Rol> roles = new HashSet<>();
 		
 		l.stream().forEach(roles::add);
 		

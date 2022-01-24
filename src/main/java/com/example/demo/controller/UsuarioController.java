@@ -65,7 +65,7 @@ public class UsuarioController {
 		mav.setViewName("logIn");
 		return mav;
 	}
-
+	
 	@PostMapping(value = "/login")
 	public String postLogin(HttpSession session,@RequestParam String usuario, @RequestParam String contrasenna) {
 		
@@ -133,8 +133,6 @@ public class UsuarioController {
 			Usuario usuario = new Usuario(nombre, apellido, contrasenna, email, fecha);
 		
 			usuarioService.guardar(usuario);
-			
-			usuarioService.asignarRolCliente(email, Byte.parseByte("2"));
 			
 			return redirectCorrecto;
 		} else {

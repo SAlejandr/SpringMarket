@@ -2,11 +2,10 @@ package com.example.demo.repository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
-
-import org.springframework.stereotype.Repository;
 
 import com.example.demo.pojos.Rol;
 import com.example.demo.pojos.Tarjeta;
@@ -52,7 +51,7 @@ public class UsuarioRepository extends DaoRepository<Usuario> implements Usuario
 	}
 
 	@Override
-	public List<Rol> findAllRolByUser(long id) {
+	public Set<Rol> findAllRolByUser(long id) {
 		
 		Query query = this.em.createQuery("FROM Usuario u where u.id = :id");
 		query.setParameter("id", id);
