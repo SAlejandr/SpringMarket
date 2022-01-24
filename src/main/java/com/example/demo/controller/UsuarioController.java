@@ -128,7 +128,7 @@ public class UsuarioController {
 		String redirectCorrecto = "redirect:/indesx", redirectIncorrecto = "redirect:/usuario/signup";
 		
 		LocalDate fecha = LocalDate.parse(fNacimiento);
-		if (u.getId() == -1) {
+		if (u.getId() == -1L) {
 			
 			Usuario usuario = new Usuario(nombre, apellido, contrasenna, email, fecha);
 		
