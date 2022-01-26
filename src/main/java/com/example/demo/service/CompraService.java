@@ -28,9 +28,7 @@ public class CompraService implements ICompraService {
 	@Override
 	public void guardarCompra(Compra c, Set<ItemCompra> articulos) {
 		
-		dao.crear(c);
-		
-		Compra compra = dao.findUlitmaByUsuario(c.getUsuario().getId());
+		Compra compra = dao.crear(c);
 		
 		
 		articulos.stream().forEach(p -> {

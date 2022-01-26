@@ -251,8 +251,7 @@ public class UsuarioController {
 			lista.add(item);
 			
 		});
-		Usuario u = new Usuario();
-		u.setId(id);
+		Usuario u = usuarioService.buscarPorId(id);
 		Compra c = new Compra(u, LocalDateTime.now());
 		compraService.guardarCompra(c, lista);
 		session.setAttribute("carrito", null);
