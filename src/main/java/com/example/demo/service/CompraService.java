@@ -15,6 +15,7 @@ import com.example.demo.pojos.Usuario;
 import com.example.demo.repository.CompraRepository;
 import com.example.demo.repository.ItemCompraRepository;
 import com.example.demo.repository.ProductoDao;
+import com.example.demo.repository.UsuarioDao;
 import com.example.demo.repository.UsuarioRepository;
 @Transactional
 @Service
@@ -27,7 +28,7 @@ public class CompraService implements ICompraService {
 	@Autowired
 	private ItemCompraRepository daoArticulo;
 	@Autowired
-	private UsuarioRepository daoRepository;
+	private UsuarioDao daoUsuario;
 	
 	@Override
 	public void guardarCompra(Compra c, Set<ItemCompra> articulos) {
@@ -48,7 +49,7 @@ public class CompraService implements ICompraService {
 	@Override
 	public List<Compra> listarComprasPorUsuario(long usuario) {
 		
-		Usuario u = daoRepository.buscar((Long)usuario);
+		Usuario u = daoUsuario.buscar((Long)usuario);
 		
 		ArrayList<Compra> lista = (ArrayList<Compra>) dao.findByUsuario(u);
 		
