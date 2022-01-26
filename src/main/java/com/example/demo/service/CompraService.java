@@ -13,6 +13,7 @@ import com.example.demo.pojos.ItemCompra;
 import com.example.demo.pojos.Producto;
 import com.example.demo.pojos.Usuario;
 import com.example.demo.repository.CompraRepository;
+import com.example.demo.repository.ElUsuarioRepository;
 import com.example.demo.repository.ItemCompraRepository;
 import com.example.demo.repository.ProductoDao;
 import com.example.demo.repository.UsuarioDao;
@@ -28,7 +29,7 @@ public class CompraService implements ICompraService {
 	@Autowired
 	private ItemCompraRepository daoArticulo;
 	@Autowired
-	private UsuarioDao daoUsuario;
+	private ElUsuarioRepository daoUsuario;
 	
 	@Override
 	public void guardarCompra(Compra c, Set<ItemCompra> articulos) {
@@ -49,9 +50,9 @@ public class CompraService implements ICompraService {
 	@Override
 	public List<Compra> listarComprasPorUsuario(long usuario) {
 		
-		Usuario u = daoUsuario.buscar((Long)usuario);
+		Optional<Usuario> u = daoUsuario.findById((Long)usuario);
 		
-		ArrayList<Compra> lista = (ArrayList<Compra>) dao.findByUsuario(u);
+		ArrayList<Compra> lista = (u.isPresent())? (ArrayList<Compra>) dao.findByUsuario(u.get()) : new ArrayList<>();
 		
 		return lista;
 	}
