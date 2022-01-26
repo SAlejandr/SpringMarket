@@ -85,6 +85,13 @@ public class CompraService implements ICompraService {
 		lista.stream().forEach(c -> c.setBorrado((Boolean)false));
 		
 	}
+
+	@Override
+	public void actualizar(Compra c) {
+		// TODO Auto-generated method stub
+		
+		dao.save(c);
+	}
 	
 	
 }

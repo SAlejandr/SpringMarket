@@ -265,9 +265,14 @@ public class UsuarioController {
 		
 		Compra c = compraService.compraPorId((Long)compra);
 		
+		
 		List<ItemCompra> articulos = compraService.listarArticulos(c);
 		
 		articulos.stream().forEach(it -> compraService.borrarUnArticulo(it) );
+		
+		c.setBorrado(true);
+		
+		compraService.actualizar(c);
 		
 		return "redirect:/usuario/perfil/"+id+"/compras";	
 		
