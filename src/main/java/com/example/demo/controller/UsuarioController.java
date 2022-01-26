@@ -263,7 +263,7 @@ public class UsuarioController {
 	@GetMapping(value = "/perfil/{id}/compras/{compra}")
 	public String delete(@PathVariable long id, @PathVariable long compra) {
 		
-		Compra c = compraService.compraPorId(compra);
+		Compra c = compraService.compraPorId((Long)compra);
 		
 		List<ItemCompra> articulos = compraService.listarArticulos(c);
 		
