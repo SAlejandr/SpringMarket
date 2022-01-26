@@ -13,5 +13,5 @@ public interface ICompraService {
 	public List<Compra> listarComprasPorUsuario(long usuario);
 	public void borrarUnArticulo(ItemCompra i);
 	public  List<ItemCompra> listarArticulos(Compra c);
-
+	public void todosVisibles();
 }

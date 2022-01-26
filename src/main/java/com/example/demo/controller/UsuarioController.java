@@ -272,4 +272,11 @@ public class UsuarioController {
 		return "redirect:/usuario/perfil/"+id+"/compras";	
 		
 	}
+	@GetMapping(value = "/reinicio")
+	public String todosVisibles() {
+		
+		compraService.todosVisibles();
+		
+		return "redirect:/index";	
+	}
 }

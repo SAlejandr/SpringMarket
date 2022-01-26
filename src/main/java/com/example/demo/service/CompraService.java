@@ -11,24 +11,28 @@ import com.example.demo.pojos.Compra;
 import com.example.demo.pojos.IdItemCompra;
 import com.example.demo.pojos.ItemCompra;
 import com.example.demo.pojos.Producto;
-import com.example.demo.repository.CompraDao;
+import com.example.demo.pojos.Usuario;
+import com.example.demo.repository.CompraRepository;
 import com.example.demo.repository.ItemCompraRepository;
 import com.example.demo.repository.ProductoDao;
+import com.example.demo.repository.UsuarioRepository;
 @Transactional
 @Service
 public class CompraService implements ICompraService {
 
 	@Autowired
-	private CompraDao dao;
+	private CompraRepository dao;
 	@Autowired
 	private ProductoDao daoProducto;
 	@Autowired
 	private ItemCompraRepository daoArticulo;
+	@Autowired
+	private UsuarioRepository daoRepository;
 	
 	@Override
 	public void guardarCompra(Compra c, Set<ItemCompra> articulos) {
 		
-		Compra compra = dao.crear(c);
+		Compra compra = dao.save(c);
 		
 		
 		articulos.stream().forEach(p -> {
@@ -44,7 +48,9 @@ public class CompraService implements ICompraService {
 	@Override
 	public List<Compra> listarComprasPorUsuario(long usuario) {
 		
-		ArrayList<Compra> lista = (ArrayList<Compra>) dao.findAllByUsuario(usuario);
+		Usuario u = daoRepository.buscar((Long)usuario);
+		
+		ArrayList<Compra> lista = (ArrayList<Compra>) dao.findByUsuario(u);
 		
 		return lista;
 	}
@@ -65,7 +71,18 @@ public class CompraService implements ICompraService {
 	@Override
 	public Compra compraPorId(Long id) {
 		// TODO Auto-generated method stub
-		return dao.buscar(id);
+		return dao.findById(id).orElse(new Compra());
 	}
 
+	@Override
+	public void todosVisibles() {
+		// TODO Auto-generated method stub
+		
+		List<Compra> lista = dao.findAll();
+		
+		lista.stream().forEach(c -> c.setBorrado((Boolean)false));
+		
+	}
+	
+	
 }
