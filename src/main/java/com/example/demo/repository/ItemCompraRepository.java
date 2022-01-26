@@ -14,7 +14,7 @@ import com.example.demo.pojos.ItemCompra;
 @Repository
 public interface ItemCompraRepository extends JpaRepository<ItemCompra, IdItemCompra>{
 
-	@Query("Select i from ItemCompra i where i.id.idCompra = :compra")
+	@Query("Select i from ItemCompra i where i.id.idCompra = :c")
 	public List<ItemCompra> findAllByCompra(Compra c);
 
 }

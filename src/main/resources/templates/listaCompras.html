@@ -13,22 +13,25 @@
 			<thead>
 				<tr>
 					<th>Id compra</th>
-					<th>Nombre articulo</th>
-					<th>Cantidad</th>
+					<th>Fecha compra</th>
 					<th>Devolucion</th>
 				</tr>
 			</thead>
 			<div th:each="recibo :${compra}">
-			<strong th:text="${recibo.id}"></strong>
-			<span th:text="${recibo.fecha}"></span>
-			<tbody th:each="producto :${recibo.productos}">
+
+			<!--  <tbody th:each="producto :${recibo.productos}">
 				<tr class="table-light" >
 					<td th:text="${producto.id}"></td>
 					<td th:text="${producto.nombre}"></td>
 					<td th:text="${producto.cantidad}"></td>
 					<td><a class="bi bi-bag-x" th:href="@{/usuario/perfil/{id}/compras/{compra}/{pro} (id=${usuario.id}, compra=${recibo.id}, pro=${producto.id})}"></a></td>
 				</tr>
-			</tbody>
+			</tbody>-->
+			<tr th:if="${recibo.borrado==false}">
+			<td th:text="${recibo.id}"></td>
+			<td th:text="${recibo.fecha}"></td>
+			<td><a class="bi bi-bag-x" th:href="@{/usuario/perfil/{id}/compras/{compra} (id=${usuario.id}, compra=${recibo.id} )}"></a></td>
+			</tr>
 			</div>
 	</main>
 </body>
