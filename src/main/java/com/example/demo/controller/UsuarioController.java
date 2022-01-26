@@ -256,7 +256,8 @@ public class UsuarioController {
 		Compra c = new Compra(u, LocalDateTime.now());
 		compraService.guardarCompra(c, lista);
 		session.setAttribute("carrito", null);
-		return "redirect:/usuario/perfil/"+id+"/compras";
+		
+		return "redirect:/usuario/perfil/"+id.longValue()+"/compras";
 		
 	}
 	
