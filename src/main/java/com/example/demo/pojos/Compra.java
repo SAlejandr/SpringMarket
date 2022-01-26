@@ -32,6 +32,8 @@ public class Compra implements Serializable {
 	private Long id;
 	@Column
 	private LocalDateTime fecha;
+	
+	private Boolean borrado = false;
 	//constructor
 	
 	public Compra() {
@@ -81,6 +83,14 @@ public class Compra implements Serializable {
 
 	public void setFecha(LocalDateTime fecha) {
 		this.fecha = fecha;
+	}
+
+	public Boolean getBorrado() {
+		return borrado;
+	}
+
+	public void setBorrado(Boolean borrado) {
+		this.borrado = borrado;
 	}
 
 	@Override
