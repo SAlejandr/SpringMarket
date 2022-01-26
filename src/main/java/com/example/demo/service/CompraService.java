@@ -50,20 +50,22 @@ public class CompraService implements ICompraService {
 	}
 
 	@Override
-	public void borrarUnArticulo(long idCompra, long articulo) {
+	public void borrarUnArticulo(ItemCompra i) {
 		
-		Compra c = new Compra();
-		c.setId(idCompra);
-		
-		Producto p = new Producto();
-		p.setId(articulo);
-		
-		IdItemCompra id = new IdItemCompra(c, p);
-		ItemCompra i = new ItemCompra();
-		i.setId(id);
-
 		daoArticulo.delete(i);
 		
+	}
+
+	@Override
+	public List<ItemCompra> listarArticulos(Compra c) {
+		// TODO Auto-generated method stub
+		return daoArticulo.findAllByCompra(c);
+	}
+
+	@Override
+	public Compra compraPorId(Long id) {
+		// TODO Auto-generated method stub
+		return dao.buscar(id);
 	}
 
 }

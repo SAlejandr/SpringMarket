@@ -9,7 +9,9 @@ import com.example.demo.pojos.ItemCompra;
 public interface ICompraService {
 	
 	public void guardarCompra(Compra c, Set<ItemCompra> articulos);
+	public Compra compraPorId(Long id);
 	public List<Compra> listarComprasPorUsuario(long usuario);
-	public void borrarUnArticulo(long idCompra, long articulo);
+	public void borrarUnArticulo(ItemCompra i);
+	public  List<ItemCompra> listarArticulos(Compra c);
 
 }

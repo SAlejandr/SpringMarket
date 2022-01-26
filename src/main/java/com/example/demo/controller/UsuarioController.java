@@ -260,10 +260,14 @@ public class UsuarioController {
 		
 	}
 	
-	@GetMapping(value = "/perfil/{id}/compras/{compra}/{pro}")
-	public String delete(@PathVariable long id, @PathVariable long compra, @PathVariable long pro) {
+	@GetMapping(value = "/perfil/{id}/compras/{compra}")
+	public String delete(@PathVariable long id, @PathVariable long compra) {
 		
-		compraService.borrarUnArticulo(compra, pro);
+		Compra c = compraService.compraPorId(compra);
+		
+		List<ItemCompra> articulos = compraService.listarArticulos(c);
+		
+		articulos.stream().forEach(it -> compraService.borrarUnArticulo(it) );
 		
 		return "redirect:/usuario/perfil/"+id+"/compras";	
 		
