@@ -12,7 +12,7 @@ import com.example.demo.pojos.IdItemCompra;
 import com.example.demo.pojos.ItemCompra;
 import com.example.demo.pojos.Producto;
 import com.example.demo.repository.CompraDao;
-import com.example.demo.repository.ItemCompraDao;
+import com.example.demo.repository.ItemCompraRepository;
 import com.example.demo.repository.ProductoDao;
 @Transactional
 @Service
@@ -23,7 +23,7 @@ public class CompraService implements ICompraService {
 	@Autowired
 	private ProductoDao daoProducto;
 	@Autowired
-	private ItemCompraDao daoArticulo;
+	private ItemCompraRepository daoArticulo;
 	
 	@Override
 	public void guardarCompra(Compra c, Set<ItemCompra> articulos) {
@@ -34,7 +34,7 @@ public class CompraService implements ICompraService {
 		articulos.stream().forEach(p -> {
 			p.getId().setIdCompra(compra);
 			
-			daoArticulo.crear(p);
+			daoArticulo.save(p);
 		});
 		
 		
@@ -62,7 +62,7 @@ public class CompraService implements ICompraService {
 		ItemCompra i = new ItemCompra();
 		i.setId(id);
 
-		daoArticulo.borrar(i);
+		daoArticulo.delete(i);
 		
 	}
 

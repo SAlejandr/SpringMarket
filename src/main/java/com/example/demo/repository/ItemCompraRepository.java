@@ -2,23 +2,19 @@ package com.example.demo.repository;
 
 import java.util.List;
 
-import javax.persistence.Query;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.pojos.Compra;
+import com.example.demo.pojos.IdItemCompra;
 import com.example.demo.pojos.ItemCompra;
 
 @Repository
-public class ItemCompraRepository extends DaoRepository<ItemCompra> implements ItemCompraDao{
+public interface ItemCompraRepository extends JpaRepository<ItemCompra, IdItemCompra>{
 
-	@Override
-	public List<ItemCompra> findAllByCompra(Compra c) {
-		
-		Query query = this.em.createQuery("from ItemCompra i where i.id.idCompra = :compra");
-		query.setParameter("compra", c);
-		
-		return query.getResultList();
-	}
+	@Query("Select i from ItemCompra i where i.id.idCompra = :compra")
+	public List<ItemCompra> findAllByCompra(Compra c);
 
 }
