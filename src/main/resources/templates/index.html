@@ -8,21 +8,22 @@
 		$('[data-toggle="tooltip"]').tooltip()
 	});
 </script>
-
+<link rel="stylesheet" th:href="@{/css/bootstrap.css}" />
+<link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
 	<nav th:replace="/header "></nav>
 	<main>
-		<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-			<div class="carousel-inner" data-interval="500" role="listbox" style=" width:100%; height: 300px !important;">
+		<div id="carouselExampleControls" class=" carousel slide" data-ride="carousel">
+			<div class="carousel-inner" data-interval="500" role="listbox" >
 				<div class="carousel-item active">
-					<img class="d-block w-100" src="img/carrusel1.jpg" alt="primera imagen carrusel">
+					<img class="d-block w-100 " src="img/carrusel1.jpg" height="500px" alt="primera imagen carrusel">
 				</div>
 				<div class="carousel-item">
-					<img class="d-block w-100" src="img/carrusel2.jpg" alt="segunda imagen carrusel">
+					<img class="d-block w-100 " src="img/carrusel2.jpg" height="500px" alt="segunda imagen carrusel">
 				</div>
 				<div class="carousel-item">
-					<img class="d-block w-100" src="img/carrusel3.jpg" alt="tercera imagen carrusel">
+					<img class="d-block w-100 " src="img/carrusel3.jpg" height="500px" alt="tercera imagen carrusel">
 				</div>
 			</div>
 			<a class="carousel-control-prev" href="#carouselExampleControls"
@@ -36,7 +37,7 @@
 			</a>
 		</div>
 
-		<div class="articulos">
+		<div class="articulos container justify-content">
 			<article class="card" th:each="producto : ${productos} ">
 				<picture class="card-img-top" th:switch="${producto.id % 4}">
 				<img th:case="1" th:src="@{img/peugeot.jpg}" height="300"
@@ -46,8 +47,8 @@
 					th:case="0" th:src="@{img/volkswagen.jpg}" height="300" width="300">
 				</picture>
 				<br>
-				<h5 class="card-title" th:text="${producto.titulo}"></h5>
-				<a class="btn btn-primary" data-toggle="popover"
+				<h5 class="card-title w-100" th:text="${producto.titulo}"></h5>
+				<a class="btn btn-primary w-100" data-toggle="popover"
 					title="Ver mas informacion del vehiculo"
 					th:href="@{/producto/{id}(id=${producto.id})}">Ver
 					caracteristicas</a>
