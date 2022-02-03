@@ -10,9 +10,11 @@ DROP TABLE IF EXISTS producto;
 
 DROP TABLE IF EXISTS rol;
 
+DROP TABLE IF EXISTS usuario;
+
 DROP TABLE IF EXISTS tarjeta;
 
-DROP TABLE IF EXISTS usuario;
+
 
 
 
