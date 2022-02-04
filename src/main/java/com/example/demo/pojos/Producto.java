@@ -29,7 +29,6 @@ public class Producto implements Serializable{
 	//Constructores
 	
 	public Producto() {
-		// TODO Auto-generated constructor stub
 		this("", "", 0, 0);
 		
 	}

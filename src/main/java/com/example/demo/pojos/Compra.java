@@ -37,7 +37,6 @@ public class Compra implements Serializable {
 	//constructor
 	
 	public Compra() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Compra(Usuario usuario, Long id, LocalDateTime fecha) {

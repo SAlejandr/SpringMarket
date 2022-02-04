@@ -20,19 +20,16 @@ public class TarjetaService implements ITarjetaService {
 
 	@Override
 	public Tarjeta guardar(Tarjeta tarjeta) {
-		// TODO Auto-generated method stub
 		return dao.save(tarjeta);
 	}
 
 	@Override
 	public List<Tarjeta> listarTodo() {
-		// TODO Auto-generated method stub
 		return dao.findAll();
 	}
 
 	@Override
 	public Tarjeta buscarPorId(Tarjeta tarjeta) {
-		// TODO Auto-generated method stub
 		Optional<Tarjeta> optional = dao.findById(tarjeta.getNumero());
 
 		return optional.orElse(new Tarjeta(BigInteger.ZERO, "", 0, ""));
@@ -40,7 +37,6 @@ public class TarjetaService implements ITarjetaService {
 
 	@Override
 	public Tarjeta borrarPorId(BigInteger tarjeta) {
-		// TODO Auto-generated method stub
 
 		Optional<Tarjeta> optional = dao.findById(tarjeta);
 
@@ -54,14 +50,12 @@ public class TarjetaService implements ITarjetaService {
 
 	@Override
 	public Tarjeta actualizarTarjeta(Tarjeta tarjeta) {
-		// TODO Auto-generated method stub
 		return dao.save(tarjeta);
 
 	}
 
 	@Override
 	public boolean existeTarjeta(BigInteger tarjeta) {
-		// TODO Auto-generated method stub
 		Optional<Tarjeta> optional = dao.findById(tarjeta);
 		
 		return optional.isPresent();

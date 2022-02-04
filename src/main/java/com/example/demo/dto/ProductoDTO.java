@@ -12,7 +12,6 @@ public class ProductoDTO implements Serializable {
 	
 	//Constructor
 	public ProductoDTO() {
-		// TODO Auto-generated constructor stub
 		this(0, "", 0, 0);
 	}
 

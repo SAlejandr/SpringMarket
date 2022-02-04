@@ -61,19 +61,16 @@ public class CompraService implements ICompraService {
 
 	@Override
 	public List<ItemCompra> listarArticulos(Compra c) {
-		// TODO Auto-generated method stub
 		return daoArticulo.findAllByCompra(c);
 	}
 
 	@Override
 	public Compra compraPorId(Long id) {
-		// TODO Auto-generated method stub
 		return dao.findById(id).orElse(new Compra());
 	}
 
 	@Override
 	public void todosVisibles() {
-		// TODO Auto-generated method stub
 		
 		List<Compra> lista = dao.findAll();
 		
@@ -83,7 +80,6 @@ public class CompraService implements ICompraService {
 
 	@Override
 	public void actualizar(Compra c) {
-		// TODO Auto-generated method stub
 		
 		dao.save(c);
 	}

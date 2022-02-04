@@ -20,7 +20,6 @@ public class IdItemCompra implements Serializable{
 	private Producto idProducto;
 	
 	public IdItemCompra() {
-		// TODO Auto-generated constructor stub
 		
 		this.idCompra = new Compra();
 		this.idProducto = new Producto();

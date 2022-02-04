@@ -19,7 +19,6 @@ public class ItemCompra implements Serializable{
 	private int cantidad;
 
 	public ItemCompra() {
-		// TODO Auto-generated constructor stub
 		
 		this.id = new IdItemCompra();
 		this.cantidad = 0;

@@ -27,7 +27,6 @@ public class Tarjeta implements Serializable{
 	private String dirFactura;
 	//constructores a
 	public Tarjeta() {
-		// TODO Auto-generated constructor stub
 		this(new BigInteger("0"),"",0,"");
 	}
 

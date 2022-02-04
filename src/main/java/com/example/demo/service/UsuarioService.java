@@ -42,7 +42,6 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 	
 	@Override
 	public Usuario guardar(Usuario usuario) {
-		// TODO Auto-generated method stub
 		usuario.anadirRol(rolDao.findById(Byte.parseByte("2")).get());
 		usuario.setContrasenna(bCryptPasswordEncoder.encode(usuario.getContrasenna()));
 		
@@ -51,13 +50,11 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 
 	@Override
 	public List<Usuario> listarTodos() {
-		// TODO Auto-generated method stub
 		return dao.findAll();
 	}
 
 	@Override
 	public Usuario buscarPorId(long id) {
-		// TODO Auto-generated method stub
 		Optional<Usuario> optional = dao.findById(id);
 
 		return optional.orElse(new Usuario());
@@ -66,7 +63,6 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 
 	@Override
 	public Usuario buscarPorEmail(String email) {
-		// TODO Auto-generated method stub
 
 		Optional<Usuario> optional = dao.findByEmail(email);
 
@@ -75,7 +71,6 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 
 	@Override
 	public Usuario borrarPorId(long id) {
-		// TODO Auto-generated method stub
 		
 		Optional<Usuario> optional = dao.findById(id);
 		
@@ -89,7 +84,6 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 
 	@Override
 	public int cambiarTarjeta(long id, Tarjeta tarjeta) {
-		// TODO Auto-generated method stub
 
 		Optional<Usuario> optional = dao.findById(id);
 		
@@ -100,7 +94,6 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 
 				
 			} catch (EmptyResultDataAccessException e) {
-				// TODO: handle exception
 				tarjetica = Optional.empty();
 			}
 				if (tarjetica.isPresent() && optional.get().getTarjeta() == null){
@@ -108,7 +101,6 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 					Usuario u = optional.get();
 					u.setTarjeta(tarjeta);
 					dao.save(u);
-					//dao.updateTarjeta(id, tarjeta);
 				} else if (tarjetica.isPresent() && optional.get().getTarjeta().equals(tarjeta)) {
 
 					tarjetaDao.save(tarjeta);
