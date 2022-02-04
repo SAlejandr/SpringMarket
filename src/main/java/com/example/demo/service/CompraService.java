@@ -15,6 +15,7 @@ import com.example.demo.pojos.Usuario;
 import com.example.demo.repository.CompraRepository;
 import com.example.demo.repository.ItemCompraRepository;
 import com.example.demo.repository.UsuarioRepository;
+
 @Transactional
 @Service
 public class CompraService implements ICompraService {
@@ -25,38 +26,35 @@ public class CompraService implements ICompraService {
 	private ItemCompraRepository daoArticulo;
 	@Autowired
 	private UsuarioRepository daoUsuario;
-	
+
 	@Override
 	public void guardarCompra(Compra c, Set<ItemCompra> articulos) {
-		
+
 		Compra compra = dao.save(c);
-		
-		
+
 		articulos.stream().forEach(p -> {
 			p.getId().setIdCompra(compra);
-			
+
 			daoArticulo.save(p);
 		});
-		
-		
-		
+
 	}
 
 	@Override
 	public List<Compra> listarComprasPorUsuario(long usuario) {
-		
-		Optional<Usuario> u = daoUsuario.findById((Long)usuario);
-		
-		ArrayList<Compra> lista = (u.isPresent())? (ArrayList<Compra>) dao.findByUsuario(u.get()) : new ArrayList<>();
-		
+
+		Optional<Usuario> u = daoUsuario.findById((Long) usuario);
+
+		ArrayList<Compra> lista = (u.isPresent()) ? (ArrayList<Compra>) dao.findByUsuario(u.get()) : new ArrayList<>();
+
 		return lista;
 	}
 
 	@Override
 	public void borrarUnArticulo(ItemCompra i) {
-		
+
 		daoArticulo.delete(i);
-		
+
 	}
 
 	@Override
@@ -71,18 +69,17 @@ public class CompraService implements ICompraService {
 
 	@Override
 	public void todosVisibles() {
-		
+
 		List<Compra> lista = dao.findAll();
-		
-		lista.stream().forEach(c -> c.setBorrado((Boolean)false));
-		
+
+		lista.stream().forEach(c -> c.setBorrado((Boolean) false));
+
 	}
 
 	@Override
 	public void actualizar(Compra c) {
-		
+
 		dao.save(c);
 	}
-	
-	
+
 }
