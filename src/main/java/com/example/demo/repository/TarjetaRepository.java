@@ -8,20 +8,14 @@ import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.pojos.Tarjeta;
 
 @Repository
-public class TarjetaRepository extends DaoRepository<Tarjeta> implements TarjetaDao {
-
-	@Override
-	public List<Tarjeta> findAll() {
-		
-		Query query = this.em.createQuery("FROM Tarjeta");
-		
-		return query.getResultList();	}
+public interface TarjetaRepository extends JpaRepository<Tarjeta, BigInteger> {
 
 	
 

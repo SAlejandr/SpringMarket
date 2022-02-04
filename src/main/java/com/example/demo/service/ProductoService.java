@@ -8,18 +8,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.pojos.Producto;
-import com.example.demo.repository.ProductoDao;
+import com.example.demo.repository.ProductoRepository;
 @Transactional
 @Service
 public class ProductoService implements IProductoService {
 
 	@Autowired
-	private ProductoDao dao;
+	private ProductoRepository dao;
 	
 	@Override
 	public Producto guardar(Producto producto) {
 		
-		return dao.crear(producto);
+		return dao.save(producto);
 	}
 
 	@Override
@@ -30,7 +30,7 @@ public class ProductoService implements IProductoService {
 	@Override
 	public Producto buscarPorId(Long id) {
 	
-		Optional<Producto> optional = Optional.of(dao.buscar(id));
+		Optional<Producto> optional = dao.findById(id);
 		
 		return optional.orElse(new Producto());
 	}
@@ -38,18 +38,18 @@ public class ProductoService implements IProductoService {
 	@Override
 	public ArrayList<Producto> buscarPorPatronDeTitulo(String patron) {
 		
-		return (ArrayList<Producto>) dao.findAllByTituloLike(patron);
+		return (ArrayList<Producto>) dao.findByTituloContains(patron);
 	}
 
 	@Override
 	public Producto borrarPorId(Long id) {
 		
 		
-		Optional<Producto> optional = Optional.of(dao.buscar(id));
+		Optional<Producto> optional = dao.findById(id);
 		
 		if(optional.isPresent()) {
 			
-			dao.borrar(optional.get());
+			dao.delete(optional.get());
 			
 		}
 		

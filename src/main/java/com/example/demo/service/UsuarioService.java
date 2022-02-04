@@ -1,7 +1,5 @@
 package com.example.demo.service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
@@ -9,6 +7,11 @@ import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,16 +19,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.example.demo.pojos.Rol;
 import com.example.demo.pojos.Tarjeta;
 import com.example.demo.pojos.Usuario;
-import com.example.demo.repository.ElUsuarioRepository;
-import com.example.demo.repository.RolDao;
-import com.example.demo.repository.TarjetaDao;
-import com.example.demo.repository.UsuarioDao;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import com.example.demo.repository.RolRepository;
+import com.example.demo.repository.TarjetaRepository;
+import com.example.demo.repository.UsuarioRepository;
 
 
 
@@ -35,19 +31,19 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 public class UsuarioService implements IUsuarioService,UserDetailsService {
 
 	@Autowired
-	private ElUsuarioRepository dao;
+	private UsuarioRepository dao;
 	//private UsuarioDao dao;
 	@Autowired
-	private TarjetaDao tarjetaDao;
+	private TarjetaRepository tarjetaDao;
 	@Autowired
-	private RolDao rolDao;
+	private RolRepository rolDao;
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
 	@Override
 	public Usuario guardar(Usuario usuario) {
 		// TODO Auto-generated method stub
-		usuario.anadirRol(rolDao.buscar(Byte.parseByte("2")));
+		usuario.anadirRol(rolDao.findById(Byte.parseByte("2")).get());
 		usuario.setContrasenna(bCryptPasswordEncoder.encode(usuario.getContrasenna()));
 		
 		return dao.save(usuario);
@@ -100,7 +96,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 		if (optional.isPresent()) {
 			Optional<Tarjeta> tarjetica;
 			try {
-				 tarjetica =Optional.of(tarjetaDao.buscar(tarjeta.getNumero()));
+				 tarjetica =tarjetaDao.findById(tarjeta.getNumero());
 
 				
 			} catch (EmptyResultDataAccessException e) {
@@ -115,7 +111,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 					//dao.updateTarjeta(id, tarjeta);
 				} else if (tarjetica.isPresent() && optional.get().getTarjeta().equals(tarjeta)) {
 
-					tarjetaDao.actualizar(tarjeta);
+					tarjetaDao.save(tarjeta);
 				} else if (tarjetica.isPresent() && !optional.get().getTarjeta().equals(tarjeta)) {
 					
 					Usuario u = optional.get();
@@ -123,7 +119,7 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 					dao.save(u);
 				} else {
 
-					tarjetaDao.crear(tarjeta);
+					tarjetaDao.save(tarjeta);
 					Usuario u = optional.get();
 					u.setTarjeta(tarjeta);
 					dao.save(u);
@@ -161,7 +157,14 @@ public class UsuarioService implements IUsuarioService,UserDetailsService {
 		
 		Usuario completa = dao.findByEmail(usuario).get();
 		
-		rolDao.saveAsignacion(rol, completa);
+		Rol elRol = rolDao.findById((Byte) rol).get();
+		
+		completa.anadirRol(elRol);
+		
+		elRol.getUsuarios().add(completa);
+	
+		dao.save(completa);
+		rolDao.save(elRol);
 		
 	}
 

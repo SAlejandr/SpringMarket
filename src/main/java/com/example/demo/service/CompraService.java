@@ -1,22 +1,19 @@
 package com.example.demo.service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.example.demo.dto.ProductoDTO;
 import com.example.demo.pojos.Compra;
-import com.example.demo.pojos.IdItemCompra;
 import com.example.demo.pojos.ItemCompra;
-import com.example.demo.pojos.Producto;
 import com.example.demo.pojos.Usuario;
 import com.example.demo.repository.CompraRepository;
-import com.example.demo.repository.ElUsuarioRepository;
 import com.example.demo.repository.ItemCompraRepository;
-import com.example.demo.repository.ProductoDao;
-import com.example.demo.repository.UsuarioDao;
 import com.example.demo.repository.UsuarioRepository;
 @Transactional
 @Service
@@ -25,11 +22,9 @@ public class CompraService implements ICompraService {
 	@Autowired
 	private CompraRepository dao;
 	@Autowired
-	private ProductoDao daoProducto;
-	@Autowired
 	private ItemCompraRepository daoArticulo;
 	@Autowired
-	private ElUsuarioRepository daoUsuario;
+	private UsuarioRepository daoUsuario;
 	
 	@Override
 	public void guardarCompra(Compra c, Set<ItemCompra> articulos) {
