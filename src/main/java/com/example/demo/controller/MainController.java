@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.pojos.Producto;
-import com.example.demo.repository.ProductoDao;
+
 import com.example.demo.service.IProductoService;
 
 @Controller

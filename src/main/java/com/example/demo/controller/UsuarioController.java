@@ -33,7 +33,7 @@ import com.example.demo.pojos.ItemCompra;
 import com.example.demo.pojos.Producto;
 import com.example.demo.pojos.Tarjeta;
 import com.example.demo.pojos.Usuario;
-import com.example.demo.repository.UsuarioDao;
+
 import com.example.demo.service.ICompraService;
 import com.example.demo.service.IProductoService;
 import com.example.demo.service.IUsuarioService;
