@@ -6,25 +6,26 @@
 
 </head>
 <body>
-<nav th:replace="header "></nav>
+	<nav th:replace="header "></nav>
 	<main class="container">
 		<div id="centrar" class="col-4">
-		
+
 			<h2>FORMULARIO</h2>
 			<form th:action="@{/formula}" method="POST">
-				<label class="col-3">Nombre:</label>
-				 <input class="col-8" type="text" name="nombre"/><br>
-				 <label class="col-3">Descripcion</label>
-				<input class="col-8" type="text" name="descripcion" /><br>
-				 <label class="col-3">precio</label>
-				  <input class="col-8" type="number" name="precio" min="0" /><br>
-				   <label class="col-3">Descuento:</label> 
-				   <input class="col-8" type="number" name="descuento" min="0">%<br>
-				    <input  class="btn btn-primary mt-3 col-6 " type="submit"value="Enviar">
+				<label class="col-3">Nombre:</label> <input class="col-8"
+					type="text" name="nombre" /><br> <label class="col-3">Descripcion</label>
+				<input class="col-8" type="text" name="descripcion" /><br> <label
+					class="col-3">precio</label> <input class="col-8" type="number"
+					name="precio" min="0" /><br> <label class="col-3">Descuento:</label>
+				<input class="col-8" type="number" name="descuento" min="0">%<br>
+				
+				<label for="formFile" class="col-3">Imagen</label>
+				 <input class="form-control" type="file" id="formFile"><br>
+				<input class="btn btn-primary mt-3 col-6 " type="submit"
+					value="Enviar">
 			</form>
 		</div>
 	</main>
-	<footer>
-	 </footer>
+	<footer> </footer>
 </body>
 </html>
