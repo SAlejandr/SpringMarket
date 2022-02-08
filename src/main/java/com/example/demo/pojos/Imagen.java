@@ -1,6 +1,8 @@
 package com.example.demo.pojos;
 
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Objects;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -18,6 +20,9 @@ public class Imagen implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column
+	private String nombre;
 	
 	@Lob
 	@Column
@@ -43,6 +48,14 @@ public class Imagen implements Serializable{
 		this.id = id;
 	}
 
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
 	public byte[] getImagen() {
 		return imagen;
 	}
@@ -50,5 +63,36 @@ public class Imagen implements Serializable{
 	public void setImagen(byte[] imagen) {
 		this.imagen = imagen;
 	}
-	
+
+	public Producto getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Producto producto) {
+		this.producto = producto;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Imagen other = (Imagen) obj;
+		return Objects.equals(id, other.id);
+	}
+
+	@Override
+	public String toString() {
+		return "Imagen [id=" + id + ", nombre=" + nombre + ", imagen=" + Arrays.toString(imagen) + ", producto="
+				+ producto + "]";
+	}
+
 }
