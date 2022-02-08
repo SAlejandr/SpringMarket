@@ -9,5 +9,5 @@ public interface IImagenService {
 	public Imagen encontrarImagen(Long id);
 	public List<Imagen> listaImagenes();
 	public Imagen guardarImagen(Imagen imagen);
-	
+	//
 }
