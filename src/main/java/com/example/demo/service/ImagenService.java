@@ -85,7 +85,6 @@ public class ImagenService implements IImagenService {
 					
 					p.setImagen(img);
 					
-					dao.save(img);
 					daoProducto.save(p);
 					
 					return img;
