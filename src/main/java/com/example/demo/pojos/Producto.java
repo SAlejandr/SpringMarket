@@ -98,8 +98,16 @@ public class Producto implements Serializable{
 	public void setDescuento(int descuento) {
 		this.descuento = descuento;
 	}
-	//equals y hasCode
+	
 
+	public Imagen getImagen() {
+		return imagen;
+	}
+
+	public void setImagen(Imagen imagen) {
+		this.imagen = imagen;
+	}
+//equals y hasCode
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
