@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.pojos.Imagen;
@@ -12,6 +14,8 @@ import com.example.demo.pojos.Producto;
 import com.example.demo.repository.ImagenRepository;
 import com.example.demo.repository.ProductoRepository;
 
+@Transactional
+@Service
 public class ImagenService implements IImagenService {
 
 	@Autowired
@@ -68,7 +72,7 @@ public class ImagenService implements IImagenService {
 					
 					Imagen i = p.getImagen();
 					
-					i.setImagen(imagen);;
+					i.setImagen(imagen);
 					
 					p.setImagen(i);
 					

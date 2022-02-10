@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.pojos.Imagen;
 import com.example.demo.pojos.Producto;
-
+import com.example.demo.service.IImagenService;
 import com.example.demo.service.IProductoService;
 
 @Controller
@@ -23,6 +25,8 @@ public class MainController {
 
 	@Autowired
 	private IProductoService productoService;
+	@Autowired
+	private IImagenService imgServicio;
 
 	@GetMapping(value = {"/indesx", "/","/index"})
 	public String index(Model modelo, HttpSession session) {
@@ -73,8 +77,43 @@ public class MainController {
 
 		productoService.guardar(producto);
 		modelo.addAttribute("logueado", logueado);
-		return "redirect:/formula";
+		
+		session.setAttribute("idProducto",producto.getId());
+		return "redirect:/addImagen";
 	}
+	
+	@GetMapping(value = "/addImagen")
+	public String guardarImagen(Model modelo, HttpSession session) {
+
+		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		if(logueado == null) {
+			
+			logueado = false;
+		}
+		modelo.addAttribute("logueado", logueado);
+		return "addImagen";
+	}
+	
+	@PostMapping("/cargar")
+	public String fileUpload(@RequestParam("file") MultipartFile file, HttpSession session,
+			@RequestParam("idProducto") long idProducto) {
+		try {
+			byte[] image = file.getBytes();
+			Imagen img = new Imagen("foto", image);
+			Imagen saveImage = imgServicio.actualizarImagen(idProducto, file);
+			if (saveImage.getId()!=0L) {
+				return "redirect:/profesor/perfil/" + idProducto;
+			} else {
+				return "redirect:/imagenes/cargar/" + idProducto;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "redirect:/imagenes/cargar/" + idProducto;
+		}
+	}
+	
+	
+	
 
 	@GetMapping(value = "/producto/{id}")
 	public String buscarProductoPorId(Model modelo, @PathVariable long id, HttpSession session) {
@@ -138,4 +177,5 @@ public class MainController {
 		}
 
 	}
+	
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>añadir imagen al Producto</title>
+
+</head>
+<body>
+	<nav th:replace="header "></nav>
+	<main class="container">
+		<div id="centrar" class="col-4">
+
+			<h2>INSERTA IMAGEN</h2>
+			<form th:action="@{/cargar}"
+					method="POST" enctype="multipart/form-data">
+					
+				<input type="text" th:value="${idProducto}" >
+				<label for="formFile" class="col-3">Imagen</label>
+				 <input class="form-control" type="file" name="file" accept="image/png, image/jpeg"><br>
+				<input class="btn btn-primary mt-3 col-6 " type="submit"
+					value="Enviar">
+			</form>
+		</div>
+	</main>
+	<footer> </footer>
+</body>
+</html>
