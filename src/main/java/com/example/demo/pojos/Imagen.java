@@ -38,6 +38,12 @@ public class Imagen implements Serializable{
 		producto = null;
 	}
 
+	public Imagen(String nombre, byte[] imagen) {
+		super();
+		this.nombre = nombre;
+		this.imagen = imagen;
+	}
+
 	public Imagen(Long id, String nombre, byte[] imagen, Producto producto) {
 		super();
 		this.id = id;
