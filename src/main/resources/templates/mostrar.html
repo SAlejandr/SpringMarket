@@ -12,6 +12,12 @@
 		<div id="centrar" class="col-4 card">
 			<div class="card">
 				<div class="card-body">
+					<picture class="card-img-top" th:if="${producto.imagen==null}">
+						<img  th:src="@{/img/cocheDefault.png}" height="300"width="300">
+					</picture>
+					<picture class="card-img-top" th:unless="${producto.imagen==null}">
+						<img  th:src="@{/imagen/{id}(id= ${producto.imagen.id})}" height="300"width="300">
+					</picture>
 					<h5 class="card-title" th:text="${producto.titulo}"></h5>
 					<h6 class="card-subtitle mb-2 text-muted"
 						th:text="${producto.descripcion}"></h6>
