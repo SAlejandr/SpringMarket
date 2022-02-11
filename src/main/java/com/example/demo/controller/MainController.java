@@ -38,14 +38,14 @@ public class MainController {
 		}
 		
 		ArrayList<Producto> lista = productoService.listarTodas();
-		ArrayList<Producto> productos = new ArrayList<>();
+		/*ArrayList<Producto> productos = new ArrayList<>();
 
 		for (int i = 0; i < lista.size() && i < 8; i++) {
 
 			productos.add(lista.get(i));
-		}
+		}*/
 
-		modelo.addAttribute("productos", productos);
+		modelo.addAttribute("productos", lista);
 		modelo.addAttribute("logueado", logueado);
 		
 		return "index";
@@ -75,10 +75,10 @@ public class MainController {
 
 		Producto producto = new Producto(nombre, descripcion, precio, descuento);
 
-		productoService.guardar(producto);
+		Producto p = productoService.guardar(producto);
 		modelo.addAttribute("logueado", logueado);
 		
-		session.setAttribute("idProducto",producto.getId());
+		session.setAttribute("idProducto",p.getId());
 		return "redirect:/addImagen";
 	}
 	
@@ -86,11 +86,14 @@ public class MainController {
 	public String guardarImagen(Model modelo, HttpSession session) {
 
 		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		Long idProducto= (Long) session.getAttribute("idProducto");
+		System.out.println(idProducto);
 		if(logueado == null) {
 			
 			logueado = false;
 		}
 		modelo.addAttribute("logueado", logueado);
+		modelo.addAttribute("idProducto",idProducto);		
 		return "addImagen";
 	}
 	
@@ -102,13 +105,13 @@ public class MainController {
 			Imagen img = new Imagen("foto", image);
 			Imagen saveImage = imgServicio.actualizarImagen(idProducto, file);
 			if (saveImage.getId()!=0L) {
-				return "redirect:/profesor/perfil/" + idProducto;
+				return "redirect:/";
 			} else {
-				return "redirect:/imagenes/cargar/" + idProducto;
+				return "redirect:/" ;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return "redirect:/imagenes/cargar/" + idProducto;
+			return "redirect:/addImagen";
 		}
 	}
 	
