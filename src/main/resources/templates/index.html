@@ -47,7 +47,7 @@
 					th:case="0" th:src="@{img/volkswagen.jpg}" height="300" width="300">
 				</picture>
 				<picture class="card-img-top" th:unless="${producto.imagen==null}">
-				<img  th:src="${producto.imagen.imagen}" height="300"width="300">
+				<img  th:src="@{/imagen/{id}(id= ${producto.imagen.id})}" height="300"width="300">
 				</picture>
 				<br>
 				<h5 class="card-title w-100" th:text="${producto.titulo}"></h5>
