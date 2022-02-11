@@ -101,6 +101,20 @@ public class MainController {
 		modelo.addAttribute("idProducto",idProducto);		
 		return "addImagen";
 	}
+	@PostMapping(value = "/actImagen")
+	public String actualizarImagen(Model modelo, @RequestParam Long idProd, HttpSession session) {
+
+		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		session.setAttribute("idProducto",idProd);
+		Long idProducto= (Long) session.getAttribute("idProducto");
+		if(logueado == null) {
+			
+			logueado = false;
+		}
+		modelo.addAttribute("logueado", logueado);
+		modelo.addAttribute("idProducto",idProducto);		
+		return "addImagen";
+	}
 	
 	@PostMapping("/cargar")
 	public String fileUpload(@RequestParam("file") MultipartFile file, HttpSession session,

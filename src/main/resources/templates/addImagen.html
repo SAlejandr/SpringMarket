@@ -14,7 +14,7 @@
 			<form th:action="@{/cargar}"
 					method="POST" enctype="multipart/form-data">
 					
-				<input type="text" th:value="${session.idProducto}" name="idProducto">
+				<input type="text" th:value="${session.idProducto}" name="idProducto" hidden >
 				<label for="formFile" class="col-3">Imagen</label>
 				 <input class="form-control" type="file" name="file" accept="image/png, image/jpeg"><br>
 				<input class="btn btn-primary mt-3 col-6 " type="submit"
