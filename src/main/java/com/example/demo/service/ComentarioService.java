@@ -4,11 +4,15 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.pojos.Comentario;
 import com.example.demo.pojos.Producto;
 import com.example.demo.repository.ComentarioRepository;
 
+@Transactional
+@Service
 public class ComentarioService implements IComentarioService{
 	
 	@Autowired
