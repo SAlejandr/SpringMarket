@@ -33,7 +33,7 @@ public class Comentario implements Serializable {
 	private Producto producto;
 	
 	@ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@JoinColumn(name = "respuestaDe")
+	@JoinColumn(name = "respuesta_de")
 	private Comentario comentarioPadre;
 	
 	@Column
