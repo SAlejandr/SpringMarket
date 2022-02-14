@@ -58,10 +58,21 @@ public class ComentarioController {
 
 	
 	@DeleteMapping(value = "/borrar/{id}")
-	public String deleteMethodName(@PathVariable String id) {
-		//TODO: process DELETE request
+	public ResponseEntity<Comentario> deleteMethodName(@PathVariable Long id) {
+
+		ResponseEntity<Comentario> response;
+		if(service.existenciaPorId(id)) {
+			
+			Comentario c = service.buscarPorId(id).get();
+			c.setBorrado(true);
+			service.guardarComentario(c);
+			response = new ResponseEntity<>(HttpStatus.OK);
+		}else {
+			
+			response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
 		
-		return "Success";
+		return response;
 	}
 
 

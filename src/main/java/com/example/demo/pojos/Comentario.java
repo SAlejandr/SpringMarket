@@ -37,7 +37,7 @@ public class Comentario implements Serializable {
 	private Comentario comentarioPadre;
 	
 	@Column
-	private Boolean borrado;
+	private Boolean borrado = false;
 	
 	/*Constructor*/
 	public Comentario() {
