@@ -21,6 +21,9 @@ public class Comentario implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
+	@Column
+	private String texto;
+	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario")
 	private Usuario usuario;
@@ -40,6 +43,15 @@ public class Comentario implements Serializable {
 	public Comentario(Long id, Usuario usuario, Producto producto, Comentario comentarioPadre) {
 		super();
 		this.id = id;
+		this.usuario = usuario;
+		this.producto = producto;
+		this.comentarioPadre = comentarioPadre;
+	}
+
+	public Comentario(Long id, String texto, Usuario usuario, Producto producto, Comentario comentarioPadre) {
+		super();
+		this.id = id;
+		this.texto = texto;
 		this.usuario = usuario;
 		this.producto = producto;
 		this.comentarioPadre = comentarioPadre;
@@ -78,6 +90,14 @@ public class Comentario implements Serializable {
 		this.comentarioPadre = comentarioPadre;
 	}
 
+	public String getTexto() {
+		return texto;
+	}
+
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
+
 	/*Equals y hashCode*/
 	@Override
 	public int hashCode() {
@@ -96,11 +116,11 @@ public class Comentario implements Serializable {
 		return Objects.equals(id, other.id);
 	}
 	/*To String*/
+
 	@Override
 	public String toString() {
-		return "Comentario [id=" + id + ", usuario=" + usuario + ", producto=" + producto + ", comentarioPadre="
-				+ comentarioPadre + "]";
+		return "Comentario [id=" + id + ", texto=" + texto + ", usuario=" + usuario + ", producto=" + producto
+				+ ", comentarioPadre=" + comentarioPadre + "]";
 	}
-	
 	
 }
