@@ -28,7 +28,7 @@ public class ComentarioController {
 	@Autowired
 	private IProductoService productoService;
 	
-	@GetMapping(value = "/obtenerLista")
+	@GetMapping(value = "/todos")
 	public List<Comentario> obtenerLista(@RequestParam Long producto) {
 		
 		Producto p = productoService.buscarPorId(producto);
