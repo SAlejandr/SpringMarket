@@ -36,6 +36,9 @@ public class Comentario implements Serializable {
 	@JoinColumn(name = "respuestaDe")
 	private Comentario comentarioPadre;
 	
+	@Column
+	private Boolean borrado;
+	
 	/*Constructor*/
 	public Comentario() {
 	}
@@ -55,6 +58,18 @@ public class Comentario implements Serializable {
 		this.usuario = usuario;
 		this.producto = producto;
 		this.comentarioPadre = comentarioPadre;
+	}
+	
+
+	public Comentario(Long id, String texto, Usuario usuario, Producto producto, Comentario comentarioPadre,
+			Boolean borrado) {
+		super();
+		this.id = id;
+		this.texto = texto;
+		this.usuario = usuario;
+		this.producto = producto;
+		this.comentarioPadre = comentarioPadre;
+		this.borrado = borrado;
 	}
 
 	/*Sets y gets*/
@@ -98,6 +113,14 @@ public class Comentario implements Serializable {
 		this.texto = texto;
 	}
 
+	public Boolean getBorrado() {
+		return borrado;
+	}
+
+	public void setBorrado(Boolean borrado) {
+		this.borrado = borrado;
+	}
+
 	/*Equals y hashCode*/
 	@Override
 	public int hashCode() {
@@ -120,7 +143,9 @@ public class Comentario implements Serializable {
 	@Override
 	public String toString() {
 		return "Comentario [id=" + id + ", texto=" + texto + ", usuario=" + usuario + ", producto=" + producto
-				+ ", comentarioPadre=" + comentarioPadre + "]";
+				+ ", comentarioPadre=" + comentarioPadre + ", borrado=" + borrado + "]";
 	}
+
+	
 	
 }
