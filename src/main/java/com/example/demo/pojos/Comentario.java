@@ -1,6 +1,7 @@
 package com.example.demo.pojos;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Objects;
 
 import javax.persistence.CascadeType;
@@ -23,6 +24,9 @@ public class Comentario implements Serializable {
 	
 	@Column
 	private String texto;
+	
+	@Column
+	private LocalDate fecha;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "usuario")
@@ -72,6 +76,18 @@ public class Comentario implements Serializable {
 		this.borrado = borrado;
 	}
 
+	public Comentario(Long id, String texto, LocalDate fecha, Usuario usuario, Producto producto,
+			Comentario comentarioPadre, Boolean borrado) {
+		super();
+		this.id = id;
+		this.texto = texto;
+		this.fecha = fecha;
+		this.usuario = usuario;
+		this.producto = producto;
+		this.comentarioPadre = comentarioPadre;
+		this.borrado = borrado;
+	}
+
 	/*Sets y gets*/
 	public Long getId() {
 		return id;
@@ -112,6 +128,15 @@ public class Comentario implements Serializable {
 	public void setTexto(String texto) {
 		this.texto = texto;
 	}
+	
+
+	public LocalDate getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(LocalDate fecha) {
+		this.fecha = fecha;
+	}
 
 	public Boolean getBorrado() {
 		return borrado;
@@ -142,8 +167,8 @@ public class Comentario implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Comentario [id=" + id + ", texto=" + texto + ", usuario=" + usuario + ", producto=" + producto
-				+ ", comentarioPadre=" + comentarioPadre + ", borrado=" + borrado + "]";
+		return "Comentario [id=" + id + ", texto=" + texto + ", fecha=" + fecha + ", usuario=" + usuario + ", producto="
+				+ producto + ", comentarioPadre=" + comentarioPadre + ", borrado=" + borrado + "]";
 	}
 
 	
