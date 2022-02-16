@@ -3,7 +3,7 @@ function anadirComentario() {
 
 	var comentario = document.getElementById("").value;
 
-	let comentario = new Comentario(id,usuario,producto,comentarioPadre,texto);
+	//let comentario = new Comentario(id,usuario,producto,comentarioPadre,texto);
 	
 	fetch('/anadir', {
 		headers: { "Content-Type": "application/json; charset=utf-8" },
@@ -32,10 +32,16 @@ function obtenerComentario() {
 		.then(res => res.json())
 		.then(response => {
 			for (let comentario of response) {
-				
-				var a = document.createElement('a');
-				a.textContent="pruebaaaa";
-				comentarios.appendChild(a);
+				let tr = document.createElement('tr');
+				var cel1 = document.createElement("td");
+				var cel2 = document.createElement("td");
+				cel1.textContent = comentario.usuario;
+				cel2.textContent = comentario.texto;
+				tr.appendChild(cel1);
+				tr.appendChild(cel2);
+
+				comentarios.appendChild(tr);
+			
 			}
 		})
 }
