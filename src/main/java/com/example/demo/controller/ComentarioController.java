@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.dto.ComentarioDTO;
 import com.example.demo.pojos.Comentario;
 import com.example.demo.pojos.Producto;
 import com.example.demo.service.IComentarioService;
@@ -29,12 +31,19 @@ public class ComentarioController {
 	private IProductoService productoService;
 	
 	@GetMapping(value = "/todos")
-	public List<Comentario> obtenerLista(@RequestParam Long producto) {
+	public List<ComentarioDTO> obtenerLista(@RequestParam Long producto) {
 		
 		Producto p = productoService.buscarPorId(producto);
 		
 		
-		return service.obtenerComentariosPorProducto(p);
+		List<ComentarioDTO> comentarios = new ArrayList<ComentarioDTO>();
+		
+		service.obtenerComentariosPorProducto(p).stream().forEach(c -> {
+			
+			comentarios.add(new ComentarioDTO(c.getId(), c.getComentarioPadre().getId(), c.getTexto(), c.getUsuario().getNombre(), c.getFecha()));
+		});
+		
+		return comentarios;
 	}
 
 	@PostMapping(value = "/add")
