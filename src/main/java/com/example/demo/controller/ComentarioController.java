@@ -40,7 +40,12 @@ public class ComentarioController {
 		
 		service.obtenerComentariosPorProducto(p).stream().forEach(c -> {
 			
-			comentarios.add(new ComentarioDTO(c.getId(), c.getComentarioPadre().getId(), c.getTexto(), c.getUsuario().getNombre(), c.getFecha()));
+			if(c.getComentarioPadre() != null) {
+				comentarios.add(new ComentarioDTO(c.getId(), c.getComentarioPadre().getId(), c.getTexto(), c.getUsuario().getNombre(), c.getFecha()));
+			}else {
+				comentarios.add(new ComentarioDTO(c.getId(), null, c.getTexto(), c.getUsuario().getNombre(), c.getFecha()));
+			}
+			
 		});
 		
 		return comentarios;
