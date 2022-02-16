@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <title>Mostrar producto</title>
-  <script src="js/Comentario.js"></script>
-  <script src="js/ajax.js"></script>
+  <script type="text/javascript" th:src="@{js/Comentario.js}"></script>
+  <script type="text/javascript" th:src="@{js/ajax.js}"></script>
 </head>
 <body>
 <body>
@@ -37,7 +37,7 @@
 						class="bi bi-trash">Eliminar producto</i></a>
 						
 						<form th:action="@{/actImagen}" method="POST">
-							<input type="text" th:value="${producto.id}" name="idProd" hidden>
+							<input type="text" th:value="${producto.id}" name="idProd" id="idProd" hidden>
 							<input sec:authorize="hasAuthority('Admin')" type="submit" class="btn btn-outline-info" value="Actualizar imagen">
 						</form>
 						
@@ -53,7 +53,8 @@
 			</form>
 		</div>
 		<h2>Preguntas</h2>
-		
+		<div id="preguntas">
+		</div>
 	</div>
 
 	</main>

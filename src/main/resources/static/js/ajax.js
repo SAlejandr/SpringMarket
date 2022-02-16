@@ -25,7 +25,19 @@ function anadirComentario() {
 	
 }
 
-function obtenerOfertas() {
-	fetch('/todos', { headers: { "Content-Type": "application/json; charset=utf-8" } })
+function obtenerComentario() {
+	let comentarios = document.getElementById("preguntas");
+	var id= document.getElementById("idProd").value;
+	fetch('/comentario/todos?producto='+id, { headers: { "Content-Type": "application/json; charset=utf-8" } })
 		.then(res => res.json())
+		.then(response => {
+			for (let comentario of response) {
+				
+				var a = document.createElement('a');
+				a.textContent="pruebaaaa";
+				comentarios.appendChild(a);
+			}
+		})
 }
+
+document.addEventListener("DOMContentLoaded", obtenerComentario);
