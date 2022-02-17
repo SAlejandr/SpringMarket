@@ -47,10 +47,11 @@
 
 	<div>
 		<div sec:authorize="isAuthenticated()">
-			<form action="">
-			<textarea class="form-control" type="text" placeholder="escribe una pregunta" rows="2" ></textarea>
+			<div>
+			<input type="text" th:value="${session.user}" disabled>
+			<textarea id="textoComentario" class="form-control" type="text" placeholder="escribe una pregunta" rows="2" ></textarea>
 			<input type="submit" class="btn btn-success" value="Enviar">
-			</form>
+			</div>
 		</div>
 		<h2>Preguntas</h2>
 		<div id="preguntas">

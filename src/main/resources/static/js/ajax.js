@@ -1,11 +1,11 @@
 
 function anadirComentario() {
 
-	var comentario = document.getElementById("").value;
-
-	//let comentario = new Comentario(id,usuario,producto,comentarioPadre,texto);
+	var texto = document.getElementById("textoComentario").value;
 	
-	fetch('/anadir', {
+	let comentario = new Comentario();
+	
+	fetch('/add', {
 		headers: { "Content-Type": "application/json; charset=utf-8" },
 		method: 'POST',
 		body: JSON.stringify(comentario)
@@ -20,6 +20,7 @@ function anadirComentario() {
 			}
 		}).then(res => {
 			comentario = res;
+			anadirfila(comentario);
 			console.log(res);
 		});
 	
@@ -35,10 +36,13 @@ function obtenerComentario() {
 				let tr = document.createElement('tr');
 				var cel1 = document.createElement("td");
 				var cel2 = document.createElement("td");
-				cel1.textContent = comentario.usuario;
+				var cel3 = document.createElement("td");
+				cel1.textContent = comentario.username;
 				cel2.textContent = comentario.texto;
+				cel3.textContent = comentario.fecha;
 				tr.appendChild(cel1);
 				tr.appendChild(cel2);
+				tr.appendChild(cel3);
 
 				comentarios.appendChild(tr);
 			
