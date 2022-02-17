@@ -1,11 +1,11 @@
 
 function anadirComentario() {
 
-	var comentario = document.getElementById("").value;
-
-	//let comentario = new Comentario(id,usuario,producto,comentarioPadre,texto);
+	var texto = document.getElementById("textoComentario").value;
 	
-	fetch('/anadir', {
+	let comentario = new Comentario();
+	
+	fetch('/add', {
 		headers: { "Content-Type": "application/json; charset=utf-8" },
 		method: 'POST',
 		body: JSON.stringify(comentario)
@@ -20,6 +20,7 @@ function anadirComentario() {
 			}
 		}).then(res => {
 			comentario = res;
+			anadirfila(comentario);
 			console.log(res);
 		});
 	
