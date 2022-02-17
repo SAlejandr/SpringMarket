@@ -28,7 +28,7 @@ public class Comentario implements Serializable {
 	@Column
 	private LocalDate fecha;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "usuario")
 	private Usuario usuario;
 	
