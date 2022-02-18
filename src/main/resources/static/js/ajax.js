@@ -17,23 +17,30 @@ function anadirComentario() {
 
 	let comentario = new ComentarioNuevoDTO(idUsuario, idProducto, null, texto);
 
-	$.ajax({url:'/comentario/add'}, {
-		headers: { "Content-Type": "application/json; charset=utf-8" },
-		method: 'POST',
-		body: JSON.stringify(comentario)
-	})
-		.then(function(response) {
+	$.ajax({url:'/comentario/add',
+		contentType: "application/json; charset=utf-8",
+		body: JSON.stringify(comentario),
+		type: "POST",
+		success : function(response) {
+			
 			if (response.ok) {
-				return response.json();
-
+				let res = response.json();
+				res => {
+					comentario = res;
+			//anadirfila(comentario);
+					console.log(res);
+					
+					}
 			} else {
 				throw "No va";
 
 			}
-		}).then(res => {
-			comentario = res;
-			//anadirfila(comentario);
-			console.log(res);
+		}, 
+		error: function(){
+			
+			console.log("Algo mal")
+		}
+		
 		});
 
 }
