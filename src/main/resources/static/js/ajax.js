@@ -2,7 +2,8 @@
 function anadirComentario() {
 
 	var texto = document.getElementById("textoComentario").value;
-	
+	var idUsuario=document.getElementById("idUsuario").value;
+	var idProucto=document.getElementById("id").value;
 	let comentario = new Comentario();
 	
 	fetch('/add', {

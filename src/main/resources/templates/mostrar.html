@@ -48,7 +48,7 @@
 	<div>
 		<div sec:authorize="isAuthenticated()">
 			<div>
-			<input type="text" th:value="${session.user}" disabled>
+			<input id="idUsuario" type="text" th:value="${session.idUsuario}" hidden>
 			<textarea id="textoComentario" class="form-control" type="text" placeholder="escribe una pregunta" rows="2" ></textarea>
 			<input type="submit" class="btn btn-success" value="Enviar">
 			</div>
