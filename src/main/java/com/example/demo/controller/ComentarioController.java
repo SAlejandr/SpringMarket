@@ -61,7 +61,7 @@ public class ComentarioController {
 
 		List<ComentarioDTO> comentarios = new ArrayList<ComentarioDTO>();
 
-		service.obtenerComentariosPorProducto(p).stream().forEach(c -> convertirComentario(c));
+		service.obtenerComentariosPorProducto(p).stream().forEach(c -> comentarios.add(convertirComentario(c)));
 
 		return comentarios;
 	}

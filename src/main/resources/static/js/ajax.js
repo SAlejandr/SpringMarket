@@ -1,36 +1,47 @@
 
-function anadirComentario() {
 
-	var texto = document.getElementById("textoComentario").value;
-	var idUsuario=document.getElementById("idUsuario").value;
-	var idProucto=document.getElementById("id").value;
-	let comentario = new Comentario();
+
+
+
+function anadirComentario() {
 	
-	fetch('/add', {
+	var token = $("meta[name='_csrf']").attr("content");
+	var header = $("meta[name='_csrf_header']").attr("content");
+	$(document).ajaxSend(function(e, xhr, options) {
+		xhr.setRequestHeader(header, token);
+	});
+	
+	var texto = document.getElementById("textoComentario").value;
+	var idUsuario = document.getElementById("idUsuario").value;
+	var idProducto = document.getElementById("idProd").value;
+
+	let comentario = new ComentarioNuevoDTO(idUsuario, idProducto, null, texto);
+
+	$.ajax({url:'/comentario/add'}, {
 		headers: { "Content-Type": "application/json; charset=utf-8" },
 		method: 'POST',
 		body: JSON.stringify(comentario)
 	})
-		.then(function(response){
-			if(response.ok){
+		.then(function(response) {
+			if (response.ok) {
 				return response.json();
-			
-			}else{
+
+			} else {
 				throw "No va";
-				
+
 			}
 		}).then(res => {
 			comentario = res;
-			anadirfila(comentario);
+			//anadirfila(comentario);
 			console.log(res);
 		});
-	
+
 }
 
 function obtenerComentario() {
 	let comentarios = document.getElementById("preguntas");
-	var id= document.getElementById("idProd").value;
-	fetch('/comentario/todos?producto='+id, { headers: { "Content-Type": "application/json; charset=utf-8" } })
+	var id = document.getElementById("idProd").value;
+	fetch('/comentario/todos?producto=' + id, { headers: { "Content-Type": "application/json; charset=utf-8" } })
 		.then(res => res.json())
 		.then(response => {
 			for (let comentario of response) {
@@ -46,7 +57,7 @@ function obtenerComentario() {
 				tr.appendChild(cel3);
 
 				comentarios.appendChild(tr);
-			
+
 			}
 		})
 }

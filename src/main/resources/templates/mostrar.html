@@ -2,9 +2,14 @@
 <html>
 <head>
 <meta charset="utf-8">
+<meta name="_csrf" th:content="${_csrf.token}" />
+<meta name="_csrf_header"
+th:content="${_csrf.headerName}" />
 <title>Mostrar producto</title>
   <script type="text/javascript" th:src="@{/js/ComentarioDTO.js}"></script>
+  <script type="text/javascript" th:src="@{/js/ComentarioNuevoDTO.js}"></script>
   <script type="text/javascript" th:src="@{/js/ajax.js}"></script>
+  <script type="text/javascript" th:src="@{/js/jquery-3.6.0.min.js}"></script>
 </head>
 <body>
 <body>
@@ -50,7 +55,7 @@
 			<div>
 			<input id="idUsuario" type="text" th:value="${session.idUsuario}" hidden>
 			<textarea id="textoComentario" class="form-control" type="text" placeholder="escribe una pregunta" rows="2" ></textarea>
-			<input type="submit" class="btn btn-success" value="Enviar">
+			<input type="submit" onclick=anadirComentario() class="btn btn-success" value="Enviar">
 			</div>
 		</div>
 		<h2>Preguntas</h2>
