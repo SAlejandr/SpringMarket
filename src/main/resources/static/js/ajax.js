@@ -52,18 +52,21 @@ function obtenerComentario() {
 		.then(res => res.json())
 		.then(response => {
 			for (let comentario of response) {
-				let tr = document.createElement('tr');
-				var cel1 = document.createElement("td");
-				var cel2 = document.createElement("td");
-				var cel3 = document.createElement("td");
-				cel1.textContent = comentario.username;
-				cel2.textContent = comentario.texto;
-				cel3.textContent = comentario.fecha;
-				tr.appendChild(cel1);
-				tr.appendChild(cel2);
-				tr.appendChild(cel3);
-
-				comentarios.appendChild(tr);
+				
+				let div = document.createElement('div');
+				let body=document.createElement("div");
+				let texto=document.createElement("h5");
+				let nombre=document.createElement("h6");
+				div.setAttribute("class","card");
+				body.setAttribute("class","card-body");
+				texto.setAttribute("class","card-title");
+				nombre.setAttribute("class","card-subtitle mb-2 text-muted");
+				texto.textContent = comentario.texto;
+				nombre.textContent=comentario.username+"-"+comentario.fecha;
+				body.appendChild(texto);
+				body.appendChild(nombre);
+				div.appendChild(body);
+				comentarios.appendChild(div);
 
 			}
 		})
