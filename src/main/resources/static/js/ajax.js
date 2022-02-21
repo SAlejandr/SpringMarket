@@ -10,17 +10,17 @@ function anadirComentario() {
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(header, token);
 	});
+	let comentario_nuevo = new ComentarioNuevoDTO();
 
-	var texto = document.getElementById("textoComentario").value;
-	var idUsuario = document.getElementById("idUsuario").value;
-	var idProducto = document.getElementById("idProd").value;
+	comentario_nuevo.texto = document.getElementById("textoComentario").value;
+	comentario_nuevo.idUsuario = document.getElementById("idUsuario").value;
+	comentario_nuevo.idProducto = document.getElementById("idProd").value;
 
-	let comentario = new ComentarioNuevoDTO(idUsuario, idProducto, null, texto);
-
+	alert(JSON.stringify(comentario_nuevo));
 	$.ajax({
 		url: '/comentario/add',
 		contentType: "application/json; charset=utf-8",
-		data: JSON.stringify(comentario),
+		data: JSON.stringify(comentario_nuevo),
 		type: "POST",
 		success: function(response) {
 

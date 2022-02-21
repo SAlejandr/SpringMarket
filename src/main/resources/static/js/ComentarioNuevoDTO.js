@@ -8,7 +8,7 @@ function ComentarioNuevoDTO(idUsuario,idProducto,idComentarioPadre,texto){
 function ComentarioNuevoDTO(){
 	this.idUsuario=0;
 	this.idProducto=0;
-	this.idComentarioPadre=0;
+	this.idComentarioPadre=null;
 	this.texto="";
 }
 
