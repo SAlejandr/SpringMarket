@@ -4,40 +4,41 @@
 
 
 function anadirComentario() {
-	
+
 	var token = $("meta[name='_csrf']").attr("content");
 	var header = $("meta[name='_csrf_header']").attr("content");
 	$(document).ajaxSend(function(e, xhr, options) {
 		xhr.setRequestHeader(header, token);
 	});
-	
+
 	var texto = document.getElementById("textoComentario").value;
 	var idUsuario = document.getElementById("idUsuario").value;
 	var idProducto = document.getElementById("idProd").value;
 
 	let comentario = new ComentarioNuevoDTO(idUsuario, idProducto, null, texto);
 
-	$.ajax({url:'/comentario/add',
+	$.ajax({
+		url: '/comentario/add',
 		contentType: "application/json; charset=utf-8",
-		body: JSON.stringify(comentario),
+		data: JSON.stringify(comentario),
 		type: "POST",
-		success : function(response) {
-			
-			
-				let res = response.json();
-				res => {
-					comentario = res;
-					console.log(res);
-					
-					}
+		success: function(response) {
 
-		}, 
-		error: function(){
-			
+
+			let res = response.json();
+			res => {
+				comentario = res;
+				console.log(res);
+
+			}
+
+		},
+		error: function() {
+
 			console.log("Algo mal")
 		}
-		
-		});
+
+	});
 
 }
 
