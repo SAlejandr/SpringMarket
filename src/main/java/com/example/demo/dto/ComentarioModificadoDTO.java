@@ -1,8 +1,9 @@
 package com.example.demo.dto;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class ComentarioModificadoDTO {
+public class ComentarioModificadoDTO implements Serializable{
 	
 	private Long id;
 	

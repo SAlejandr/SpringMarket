@@ -1,9 +1,10 @@
 package com.example.demo.dto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class ComentarioDTO {
+public class ComentarioDTO implements Serializable{
 	
 	private Long id, idPadre;
 	
