@@ -23,18 +23,14 @@ function anadirComentario() {
 		type: "POST",
 		success : function(response) {
 			
-			if (response.ok) {
+			
 				let res = response.json();
 				res => {
 					comentario = res;
-			//anadirfila(comentario);
 					console.log(res);
 					
 					}
-			} else {
-				throw "No va";
 
-			}
 		}, 
 		error: function(){
 			

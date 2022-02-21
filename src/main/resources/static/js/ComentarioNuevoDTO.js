@@ -1,14 +1,14 @@
-function ComentarioNuevoDTO(usuario,producto,comentarioPadre,texto){
-	this.usuario=usuario;
-	this.producto=producto;
-	this.comentarioPadre=comentarioPadre;
+function ComentarioNuevoDTO(idUsuario,idProducto,idComentarioPadre,texto){
+	this.idUsuario=idUsuario;
+	this.idProducto=idProducto;
+	this.idComentarioPadre=idComentarioPadre;
 	this.texto=texto;
 }
 
 function ComentarioNuevoDTO(){
-	this.usuario=0;
-	this.producto=0;
-	this.comentarioPadre=0;
+	this.idUsuario=0;
+	this.idProducto=0;
+	this.idComentarioPadre=0;
 	this.texto="";
 }
 
