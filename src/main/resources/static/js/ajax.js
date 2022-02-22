@@ -21,11 +21,12 @@ function anadirComentario() {
 		url: '/comentario/add',
 		contentType: "application/json; charset=utf-8",
 		data: JSON.stringify(comentario_nuevo),
+		dataType: "json",
 		type: "POST",
 		success: function(response) {
 
 
-			let res = response.json();
+			let res = response;
 			res => {
 				comentario = res;
 				console.log(res);
