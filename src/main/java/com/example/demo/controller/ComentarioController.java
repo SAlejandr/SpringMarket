@@ -91,7 +91,7 @@ public class ComentarioController {
 	}
 
 	@DeleteMapping(value = "/borrar/{id}")
-	public ResponseEntity<Comentario> deleteMethodName(@PathVariable Long id) {
+	public ResponseEntity<Comentario> borrarComentario(@PathVariable Long id) {
 
 		ResponseEntity<Comentario> response;
 		if (service.existenciaPorId(id)) {
@@ -99,6 +99,21 @@ public class ComentarioController {
 			Comentario c = service.buscarPorId(id).get();
 			c.setBorrado(true);
 			service.guardarComentario(c);
+			response = new ResponseEntity<>(HttpStatus.OK);
+		} else {
+
+			response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+
+		return response;
+	}
+	@DeleteMapping(value = "/borrar/admin/{id}")
+	public ResponseEntity<Comentario> eliminarComentario(@PathVariable Long id) {
+
+		ResponseEntity<Comentario> response;
+		if (service.existenciaPorId(id)) {
+
+			service.borrarPorId(id);
 			response = new ResponseEntity<>(HttpStatus.OK);
 		} else {
 
