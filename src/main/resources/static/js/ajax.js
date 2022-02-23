@@ -16,7 +16,6 @@ function anadirComentario() {
 	comentario_nuevo.idUsuario = document.getElementById("idUsuario").value;
 	comentario_nuevo.idProducto = document.getElementById("idProd").value;
 
-	alert(JSON.stringify(comentario_nuevo));
 	$.ajax({
 		url: '/comentario/add',
 		contentType: "application/json; charset=utf-8",
@@ -24,14 +23,13 @@ function anadirComentario() {
 		dataType: "json",
 		type: "POST",
 		success: function(response) {
-
+			let comentario;
 
 			let res = response;
-			res => {
+
 				comentario = res;
 				console.log(res);
-
-			}
+				nuevoComentario(comentario);
 
 		},
 		error: function() {
@@ -43,15 +41,11 @@ function anadirComentario() {
 
 }
 
-function obtenerComentario() {
+function nuevoComentario(comentario){
+	
 	let comentarios = document.getElementById("preguntas");
-	var id = document.getElementById("idProd").value;
-	fetch('/comentario/todos?producto=' + id, { headers: { "Content-Type": "application/json; charset=utf-8" } })
-		.then(res => res.json())
-		.then(response => {
-			for (let comentario of response) {
-				
-				let div = document.createElement('div');
+	//let idUsuario = document.getElementById("idUsuario").value;
+	let div = document.createElement('div');
 				let body=document.createElement("div");
 				let texto=document.createElement("h5");
 				let nombre=document.createElement("h6");
@@ -63,8 +57,28 @@ function obtenerComentario() {
 				nombre.textContent=comentario.username+"-"+comentario.fecha;
 				body.appendChild(texto);
 				body.appendChild(nombre);
+				
+				/*if(email==comentario.email){
+				var boton = document.createElement("button");		
+				boton.setAttribute("class","btn btn-danger");
+				boton.setAttribute("type","button");
+				boton.setAttribute("class","btn btn-danger");
+				boton.textContent = "borrar";
+				body.appendChild(boton);
+				}*/
 				div.appendChild(body);
 				comentarios.appendChild(div);
+}
+
+function obtenerComentario() {
+	let comentarios = document.getElementById("preguntas");
+	var id = document.getElementById("idProd").value;
+	fetch('/comentario/todos?producto=' + id, { headers: { "Content-Type": "application/json; charset=utf-8" } })
+		.then(res => res.json())
+		.then(response => {
+			for (let comentario of response) {
+				
+				nuevoComentario(comentario);
 
 			}
 		})
