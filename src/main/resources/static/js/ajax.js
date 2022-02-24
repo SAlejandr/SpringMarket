@@ -44,7 +44,7 @@ function anadirComentario() {
 function nuevoComentario(comentario){
 	
 	let comentarios = document.getElementById("preguntas");
-	//let idUsuario = document.getElementById("idUsuario").value;
+	let correo = document.getElementById("correoUsuario").value;
 	let div = document.createElement('div');
 				let body=document.createElement("div");
 				let texto=document.createElement("h5");

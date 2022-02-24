@@ -54,6 +54,7 @@ th:content="${_csrf.headerName}" />
 		<div sec:authorize="isAuthenticated()">
 			<div>
 			<input id="idUsuario" type="text" th:value="${session.idUsuario}" hidden>
+			<input id="correoUsuario" type="text" th:value="${session.username}" hidden>
 			<textarea id="textoComentario" class="form-control" type="text" placeholder="escribe una pregunta" rows="2" ></textarea>
 			<input type="submit" onclick=anadirComentario() class="btn btn-success" value="Enviar">
 			</div>

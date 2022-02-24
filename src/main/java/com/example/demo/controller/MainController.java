@@ -156,6 +156,7 @@ public class MainController {
 	public String buscarProductoPorId(Model modelo, @PathVariable long id, HttpSession session) {
 
 		Boolean logueado = (Boolean) session.getAttribute("logueado");
+		
 		if(logueado == null) {
 			
 			logueado = false;
@@ -163,7 +164,6 @@ public class MainController {
 
 		Producto p = productoService.buscarPorId(id);
 		modelo.addAttribute("logueado", logueado);
-
 		if (p.getId() != -1) {
 			modelo.addAttribute("producto", p);
 			return "mostrar";
