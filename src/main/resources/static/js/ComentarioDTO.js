@@ -1,11 +1,6 @@
-function ComentarioDTO(usuario,producto,comentarioPadre,texto){
-	this.usuario=usuario;
-	this.producto=producto;
-	this.comentarioPadre=comentarioPadre;
-	this.texto=texto;
-	this.borrado=false;
-}
-function ComentarioDTO(usuario,producto,comentarioPadre,texto,borrado){
+function ComentarioDTO(id, email,usuario,producto,comentarioPadre,texto,borrado){
+	this.id= id;
+	this.email = email;
 	this.usuario=usuario;
 	this.producto=producto;
 	this.comentarioPadre=comentarioPadre;
@@ -13,6 +8,8 @@ function ComentarioDTO(usuario,producto,comentarioPadre,texto,borrado){
 	this.borrado=borrado;
 }
 function ComentarioDTO(){
+	this.id = 0;
+	this.email= '';
 	this.usuario=0;
 	this.producto=0;
 	this.comentarioPadre=0;

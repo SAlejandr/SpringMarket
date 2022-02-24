@@ -49,6 +49,7 @@ public class ComentarioController {
 		} else {
 			dto = new ComentarioDTO(c.getId(), null, c.getTexto(), c.getUsuario().getNombre(), c.getFecha());
 		}
+		dto.setEmail(c.getUsuario().getEmail());
 
 		return dto;
 

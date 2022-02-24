@@ -8,12 +8,11 @@ public class ComentarioDTO implements Serializable{
 	
 	private Long id, idPadre;
 	
-	private String texto, username;
+	private String email, texto, username;
 	
 	private LocalDate fecha;
 	
 	public ComentarioDTO() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public ComentarioDTO(Long id, Long idPadre, String texto, String username, LocalDate fecha) {
@@ -25,12 +24,30 @@ public class ComentarioDTO implements Serializable{
 		this.fecha = fecha;
 	}
 
+	public ComentarioDTO(Long id, Long idPadre, String email, String texto, String username, LocalDate fecha) {
+		super();
+		this.id = id;
+		this.idPadre = idPadre;
+		this.email = email;
+		this.texto = texto;
+		this.username = username;
+		this.fecha = fecha;
+	}
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public Long getIdPadre() {
@@ -84,8 +101,8 @@ public class ComentarioDTO implements Serializable{
 
 	@Override
 	public String toString() {
-		return "ComentarioDTO [id=" + id + ", idPadre=" + idPadre + ", texto=" + texto + ", username=" + username
-				+ ", fecha=" + fecha + "]";
+		return "ComentarioDTO [id=" + id + ", idPadre=" + idPadre + ", email=" + email + ", texto=" + texto
+				+ ", username=" + username + ", fecha=" + fecha + "]";
 	}
 	
 
