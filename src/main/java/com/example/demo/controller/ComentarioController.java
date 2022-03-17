@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeMap;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -91,28 +93,17 @@ public class ComentarioController {
 		return response;
 	}
 
+	
 	@DeleteMapping(value = "/borrar/{id}")
-	public ResponseEntity<Comentario> borrarComentario(@PathVariable Long id) {
+	public ResponseEntity<Comentario> eliminarComentario(@PathVariable Long id, HttpSession session) {
 
+		String username = (String) session.getAttribute("username");
+		
 		ResponseEntity<Comentario> response;
-		if (service.existenciaPorId(id)) {
-
-			Comentario c = service.buscarPorId(id).get();
-			c.setBorrado(true);
-			service.guardarComentario(c);
-			response = new ResponseEntity<>(HttpStatus.OK);
-		} else {
-
-			response = new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-
-		return response;
-	}
-	@DeleteMapping(value = "/borrar/admin/{id}")
-	public ResponseEntity<Comentario> eliminarComentario(@PathVariable Long id) {
-
-		ResponseEntity<Comentario> response;
-		if (service.existenciaPorId(id)) {
+		if(username == null) {
+			
+			response = new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		}else if(service.existenciaPorId(id)) {
 
 			service.borrarPorId(id);
 			response = new ResponseEntity<>(HttpStatus.OK);
