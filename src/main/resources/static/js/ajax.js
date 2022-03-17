@@ -40,11 +40,18 @@ function anadirComentario() {
 	});
 
 }
+function borrarComentario(id){
+	var token = $("meta[name='_csrf']").attr("content");
+	fetch('/comentario/borrar/'+id , { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': token  }, method:'DELETE',
+	credentials: 'same-origin' }).then(() =>{
+		alert("Comenterio borrado");
+	})
+}
 
 function nuevoComentario(comentario){
 	
 	let comentarios = document.getElementById("preguntas");
-	//let correo = document.getElementById("correoUsuario").value;
+	let correo = document.getElementById("correoUsuario").value == null ? "ANONIMO" : document.getElementById("correoUsuario").value;
 	
 				let li = document.createElement('li');
 				let div1=document.createElement("div");
@@ -90,14 +97,21 @@ function nuevoComentario(comentario){
 				div2.appendChild(fecha);
 				
 				
-				/*if(email==comentario.email){
-				var boton = document.createElement("button");		
-				boton.setAttribute("class","btn btn-danger");
-				boton.setAttribute("type","button");
-				boton.setAttribute("class","btn btn-danger");
-				boton.textContent = "borrar";
-				body.appendChild(boton);
-				}*/
+				if(correo==comentario.email){
+					
+					let botonBorrar = document.createElement("a");
+					
+					botonBorrar.textContent = "Borrar";
+					
+					botonBorrar.addEventListener("click",() =>{borrarComentario(comentario.id)});
+					
+					var boton = document.createElement("button");		
+					boton.setAttribute("class","btn btn-danger");
+					boton.setAttribute("type","button");
+					boton.setAttribute("class","btn btn-danger");
+					boton.textContent = "borrar";
+					body.appendChild(boton);
+				}
 				comentarios.appendChild(li);
 }
 
