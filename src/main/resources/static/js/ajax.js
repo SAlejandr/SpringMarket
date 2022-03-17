@@ -45,18 +45,50 @@ function nuevoComentario(comentario){
 	
 	let comentarios = document.getElementById("preguntas");
 	//let correo = document.getElementById("correoUsuario").value;
-	let div = document.createElement('div');
-				let body=document.createElement("div");
-				let texto=document.createElement("h5");
-				let nombre=document.createElement("h6");
-				div.setAttribute("class","card");
-				body.setAttribute("class","card-body");
-				texto.setAttribute("class","card-title");
-				nombre.setAttribute("class","card-subtitle mb-2 text-muted");
+	
+				let li = document.createElement('li');
+				let div1=document.createElement("div");
+				
+				let spanImagen=document.createElement("span");
+				let imagen=document.createElement("img");
+				
+				let nombre=document.createElement("h4");
+				
+				let div2=document.createElement("div");
+				let div3=document.createElement("div");
+				let div4=document.createElement("div");
+				
+				let texto=document.createElement("p");
+				
+				let fecha=document.createElement("span");
+				
+				div1.setAttribute("class","d-flex");
+				
+				div4.setAttribute("class","left");
+				
+				imagen.setAttribute("src","/img/cocheDefault.png");
+				imagen.setAttribute("class","profile-pict-img img-fluid");
+				 
+				div2.setAttribute("class","right");
+				
+				nombre.textContent=comentario.username;
+				
+				div3.setAttribute("class","review-description");
 				texto.textContent = comentario.texto;
-				nombre.textContent=comentario.username+"-"+comentario.fecha;
-				body.appendChild(texto);
-				body.appendChild(nombre);
+				
+				fecha.setAttribute("class","publish py-3 d-inline-block w-100");
+				fecha.textContent=comentario.fecha;
+				
+				li.appendChild(div1);
+				div1.appendChild(div4);
+				div4.appendChild(spanImagen);
+				spanImagen.appendChild(imagen);
+				div1.appendChild(div2);
+				div2.appendChild(nombre);
+				div2.appendChild(div3);
+				div3.appendChild(texto);
+				div2.appendChild(fecha);
+				
 				
 				/*if(email==comentario.email){
 				var boton = document.createElement("button");		
@@ -66,8 +98,7 @@ function nuevoComentario(comentario){
 				boton.textContent = "borrar";
 				body.appendChild(boton);
 				}*/
-				div.appendChild(body);
-				comentarios.appendChild(div);
+				comentarios.appendChild(li);
 }
 
 function obtenerComentario() {
