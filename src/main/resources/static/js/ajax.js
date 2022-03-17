@@ -71,7 +71,6 @@ function nuevoComentario(comentario){
 }
 
 function obtenerComentario() {
-	let comentarios = document.getElementById("preguntas");
 	var id = document.getElementById("idProd").value;
 	fetch('/comentario/todos?producto=' + id, { headers: { "Content-Type": "application/json; charset=utf-8" } })
 		.then(res => res.json())
@@ -84,4 +83,7 @@ function obtenerComentario() {
 		})
 }
 
-document.addEventListener("DOMContentLoaded", obtenerComentario);
+document.addEventListener("DOMContentLoaded", () =>{
+	obtenerComentario();
+	
+} );
