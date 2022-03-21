@@ -64,7 +64,7 @@ function borrarComentario(id) {
 			alert("Comenterio borrado");
 		}
 		
-	}).catch((error)=>{
+	}).then(()=> {refrescarComentarios()}).catch((error)=>{
 		alert(error + ":No sa borrao pishuula triste");
 	})
 }
