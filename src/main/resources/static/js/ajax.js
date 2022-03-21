@@ -61,6 +61,7 @@ function borrarComentario(id) {
 		if (response.status == 401){
 			alert("No sa borrao pishuula triste");
 		}else{
+			lista_comentarios.splice(lista_comentarios.findIndex((c) => c.id == id), 1);
 			alert("Comenterio borrado");
 		}
 		
