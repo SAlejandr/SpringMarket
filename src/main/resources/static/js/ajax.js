@@ -27,9 +27,9 @@ function anadirComentario() {
 
 			let res = response;
 
-				comentario = res;
-				console.log(res);
-				nuevoComentario(comentario);
+			comentario = res;
+			console.log(res);
+			nuevoComentario(comentario);
 
 		},
 		error: function() {
@@ -40,79 +40,82 @@ function anadirComentario() {
 	});
 
 }
-function borrarComentario(id){
+function borrarComentario(id) {
 	var token = $("meta[name='_csrf']").attr("content");
-	fetch('/comentario/borrar/'+id , { headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': token  }, method:'DELETE',
-	credentials: 'same-origin' }).then(() =>{
-		alert("Comenterio borrado");
+	fetch('/comentario/borrar/' + id, {
+		headers: { "Content-Type": "application/json; charset=utf-8", 'X-CSRF-TOKEN': token }, method: 'DELETE',
+		credentials: 'same-origin'
+	}).then((response) => {
+		
+		if (response.status == 401){
+			alert("No sa borrao pishuula triste");
+		}else{
+			alert("Comenterio borrado");
+		}
+		
+	}).catch((error)=>{
+		alert(error + ":No sa borrao pishuula triste");
 	})
 }
 
-function nuevoComentario(comentario){
-	
+function nuevoComentario(comentario) {
+
 	let comentarios = document.getElementById("preguntas");
-	let correo = document.getElementById("correoUsuario").value == null ? "ANONIMO" : document.getElementById("correoUsuario").value;
-	
-				let li = document.createElement('li');
-				let div1=document.createElement("div");
-				
-				let spanImagen=document.createElement("span");
-				let imagen=document.createElement("img");
-				
-				let nombre=document.createElement("h4");
-				
-				let div2=document.createElement("div");
-				let div3=document.createElement("div");
-				let div4=document.createElement("div");
-				
-				let texto=document.createElement("p");
-				
-				let fecha=document.createElement("span");
-				
-				div1.setAttribute("class","d-flex");
-				
-				div4.setAttribute("class","left");
-				
-				imagen.setAttribute("src","/img/cocheDefault.png");
-				imagen.setAttribute("class","profile-pict-img img-fluid");
-				 
-				div2.setAttribute("class","right");
-				
-				nombre.textContent=comentario.username;
-				
-				div3.setAttribute("class","review-description");
-				texto.textContent = comentario.texto;
-				
-				fecha.setAttribute("class","publish py-3 d-inline-block w-100");
-				fecha.textContent=comentario.fecha;
-				
-				li.appendChild(div1);
-				div1.appendChild(div4);
-				div4.appendChild(spanImagen);
-				spanImagen.appendChild(imagen);
-				div1.appendChild(div2);
-				div2.appendChild(nombre);
-				div2.appendChild(div3);
-				div3.appendChild(texto);
-				div2.appendChild(fecha);
-				
-				
-				if(correo==comentario.email){
-					
-					let botonBorrar = document.createElement("a");
-					
-					botonBorrar.textContent = "Borrar";
-					
-					botonBorrar.addEventListener("click",() =>{borrarComentario(comentario.id)});
-					
-					var boton = document.createElement("button");		
-					boton.setAttribute("class","btn btn-danger");
-					boton.setAttribute("type","button");
-					boton.setAttribute("class","btn btn-danger");
-					boton.textContent = "borrar";
-					body.appendChild(boton);
-				}
-				comentarios.appendChild(li);
+	//let correo = document.getElementById("correoUsuario").value == null ? "ANONIMO" : document.getElementById("correoUsuario").value;
+
+	let li = document.createElement('li');
+	let div1 = document.createElement("div");
+
+	let spanImagen = document.createElement("span");
+	let imagen = document.createElement("img");
+
+	let nombre = document.createElement("h4");
+
+	let div2 = document.createElement("div");
+	let div3 = document.createElement("div");
+	let div4 = document.createElement("div");
+
+	let texto = document.createElement("p");
+
+	let fecha = document.createElement("span");
+
+	div1.setAttribute("class", "d-flex");
+
+	div4.setAttribute("class", "left");
+
+	imagen.setAttribute("src", "/img/cocheDefault.png");
+	imagen.setAttribute("class", "profile-pict-img img-fluid");
+
+	div2.setAttribute("class", "right");
+
+	nombre.textContent = comentario.username;
+
+	div3.setAttribute("class", "review-description");
+	texto.textContent = comentario.texto;
+
+	fecha.setAttribute("class", "publish py-3 d-inline-block w-100");
+	fecha.textContent = comentario.fecha;
+
+	li.appendChild(div1);
+	div1.appendChild(div4);
+	div4.appendChild(spanImagen);
+	spanImagen.appendChild(imagen);
+	div1.appendChild(div2);
+	div2.appendChild(nombre);
+	div2.appendChild(div3);
+	div3.appendChild(texto);
+	div2.appendChild(fecha);
+
+
+
+	let botonBorrar = document.createElement("a");
+
+	botonBorrar.textContent = "Borrar";
+	botonBorrar.classList.add("text-primary");
+	botonBorrar.addEventListener("click", () => { borrarComentario(comentario.id) });
+
+	div3.appendChild(botonBorrar);
+	comentarios.appendChild(li);
 }
 
 function obtenerComentario() {
@@ -121,14 +124,14 @@ function obtenerComentario() {
 		.then(res => res.json())
 		.then(response => {
 			for (let comentario of response) {
-				
+
 				nuevoComentario(comentario);
 
 			}
 		})
 }
 
-document.addEventListener("DOMContentLoaded", () =>{
+document.addEventListener("DOMContentLoaded", () => {
 	obtenerComentario();
-	
-} );
+
+});
