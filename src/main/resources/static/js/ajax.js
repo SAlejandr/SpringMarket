@@ -1,6 +1,16 @@
+var lista_comentarios = [];
 
-
-
+function refrescarComentarios(){
+	
+	let comentarios = document.getElementById("preguntas");
+	
+	comentarios.replaceChildren();
+	
+	for(let comentario of lista_comentarios){
+		
+		nuevoComentario(comentario);
+	}
+}
 
 
 function anadirComentario() {
@@ -29,6 +39,7 @@ function anadirComentario() {
 
 			comentario = res;
 			console.log(res);
+			lista_comentarios.unshift(comentario);
 			nuevoComentario(comentario);
 
 		},
@@ -125,6 +136,7 @@ function obtenerComentario() {
 		.then(response => {
 			for (let comentario of response) {
 
+				lista_comentarios.unshift(comentario);
 				nuevoComentario(comentario);
 
 			}
